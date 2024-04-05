@@ -30,7 +30,7 @@ const FomularioSide = () => {
                 </div>
             </div>
 
-            <div className="mt-10 w4/5">
+            <div className="mt-10 w4/5 max-w-72 ">
                 <p className="text-muted-foreground text-sm">
                     Sistema FullStack desenvolvido por João Marcos |
                     <span><a className="text-blue-400" href="www.linkedin.com/in/joão-marcos-cândido-da-silva-58b29227a" target="_blank"> Linkedin</a></span>
