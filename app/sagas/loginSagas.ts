@@ -6,7 +6,7 @@ function fetchLogin(){
 }
 
 function* authorization(){
-
+    console.log("teste ");
 }
 
 export function* watchGetUsuario(){

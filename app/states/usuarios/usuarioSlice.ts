@@ -7,7 +7,7 @@ const initialState: UsuarioState = {
     nivel: null,
 }
 
-const usuarioSlice = createSlice({
+const usuarioSlice:any = createSlice({
     name: "usuario",
     initialState,
     reducers:{

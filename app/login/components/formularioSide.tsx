@@ -2,9 +2,17 @@ import Image from "next/image"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
+import { useDispatch } from "react-redux"
+import { loginRequest } from "../../states/usuarios/usuarioSlice"
 
 
 const FomularioSide = () => {
+    const dispatch = useDispatch();
+
+    const handleLogin = () => {
+        dispatch(loginRequest({}));
+    }
+
     return (
         <div className="xl:w-2/4 w-full shadow-lg flex items-center flex-col ">
             <nav className="px-5 py-3 gap-2 flex items-center w-full">
@@ -26,7 +34,7 @@ const FomularioSide = () => {
                     <Label htmlFor="senha" className="text-sm font-medium">Senha</Label>
                     <Input type="password" id="senha" className="" placeholder="JMCS2024" />
                     <br />
-                    <Button className="w-full bg-green-600 text-base hover:bg-green-700 shadow-inner">Entrar</Button>
+                    <Button onClick={handleLogin} className="w-full bg-green-600 text-base hover:bg-green-700 shadow-inner">Entrar</Button>
                 </div>
             </div>
 
