@@ -8,11 +8,12 @@ const PresentationSide = () => {
                 <nav className="flex justify-end items-center pe-4 pt-2 w-full">
                     <Button variant={"secondary"} className="gap-1 text-"><BookText size={20} /> Documentação</Button>
                 </nav>
+               
                 <div className="flex justify-center items-center flex-col h-screen w-2/3">
                     <p className="text-3xl font-medium " >
                     &ldquo;No Jardim Saúde, semeamos cuidado e colhemos 
                         esperança, cultivando um ambiente de cura onde cada
-                         paciente é uma flor única, regada com amor e expertise médica.	&rdquo;
+                         paciente é uma flor única, regada com amor e expertise médica.&rdquo;
                     </p>
                     <div className="flex justify-start mt-5 items-center w-full gap-2">
                         <Avatar>
