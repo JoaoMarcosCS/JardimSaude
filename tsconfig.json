@@ -23,7 +23,10 @@
       "@providers/*": ["./app/providers/*"],
       "@interfaces/*":["./app/interfaces/*"],
       "@states/*":["./app/states/*"],
-      "@sagas/*":["./app/sagas/*"]
+      "@sagas/*":["./app/sagas/*"],
+      "@config/*":["./app/config/*"],
+      "@types/*":["./app/types/*"],
+      "@endpoints":["./app/types/apiEndPoints.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
