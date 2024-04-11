@@ -1,7 +1,7 @@
-export type Login = "/login";
-export type Usuarios = "/usuario";
-export type Medicamentos = "/medicamento";
-export type Especialidades = "/especialidade";
-export type Pacientes = "/paciente";
-export type Tratamentos = "/tratamento";
-export type Hospital = "/hospital"
+export const Login = "/login";
+export const Usuarios = "/usuario";
+export const Medicamentos = "/medicamento";
+export const Especialidades = "/especialidade";
+export const Pacientes = "/paciente";
+export const Tratamentos = "/tratamento";
+export const Hospital = "/hospital";

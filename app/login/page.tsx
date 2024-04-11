@@ -3,7 +3,6 @@
 import { useEffect } from "react"
 import PresentationSide from "./components/PresentationSide"
 import FormularioSide from "./components/formularioSide"
-import Head from "next/head"
 
 
 const Login = () => {

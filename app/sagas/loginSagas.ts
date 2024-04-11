@@ -1,8 +1,9 @@
-import axios from 'axios'
-import { takeLatest } from 'redux-saga/effects';
+import { call, takeLatest } from 'redux-saga/effects';
+import loginService from '../services/loginService';
 
 function* authorization(){
-    console.log("teste ");
+    console.log("teste")
+    yield call(loginService);
 }
 
 export function* watchGetUsuario(){
