@@ -28,7 +28,8 @@
       "@types/*":["./app/types/*"],
       "@endpointsAPI":["./app/consts/apiEndPoints.ts"],
       "@services/*":["./app/services/*"],
-      "@hooks/*":["./app/hooks/*"]
+      "@hooks/*":["./app/hooks/*"],
+      "@schemas/*":["./app/schemas/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

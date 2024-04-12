@@ -1,6 +1,8 @@
 import {combineReducers} from "redux"
-import usuarioSlice from "../states/usuarios/usuarioSlice"; "@states/usuarios/usuarioSlice"
+import usuarioReducer from "@states/usuarios/usuarioSlice"
 
-const rootReducer = combineReducers({usuarioSlice});
+const rootReducer = combineReducers({usuarioReducer});
+
+export type IRootState = ReturnType<typeof rootReducer>
 
 export default rootReducer;

@@ -2,16 +2,14 @@ import Image from "next/image"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { loginRequest } from "../../states/usuarios/usuarioSlice"
-
+import { IRootState } from "@/app/store/root-reducer"
+import { Loader2 } from "lucide-react"
+import LoginForm from "./loginForm"
 
 const FomularioSide = () => {
-    const dispatch = useDispatch();
-
-    const handleLogin = () => {
-        dispatch(loginRequest({}));
-    }
+    
 
     return (
         <div className="xl:w-2/4 w-full shadow-lg flex items-center flex-col ">
@@ -24,18 +22,11 @@ const FomularioSide = () => {
                 <p className="text-3xl font-medium">
                     Bem-vindo de volta!
                 </p>
+
                 <p className="font-medium text-sm text-muted-foreground">
                     Faça login para entrar no Jardim Saúde
                 </p>
-                <div className="mt-8">
-                    <Label htmlFor="email" className="text-sm font-medium">Email</Label>
-                    <Input type="email" id="email" className="" placeholder="jmcsjoaomarcos@gmail.com" />
-                    <br />
-                    <Label htmlFor="senha" className="text-sm font-medium">Senha</Label>
-                    <Input type="password" id="senha" className="" placeholder="JMCS2024" />
-                    <br />
-                    <Button onClick={handleLogin} className="w-full bg-green-600 text-base hover:bg-green-700 shadow-inner">Entrar</Button>
-                </div>
+                <LoginForm/>
             </div>
 
             <div className="mt-10 w4/5 max-w-72 ">

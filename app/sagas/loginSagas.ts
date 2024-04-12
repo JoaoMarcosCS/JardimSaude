@@ -7,21 +7,22 @@ import { loginFailed, loginSuccess } from "@states/usuarios/usuarioSlice"
 import UsuarioToken from '@interfaces/token/tokenInterface';
 import { toast } from 'sonner';
 
-function* authorization(){
-    
+function* loginRequest({payload}: {payload: { email: string, senha: string }}){
+    console.log(`Payload: ${payload.email} | ${payload.senha}`)
     try {
-        const response:AxiosResponse = yield call(fetchToken);
+        const response:AxiosResponse = yield call(fetchToken,payload);
 
         const token = response.data.token
         const dados = jwtDecode.jwtDecode<UsuarioToken>(token);
         const { name, id, email, nivel} = dados;
+        toast.success(`Olá, ${name}`)
 
-        yield put(loginSuccess({name,id, email,nivel}));
-    
         api.defaults.headers.Authorization = `Bearer ${token}`;
+
+        yield put(loginSuccess({name, id, email,nivel}));
     } catch (error: any) {
         console.log(error);
-        const errors = error.response.data.message;
+        const errors = error.response?.data.message || "Erro do servidor, tente novamente em alguns instantes.";
         console.log(errors);
         toast.error(errors);
         yield put(loginFailed({errors}))
@@ -30,5 +31,5 @@ function* authorization(){
 }
 
 export function* watchGetUsuario(){
-    yield takeLatest('usuario/loginRequest', authorization);
+    yield takeLatest('usuario/loginRequest', loginRequest as any);
 }

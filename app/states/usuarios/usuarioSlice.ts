@@ -15,8 +15,10 @@ const usuarioSlice:any = createSlice({
     initialState,
     reducers:{
         loginSuccess:(state, action) => {
+            console.log("Ação disparada");
+            console.log(`state name: ${state.nome} \n Action payload name: ${action.payload.name}`)
             state.nivel = action.payload.nivel
-            state.nome = action.payload.nome;
+            state.nome = action.payload.name;
             state.id = action.payload.id;
             state.email = action.payload.email
             state.isLoading = false;
