@@ -6,8 +6,9 @@ import api from "@services/axios"
 import { loginFailed, loginSuccess } from "@states/usuarios/usuarioSlice"
 import UsuarioToken from '@interfaces/token/tokenInterface';
 import { toast } from 'sonner';
+import {loginPayloadInterface} from "@interfaces/login/loginPayload"
 
-function* loginRequest({payload}: {payload: { email: string, senha: string }}){
+function* loginRequest({payload}: {payload: loginPayloadInterface}){
     console.log(`Payload: ${payload.email} | ${payload.senha}`)
     try {
         const response:AxiosResponse = yield call(fetchToken,payload);
