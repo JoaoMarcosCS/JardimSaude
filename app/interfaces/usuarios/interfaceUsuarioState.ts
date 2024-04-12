@@ -6,4 +6,5 @@ export interface UsuarioState {
     isLoading: boolean;
     error: string | null;
     email: string | null;
+    isLoggedIn: boolean | null
 }

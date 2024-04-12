@@ -4,16 +4,22 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const LoginForm = () => {
 
     const dispatch = useDispatch();
-    const { isLoading } = useSelector((state: IRootState) => state.usuarioReducer);
+    const { isLoading, isLoggedIn } = useSelector((state: IRootState) => state.usuarioReducer);
 
+    const history = useRouter();
     const [email, setEmail] = useState("jmcsjoaomarcos@gmail.com")
     const [senha, setSenha] = useState("JMCS2024")
+
+    if(isLoggedIn){
+        history.push("/");
+    }
 
     const handleLogin = () => {
         dispatch(loginRequest({email, senha}));

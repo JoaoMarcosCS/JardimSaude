@@ -7,7 +7,8 @@ const initialState: UsuarioState = {
     nivel: null,
     isLoading: false,
     error: null,
-    email: null
+    email: null,
+    isLoggedIn : false
 }
 
 const usuarioSlice:any = createSlice({
@@ -21,6 +22,7 @@ const usuarioSlice:any = createSlice({
             state.nome = action.payload.name;
             state.id = action.payload.id;
             state.email = action.payload.email
+            state.isLoggedIn = true
             state.isLoading = false;
         },
         loginRequest:(state, action) => {
