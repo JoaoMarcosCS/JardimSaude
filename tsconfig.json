@@ -26,8 +26,9 @@
       "@sagas/*":["./app/sagas/*"],
       "@config/*":["./app/config/*"],
       "@types/*":["./app/types/*"],
-      "@endpoints":["./app/types/apiEndPoints.ts"],
-      "@services/*":["./app/services/*"]
+      "@endpointsAPI":["./app/consts/apiEndPoints.ts"],
+      "@services/*":["./app/services/*"],
+      "@hooks/*":["./app/hooks/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
