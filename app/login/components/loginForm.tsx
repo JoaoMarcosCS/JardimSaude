@@ -10,42 +10,42 @@ import { useDispatch, useSelector } from "react-redux";
 
 const LoginForm = () => {
 
-    const dispatch = useDispatch();
-    const { isLoading, isLoggedIn } = useSelector((state: IRootState) => state.usuarioReducer);
+  const dispatch = useDispatch();
+  const { isLoading, isLoggedIn } = useSelector((state: IRootState) => state.usuarioReducer);
 
-    const history = useRouter();
-    const [email, setEmail] = useState("jmcsjoaomarcos@gmail.com")
-    const [senha, setSenha] = useState("JMCS2024")
+  const history = useRouter();
+  const [email, setEmail] = useState("jmcsjoaomarcos@gmail.com")
+  const [senha, setSenha] = useState("JMCS2024")
 
-    if(isLoggedIn){
-        history.push("/");
-    }
+  if (isLoggedIn) {
+    history.push("/");
+  }
 
-    const handleLogin = () => {
-        dispatch(loginRequest({email, senha}));
-    }
+  const handleLogin = () => {
+    dispatch(loginRequest({ email, senha }));
+  }
 
-    return (
-        <div className="mt-8">
-            <Label htmlFor="email" className="text-sm font-medium">Email</Label>
-            <Input type="email" id="email" value={email} placeholder="jmcsjoaomarcos@gmail.com" onChange={(e) => setEmail(e.target.value)} />
-            <br />
-            <Label htmlFor="senha" className="text-sm font-medium">Senha</Label>
-            <Input type="password" id="senha" value={senha} placeholder="JMCS2024" onChange={(e) => setSenha(e.target.value)} />                           
-            <br />
-            <Button
-                onClick={handleLogin}
-                className="w-full
-                        bg-green-600 
-                        text-base 
-                        hover:bg-green-700 
+  return (
+    <div className="mt-8">
+      <Label htmlFor="email" className="text-sm font-medium">Email</Label>
+      <Input type="email" id="email" value={email} placeholder="jmcsjoaomarcos@gmail.com" onChange={(e) => setEmail(e.target.value)} />
+      <br />
+      <Label htmlFor="senha" className="text-sm font-medium">Senha</Label>
+      <Input type="password" id="senha" value={senha} placeholder="JMCS2024" onChange={(e) => setSenha(e.target.value)} />
+      <br />
+      <Button
+        onClick={handleLogin}
+        className="w-full
+                        bg-green-600
+                        text-base
+                        hover:bg-green-700
                         shadow-inner">
-                {isLoading ? (
-                    <Loader2 className="animate-spin mr-2 h-4 w-4" />
-                ) : ("Entrar")}
-            </Button>
-        </div>
-    )
+        {isLoading ? (
+          <Loader2 className="animate-spin mr-2 h-4 w-4" />
+        ) : ("Entrar")}
+      </Button>
+    </div>
+  )
 }
 
 export default LoginForm;
