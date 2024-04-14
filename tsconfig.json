@@ -26,7 +26,7 @@
       "@sagas/*":["./app/sagas/*"],
       "@config/*":["./app/config/*"],
       "@types/*":["./app/types/*"],
-      "@endpointsAPI":["./app/consts/apiEndPoints.ts"],
+      "@endpointsAPI":["./app/constants/apiEndPoints.ts"],
       "@services/*":["./app/services/*"],
       "@hooks/*":["./app/hooks/*"],
       "@schemas/*":["./app/schemas/*"]

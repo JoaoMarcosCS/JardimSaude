@@ -6,28 +6,31 @@ import api from "@services/axios"
 import { loginFailed, loginSuccess } from "@states/usuarios/usuarioSlice"
 import UsuarioToken from '@interfaces/token/tokenInterface';
 import { toast } from 'sonner';
+import Cookie from "js-cookie"
 import {loginPayloadInterface} from "@interfaces/login/loginPayload"
 
 
 function* loginRequest({payload}: {payload: loginPayloadInterface}){
-    console.log(`Payload: ${payload.email} | ${payload.senha}`)
+
     try {
         const response:AxiosResponse = yield call(fetchToken,payload);
 
         const token = response.data.token
-        const dados = jwtDecode.jwtDecode<UsuarioToken>(token);
-        const { name, id, email, nivel} = dados;
+        const { name, id, email, nivel} = jwtDecode.jwtDecode<UsuarioToken>(token);
+
+        toast.success("olá," + name);
+        Cookie.set("auth_token", token);
 
         api.defaults.headers.Authorization = `Bearer ${token}`;
 
         yield put(loginSuccess({name, id, email,nivel}));
 
-        
+
     } catch (error: any) {
         const errors = error.response?.data.message || "Erro do servidor, tente novamente em alguns instantes.";
         toast.error(errors);
         yield put(loginFailed({errors}))
-        
+
     }
 }
 

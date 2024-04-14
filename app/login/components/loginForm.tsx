@@ -13,12 +13,13 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const { isLoading, isLoggedIn } = useSelector((state: IRootState) => state.usuarioReducer);
 
-  const history = useRouter();
+  const {push} = useRouter();
+
   const [email, setEmail] = useState("jmcsjoaomarcos@gmail.com")
   const [senha, setSenha] = useState("JMCS2024")
 
   if (isLoggedIn) {
-    history.push("/");
+    push("/");
   }
 
   const handleLogin = () => {

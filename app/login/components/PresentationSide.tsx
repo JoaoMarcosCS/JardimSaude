@@ -4,13 +4,17 @@ import { BookText } from "lucide-react"
 
 const PresentationSide = () => {
   return (
-    <div className="w-3/4 flex-col xl:flex hidden justify-center items-center ">
+    <div className="w-3/4 flex-col xl:flex hidden justify-center items-center relative">
 
-      <nav className="flex justify-end items-center pe-4 pt-2 w-full">
+      {/* <div className="w-20 h-20 bg-green-400 rounded-full absolute">
+
+      </div> */}
+
+      <nav className="flex justify-end items-center pe-4 pt-2 w-full z-50">
         <Button variant={"secondary"} className="gap-1 text-"><BookText size={20} /> Documentação</Button>
       </nav>
 
-      <div className="flex justify-center items-center flex-col h-screen w-2/3 ">
+      <div className="flex justify-center items-center flex-col h-screen w-2/3 z-50">
         <p className="text-3xl font-medium " >
           &ldquo;No Jardim Saúde, semeamos cuidado e colhemos
           esperança, cultivando um ambiente de cura onde cada

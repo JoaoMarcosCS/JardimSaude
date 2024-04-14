@@ -10,7 +10,6 @@ import LoginForm from "./loginForm"
 
 const FomularioSide = () => {
 
-
   return (
     <div className="xl:w-2/4 w-full shadow-lg flex items-center flex-col ">
       <nav className="px-5 py-3 gap-2 flex items-center w-full">
