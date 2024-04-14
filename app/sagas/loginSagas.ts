@@ -19,7 +19,7 @@ function* loginRequest({payload}: {payload: loginPayloadInterface}){
         const { name, id, email, nivel} = jwtDecode.jwtDecode<UsuarioToken>(token);
 
         toast.success("olá," + name);
-        Cookie.set("auth_token", token);
+        Cookie.set("auth_token", token, {expires: 1/24});
 
         api.defaults.headers.Authorization = `Bearer ${token}`;
 
