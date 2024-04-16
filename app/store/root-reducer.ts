@@ -3,6 +3,6 @@ import usuarioReducer from "@states/usuarios/usuarioSlice"
 
 const rootReducer = combineReducers({usuarioReducer});
 
-export type IRootState = ReturnType<typeof rootReducer>
+export type RootState = ReturnType<typeof rootReducer>
 
 export default rootReducer;

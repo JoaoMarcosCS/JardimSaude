@@ -1,5 +1,5 @@
 import { loginRequest } from "@/app/states/usuarios/usuarioSlice";
-import { IRootState } from "@/app/store/root-reducer";
+import { RootState } from "@/app/store/root-reducer";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 const LoginForm = () => {
 
   const dispatch = useDispatch();
-  const { isLoading } = useSelector((state: IRootState) => state.usuarioReducer);
+  const { isLoading } = useSelector((state: RootState) => state.usuarioReducer);
 
   const [email, setEmail] = useState("jmcsjoaomarcos@gmail.com")
   const [senha, setSenha] = useState("JMCS2024")
