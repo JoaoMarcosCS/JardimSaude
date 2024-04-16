@@ -24,7 +24,7 @@ function* loginRequest({ payload }: { payload: loginPayloadInterface }) {
 
     yield put(loginSuccess({ name, id, email, nivel }));
 
-    window.location.href = "/";
+    //window.location.href = "/";
 
 
   } catch (error: any) {
@@ -38,5 +38,5 @@ function* loginRequest({ payload }: { payload: loginPayloadInterface }) {
 }
 
 export function* getToken() {
-  yield takeLatest('usuario/loginRequest', loginRequest as any);
+  //yield takeLatest('usuario/loginRequest', loginRequest as any);
 }

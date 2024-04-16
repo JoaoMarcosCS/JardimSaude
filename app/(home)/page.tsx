@@ -2,15 +2,16 @@
 
 import { useSelector } from "react-redux";
 import { RootState } from "../store/root-reducer";
-import MenuBottom from "./components/menuBottom";
+
 
 export default function Home() {
 
-  const {nivel} = useSelector((state:RootState) => state.usuarioReducer);
+  const {nivel, nome} = useSelector((state:RootState) => state.usuarioReducer);
 
   return (
     <div>
-      <MenuBottom/>
+      Olá, {nome} <br />
+      Você é um nivel : {nivel}
     </div>
   );
 }
