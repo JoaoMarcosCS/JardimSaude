@@ -4,7 +4,7 @@ import { CircleUserRound, ClipboardPlus, Home, LogOut, ShoppingCart, SquareUser,
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/root-reducer"
+import { RootState } from "../app/store/root-reducer"
 
 const MenuFooter = () => {
 

@@ -17,7 +17,7 @@ import {
 import { usePathname } from "next/navigation";
 import Image from "next/image"
 import { useSelector } from "react-redux";
-import { RootState } from "../../store/root-reducer"
+import { RootState } from "../app/store/root-reducer"
 
 const Header = () => {
 
