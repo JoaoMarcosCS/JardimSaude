@@ -14,8 +14,6 @@ const MenuFooter = () => {
 
   const { nivel } = useSelector((state: RootState) => state.usuarioReducer);
 
-  console.log(currentPage);
-
   return (
 
     <>

@@ -14,6 +14,16 @@ import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
+
+const schema = z.object({
+  email: z.string().email("Informe um email válido"),
+  senha: z.string().min(8, "A senha deve conter no mínimo 8 caracteres")
+})
+
+type FormProps = z.infer<typeof schema>;
 
 const LoginForm = () => {
 
@@ -21,18 +31,24 @@ const LoginForm = () => {
   const { push } = useRouter();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [emailForm, setEmail] = useState("jmcsjoaomarcos@gmail.com")
-  const [senhaForm, setSenha] = useState("JMCS2024")
 
-  const handleLogin = async () => {
+  const { handleSubmit, register, formState: { errors } } = useForm<FormProps>({
+    mode: 'all',
+    reValidateMode: "onChange",
+    resolver: zodResolver(schema)
+  })
+
+  const handleLogin = async (data: FormProps) => {
     setIsLoading(true);
-
     try {
 
       const payload: loginPayloadInterface = {
-        email: emailForm,
-        senha: senhaForm,
+        email: data.email,
+        senha: data.senha,
       }
+
+      console.log(payload)
+      
       const response = await fetchToken(payload);
 
       const token = response.data.token;
@@ -50,8 +66,7 @@ const LoginForm = () => {
     } catch (error: any) {
 
       const errors = error.response?.data.message || "Erro do servidor, tente novamente em alguns instantes.";
-      toast.error(error);
-      console.log(error);
+      toast.error(errors);
       dispatch(loginFailed({ errors }))
 
     } finally {
@@ -62,23 +77,28 @@ const LoginForm = () => {
 
   return (
     <div className="mt-8">
-      <Label htmlFor="email" className="text-sm font-medium">Email</Label>
-      <Input type="email" id="email" value={emailForm} placeholder="jmcsjoaomarcos@gmail.com" onChange={(e) => setEmail(e.target.value)} />
-      <br />
-      <Label htmlFor="senha" className="text-sm font-medium">Senha</Label>
-      <Input type="password" id="senha" value={senhaForm} placeholder="JMCS2024" onChange={(e) => setSenha(e.target.value)} />
-      <br />
-      <Button
-        onClick={handleLogin}
-        className="w-full
+      <form action="" onSubmit={handleSubmit(handleLogin)}>
+        <Label htmlFor="email" className="text-sm font-medium">Email</Label>
+        <Input type="email" value={"jmcsjoaomarcos@gmail.com"} id="email" {...register("email")} placeholder="jmcsjoaomarcos@gmail.com" />
+        <Label htmlFor="email">{errors.email?.message}</Label>
+        <br />
+        <Label htmlFor="senha" className="text-sm font-medium">Senha</Label>
+        <Input type="password" value={"JMCS2024"} {...register("senha")} id="senha" placeholder="JMCS2024" />
+        <Label htmlFor="senha">{errors.senha?.message}</Label>
+        <br />
+        <br />
+        <Button
+         type="submit"
+          className="w-full
                         bg-green-600
                         text-base
                         hover:bg-green-700
                         shadow-inner">
-        {isLoading ? (
-          <Loader2 className="animate-spin mr-2 h-4 w-4" />
-        ) : ("Entrar")}
-      </Button>
+          {isLoading ? (
+            <Loader2 className="animate-spin mr-2 h-4 w-4" />
+          ) : ("Entrar")}
+        </Button>
+      </form>
     </div>
   )
 }
