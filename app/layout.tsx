@@ -6,8 +6,6 @@ import { ReduxProvider } from "@providers/ReduxProvider";
 import ReactQueryProvider from "@providers/ReactQueryProvider";
 import { Toaster } from "@/components/ui/sonner";
 import { CircleAlert } from "lucide-react";
-import MenuFooter from "../components/menuFooter";
-import Header from "../components/menuHeader";
 import SideBar from "@/components/sideBar";
 import MainContentProvider from "./providers/mainContentProvider";
 

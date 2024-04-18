@@ -12,10 +12,11 @@ import { usePathname } from "next/navigation";
 interface ActiveLinkProps {
   href: string;
   tooltipText: string;
+  directionTooltip: "top" | "right" | "bottom" | "left";
   children: React.ReactNode;
 }
 
-const ActiveLink = ({ href, tooltipText, children }: ActiveLinkProps) => {
+const ActiveLink = ({ href, tooltipText, children, directionTooltip }: ActiveLinkProps) => {
 
   const currentPath = usePathname();
   const isActive = currentPath === href;
@@ -25,11 +26,11 @@ const ActiveLink = ({ href, tooltipText, children }: ActiveLinkProps) => {
       <Tooltip>
         <TooltipTrigger asChild>
           <Link href={href}
-            className={`flex w-full flex-col transition-all justify-center py-2 text-xs font-semibold items-center rounded-md hover:bg-green-300 ${isActive ? 'bg-green-300' : ""}`}>
+            className={`flex w-full min-w-14 flex-col transition-all justify-center py-2 text-xs font-semibold items-center rounded-sm hover:bg-green-300 ${isActive ? 'bg-green-300' : ""}`}>
             {children}
           </Link>
         </TooltipTrigger>
-        <TooltipContent side="right">
+        <TooltipContent side={directionTooltip}>
           <p>{tooltipText}</p>
         </TooltipContent>
       </Tooltip>

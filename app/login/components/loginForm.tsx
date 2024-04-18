@@ -12,7 +12,7 @@ import * as jwtDecode from "jwt-decode";
 import { Loader2 } from "lucide-react";
 import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -79,11 +79,11 @@ const LoginForm = () => {
     <div className="mt-8">
       <form action="" onSubmit={handleSubmit(handleLogin)}>
         <Label htmlFor="email" className="text-sm font-medium">Email</Label>
-        <Input type="email" id="email" value={"jmcsjoaomarcos@gmail.com"} {...register("email")} placeholder="jmcsjoaomarcos@gmail.com" />
+        <Input type="email" id="email" {...register("email")} placeholder="jmcsjoaomarcos@gmail.com" />
         <Label htmlFor="email">{errors.email?.message}</Label>
         <br />
         <Label htmlFor="senha" className="text-sm font-medium">Senha</Label>
-        <Input type="password" value={"JMCS2024"} {...register("senha")} id="senha" placeholder="JMCS2024" />
+        <Input type="password" {...register("senha")} id="senha" placeholder="JMCS2024" />
         <Label htmlFor="senha">{errors.senha?.message}</Label>
         <br />
         <br />
