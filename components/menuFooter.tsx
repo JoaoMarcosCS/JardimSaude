@@ -18,7 +18,7 @@ const MenuFooter = () => {
 
     <>
     {(!isLoginPage && nivel===2) &&
-    <nav className="w-full hidden justify-center fixed bottom-0 items-center rounded-md py-4 border-t-2 border-slate-200 max-[480px]:flex">
+    <nav className="w-full justify-center fixed bottom-0 items-center rounded-md py-4 border-t-2 border-slate-200 max-sm:flex hidden">
       <ul className="flex justify-between items-center px-4 w-full">
         <Link href={""}><li className={`flex flex-col justify-center text-xs font-medium items-center`}><Home /> Home</li></Link>
         <Link href={""}><li className={`flex flex-col justify-center text-xs font-medium items-center`}><Stethoscope /> Tratamentos</li></Link>

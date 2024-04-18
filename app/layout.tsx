@@ -8,6 +8,8 @@ import { Toaster } from "@/components/ui/sonner";
 import { CircleAlert } from "lucide-react";
 import MenuFooter from "../components/menuFooter";
 import Header from "../components/menuHeader";
+import SideBar from "@/components/sideBar";
+import MainContentProvider from "./providers/mainContentProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,18 +26,19 @@ export default function RootLayout({
     <html lang="pt-br" >
       <ReduxProvider>
         <ReactQueryProvider>
-          <body className={inter.className}>
+          <body className={`${inter.className}`}>
+          <SideBar/>
+          <MainContentProvider>
             <Toaster expand={true} closeButton icons={{
               error: <CircleAlert color="#d10816" size={20} />
             }}  />
-            <Header/>
             <ThemeProvider
               attribute="class"
               defaultTheme="light"
               enableSystem>
               {children}
             </ThemeProvider>
-            <MenuFooter/>
+            </MainContentProvider>
           </body>
         </ReactQueryProvider>
       </ReduxProvider>

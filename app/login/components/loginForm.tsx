@@ -48,7 +48,7 @@ const LoginForm = () => {
       }
 
       console.log(payload)
-      
+
       const response = await fetchToken(payload);
 
       const token = response.data.token;
@@ -79,7 +79,7 @@ const LoginForm = () => {
     <div className="mt-8">
       <form action="" onSubmit={handleSubmit(handleLogin)}>
         <Label htmlFor="email" className="text-sm font-medium">Email</Label>
-        <Input type="email" value={"jmcsjoaomarcos@gmail.com"} id="email" {...register("email")} placeholder="jmcsjoaomarcos@gmail.com" />
+        <Input type="email" id="email" value={"jmcsjoaomarcos@gmail.com"} {...register("email")} placeholder="jmcsjoaomarcos@gmail.com" />
         <Label htmlFor="email">{errors.email?.message}</Label>
         <br />
         <Label htmlFor="senha" className="text-sm font-medium">Senha</Label>
