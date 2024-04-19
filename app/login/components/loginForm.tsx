@@ -17,6 +17,7 @@ import { toast } from "sonner";
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { secretToken } from "@/app/constants/secretCookie";
 
 const schema = z.object({
   email: z.string().email("Informe um email válido"),
@@ -54,8 +55,8 @@ const LoginForm = () => {
       const token = response.data.token;
       const { name, id, email, nivel } = jwtDecode.jwtDecode<UsuarioToken>(token);
 
-      Cookie.set("auth_token", token, { expires: 1 / 24 });
-
+      Cookie.set("auth_token", token, { expires: 1 / 24, signed: true, secret: secretToken });
+      Cookie.set("nivel", nivel.toString(), { expires: 1 / 24, signed: true, secret: secretToken });
       api.defaults.headers.Authorization = `Bearer ${token}`;
 
       dispatch(loginSuccess({ name, id, email, nivel }))
@@ -80,11 +81,11 @@ const LoginForm = () => {
       <form action="" onSubmit={handleSubmit(handleLogin)}>
         <Label htmlFor="email" className="text-sm font-medium">Email</Label>
         <Input type="email" id="email" {...register("email")} placeholder="jmcsjoaomarcos@gmail.com" />
-        <Label htmlFor="email">{errors.email?.message}</Label>
+        <Label htmlFor="email" className="text-red-600">{errors.email?.message}</Label>
         <br />
         <Label htmlFor="senha" className="text-sm font-medium">Senha</Label>
         <Input type="password" {...register("senha")} id="senha" placeholder="JMCS2024" />
-        <Label htmlFor="senha">{errors.senha?.message}</Label>
+        <Label htmlFor="senha" className="text-red-600">{errors.senha?.message}</Label>
         <br />
         <br />
         <Button

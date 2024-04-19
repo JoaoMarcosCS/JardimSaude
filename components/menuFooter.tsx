@@ -5,6 +5,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store/root-reducer"
+import ActiveLink from "./activeLink";
+import { useState, useEffect } from "react";
+import Cookie from "js-cookie";
 
 const MenuFooter = () => {
 
@@ -13,6 +16,11 @@ const MenuFooter = () => {
   const isLoginPage = currentPage === "/login"
 
   const { nivel } = useSelector((state: RootState) => state.usuarioReducer);
+  // const [nivel, setNivel] = useState(0);
+  // useEffect(()=>{
+  //   const _nivel = Number(Cookie.get("nivel"));
+  //   setNivel(_nivel);
+  // },[nivel])
 
   return (
 
@@ -20,10 +28,10 @@ const MenuFooter = () => {
     {(!isLoginPage && nivel===2) &&
     <nav className="w-full justify-center fixed bottom-0 items-center rounded-md py-4 border-t-2 border-slate-200 max-sm:flex hidden">
       <ul className="flex justify-between items-center px-4 w-full">
-        <Link href={""}><li className={`flex flex-col justify-center text-xs font-medium items-center`}><Home /> Home</li></Link>
-        <Link href={""}><li className={`flex flex-col justify-center text-xs font-medium items-center`}><Stethoscope /> Tratamentos</li></Link>
-        <Link href={""}><li className={`flex flex-col justify-center text-xs font-medium items-center`}><SquareUser /> Pacientes</li></Link>
-        <Link href={""}><li className={`flex flex-col justify-center text-xs font-medium items-center`}><ClipboardPlus /> Consultas</li></Link>
+        <ActiveLink href="/" directionTooltip="top" tooltipText="Home"><Home /> Home</ActiveLink>
+        <ActiveLink href="/tratamentos" directionTooltip="top" tooltipText="Tratamentos"><Stethoscope /> Tratamentos</ActiveLink>
+        <ActiveLink href="/pacientes" directionTooltip="top" tooltipText="Pacientes"><SquareUser /> Pacientes</ActiveLink>
+        <ActiveLink href="/consultas" directionTooltip="top" tooltipText="Consultas"><ClipboardPlus /> Consultas</ActiveLink>
       </ul>
     </nav>}
   </>

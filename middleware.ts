@@ -8,7 +8,7 @@ export default function middleware(request: NextRequest) {
   const loginPath = new URL("/login", request.url);
 
   if (!token) {
-  
+
     return NextResponse.redirect(loginPath);
   }
 
@@ -17,5 +17,5 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/"]
+  matcher: ["/","/tratamentos"]
 }

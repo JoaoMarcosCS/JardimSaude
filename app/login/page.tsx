@@ -10,10 +10,10 @@ import { useRouter } from "next/navigation"
 
 const Login = () => {
 
-  useEffect(() => {
-    document.title = "Jardim Saúde | Login"
+  // useEffect(() => {
+  //   document.title = "Jardim Saúde | Login"
 
-  }, [])
+  // }, [])
 
   return (
     <div className="flex h-screen ">

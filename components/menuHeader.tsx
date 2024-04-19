@@ -6,11 +6,15 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image"
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store/root-reducer"
 import ActiveLink from "./activeLink";
+import LogoutDialog from "./logoutDialog";
+import { useState, useEffect } from "react";
+import Cookie from "js-cookie";
+
 
 const Header = () => {
 
@@ -19,6 +23,11 @@ const Header = () => {
   const isLoginPage = currentPage === "/login"
 
   const { nivel } = useSelector((state: RootState) => state.usuarioReducer);
+  // const [nivel, setNivel] = useState(0);
+  // useEffect(()=>{
+  //   const _nivel = Number(Cookie.get("nivel"));
+  //   setNivel(_nivel);
+  // },[nivel])
 
   return (
     <>
@@ -33,14 +42,18 @@ const Header = () => {
                   <SheetTrigger asChild >
                     <Menu className=" max-sm:flex hidden" />
                   </SheetTrigger>
+                  <SheetContent>
+                    Olá
+                  </SheetContent>
+
                 </Sheet>
               ) :
               (<></>)}
           </div>
           <ul className="flex justify-between items-center md:mr-10 px-4 gap-5">
             {(nivel === 1) && <ActiveLink directionTooltip="bottom" href="/cart" tooltipText="Seu carrinho"><ShoppingCart/>Carrinho</ActiveLink>}
-            <ActiveLink directionTooltip="bottom" href="/logout" tooltipText="Deslogar"><LogOut /> Sair</ActiveLink>
-            <ActiveLink directionTooltip="bottom" href="/profile" tooltipText="Seu perfil"><CircleUserRound /> Perfil</ActiveLink>
+            <LogoutDialog/>
+            <ActiveLink directionTooltip="bottom" href="" tooltipText="Seu perfil"><CircleUserRound /> Perfil</ActiveLink>
           </ul>
 
         </nav>
