@@ -23,7 +23,7 @@ const LogoutDialog = () => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <button className="flex w-full min-w-14 flex-col transition-all justify-center py-2 text-xs font-semibold items-center rounded-sm hover:bg-green-300">
+        <button className="flex w-full min-w-14 flex-col transition-all justify-center py-2 text-xs font-semibold items-center rounded-sm hover:text-green-400">
           <LogOut /> Sair
         </button>
       </AlertDialogTrigger>
