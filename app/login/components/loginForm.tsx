@@ -48,7 +48,7 @@ const LoginForm = () => {
         senha: data.senha,
       }
 
-      console.log(payload)
+
 
       const response = await fetchToken(payload);
 

@@ -2,24 +2,20 @@
 
 import { useSelector } from "react-redux";
 import { RootState } from "../store/root-reducer";
-import { useEffect, useState } from "react";
-import Cookie from "js-cookie"
+import HomeMedico from "./components/homeMedico";
+import HomeSecretaria from "./components/homeSecretaria";
 
 export default function Home() {
 
-  // const [nivel, setNivel] = useState(0);
-  // useEffect(()=>{
-  //   const _nivel = Number(Cookie.get("nivel"));
-  //   setNivel(_nivel);
-  // },[nivel])
-
-  const { nivel, nome} = useSelector((state:RootState) => state.usuarioReducer);
-
+  const {nivel } = useSelector((state:RootState) => state.usuarioReducer);
 
   return (
-    <div>
-      Olá, {nome} <br />
-      Você é um nivel : {nivel}
-    </div>
+    <>
+    {(nivel === 1) ? (
+      <HomeSecretaria/>
+    ) : (
+    <HomeMedico/>
+    )}
+    </>
   );
 }

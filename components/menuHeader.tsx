@@ -38,11 +38,11 @@ const Header = () => {
             <p className="text-xl tracking-wide text-green-500 font-semibold flex max-sm:hidden">Jardim Saúde</p>
             {(nivel == 1)
               ? (
-                <Sheet>
+                <Sheet >
                   <SheetTrigger asChild >
                     <Menu className=" max-sm:flex hidden" />
                   </SheetTrigger>
-                  <SheetContent>
+                  <SheetContent side={"left"}>
                     Olá
                   </SheetContent>
 
