@@ -6,16 +6,8 @@ import { useSelector } from "react-redux";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { RootState } from "../app/store/root-reducer"
 import ActiveLink from "./activeLink";
-import Cookie from "js-cookie";
-import { useState, useEffect } from "react";
+import takeInitialLetters from "@utils/takeInitialLetters";
 
-const takeInitialLetters = (fullName: any) => {
-  const [firstName, lastName] = fullName.split(" ");
-  const firstLetter = firstName?.at(0) || "U";
-  const secondLetter = lastName?.at(0) || "S"
-
-  return `${firstLetter}${secondLetter}`;
-}
 
 const SideBar = () => {
 
@@ -24,12 +16,6 @@ const SideBar = () => {
   const isLoginPage = currentPage === "/login"
 
   const { nivel, nome } = useSelector((state: RootState) => state.usuarioReducer);
-  // const [nivel, setNivel] = useState(0);
-
-  // useEffect(()=>{
-  //   const _nivel = Number(Cookie.get("nivel"));
-  //   setNivel(_nivel);
-  // },[nivel])
 
   const userName = nome ? takeInitialLetters(nome) : "US";
 

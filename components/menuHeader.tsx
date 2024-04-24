@@ -1,6 +1,6 @@
 "use client";
 
-import { CircleUserRound, ClipboardPlus, Home, LogOut, Menu, ShoppingCart, SquareUser, Stethoscope } from "lucide-react";
+import { Boxes, CircleUserRound, ClipboardPlus, Home, LineChart, LogOut, Menu, ShoppingCart, SquareUser, Stethoscope, Store, Users } from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -14,6 +14,9 @@ import ActiveLink from "./activeLink";
 import LogoutDialog from "./logoutDialog";
 import { useState, useEffect } from "react";
 import Cookie from "js-cookie";
+import { Avatar, AvatarFallback } from "./ui/avatar";
+import takeInitialLetters from "@/utils/takeInitialLetters";
+import SheetContentMenu from "./SheetContentMenu";
 
 
 const Header = () => {
@@ -22,12 +25,8 @@ const Header = () => {
 
   const isLoginPage = currentPage === "/login"
 
-  const { nivel } = useSelector((state: RootState) => state.usuarioReducer);
-  // const [nivel, setNivel] = useState(0);
-  // useEffect(()=>{
-  //   const _nivel = Number(Cookie.get("nivel"));
-  //   setNivel(_nivel);
-  // },[nivel])
+
+  const { nivel, nome } = useSelector((state: RootState) => state.usuarioReducer);
 
   return (
     <>
@@ -43,7 +42,7 @@ const Header = () => {
                     <Menu className=" max-sm:flex hidden" />
                   </SheetTrigger>
                   <SheetContent side={"left"}>
-                    Olá
+                    <SheetContentMenu/>
                   </SheetContent>
 
                 </Sheet>
@@ -51,8 +50,8 @@ const Header = () => {
               (<></>)}
           </div>
           <ul className="flex justify-between items-center md:mr-10 px-4 gap-5">
-            {(nivel === 1) && <ActiveLink directionTooltip="bottom" href="/cart" tooltipText="Seu carrinho"><ShoppingCart/>Carrinho</ActiveLink>}
-            <LogoutDialog/>
+            {(nivel === 1) && <ActiveLink directionTooltip="bottom" href="/cart" tooltipText="Seu carrinho"><ShoppingCart />Carrinho</ActiveLink>}
+            <LogoutDialog />
             <ActiveLink directionTooltip="bottom" href="" tooltipText="Seu perfil"><CircleUserRound /> Perfil</ActiveLink>
           </ul>
 

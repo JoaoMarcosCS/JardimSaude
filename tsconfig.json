@@ -30,6 +30,7 @@
       "@services/*":["./app/services/*"],
       "@hooks/*":["./app/hooks/*"],
       "@schemas/*":["./app/schemas/*"],
+      "@utils/*":["./utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
