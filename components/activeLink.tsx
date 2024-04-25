@@ -26,7 +26,7 @@ const ActiveLink = ({ href, tooltipText, children, directionTooltip }: ActiveLin
       <Tooltip>
         <TooltipTrigger asChild>
           <Link href={href}
-            className={`flex w-full min-w-14 flex-col transition-all justify-center py-2 text-xs font-semibold items-center rounded-sm hover:text-green-400 ${isActive ? 'text-green-400' : ""}`}>
+            className={`flex min-w-14 flex-col transition-all justify-center py-2 text-xs font-semibold items-center rounded-sm hover:text-green-400 ${isActive ? 'text-green-400' : ""}`}>
             {children}
           </Link>
         </TooltipTrigger>
