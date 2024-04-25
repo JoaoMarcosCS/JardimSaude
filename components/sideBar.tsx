@@ -31,15 +31,15 @@ const SideBar = () => {
             </Avatar>
           </div>
 
-          <ul className="flex flex-col pt-3 pb-5 w-full h-screen justify-between items-center md:mr-10 overflow-hidden">
+          <ul className="flex flex-col pt-3 pb-5 w-full h-screen justify-start gap-2 items-center md:mr-10 overflow-hidden">
             <ActiveLink directionTooltip="right" href="/" tooltipText="Home"><Home /> Home</ActiveLink>
             <ActiveLink directionTooltip="right" href="/tratamentos" tooltipText="Tratamentos"><Stethoscope /> Tratamentos</ActiveLink>
-            <ActiveLink directionTooltip="right" href="/funcionarios" tooltipText="Funcionários"><Users /> Funcionários</ActiveLink>
+            {(nivel==1) && <ActiveLink directionTooltip="right" href="/funcionarios" tooltipText="Funcionários"><Users /> Funcionários</ActiveLink>}
             <ActiveLink directionTooltip="right" href="/pacientes" tooltipText="Pacientes"><SquareUser /> Pacientes</ActiveLink>
             <ActiveLink directionTooltip="right" href="/consultas" tooltipText="Consultas"><ClipboardPlus /> Consultas</ActiveLink>
-            <ActiveLink directionTooltip="right" href="/estoque" tooltipText="Estoque"> <Boxes /> Estoque</ActiveLink>
-            <ActiveLink directionTooltip="right" href="/financeiro" tooltipText="Financeiro"> <LineChart /> Financeiro</ActiveLink>
-            <ActiveLink directionTooltip="right" href="/shopping" tooltipText="Shopping"><Store /> Shopping</ActiveLink>
+            {(nivel==1) && <ActiveLink directionTooltip="right" href="/estoque" tooltipText="Estoque"> <Boxes /> Estoque</ActiveLink>}
+            {(nivel==1) && <ActiveLink directionTooltip="right" href="/financeiro" tooltipText="Financeiro"> <LineChart /> Financeiro</ActiveLink>}
+            {(nivel==1) && <ActiveLink directionTooltip="right" href="/shopping" tooltipText="Shopping"><Store /> Shopping</ActiveLink>}
           </ul>
 
         </nav>

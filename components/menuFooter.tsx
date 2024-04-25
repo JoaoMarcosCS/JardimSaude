@@ -1,13 +1,10 @@
 "use client";
 
-import { CircleUserRound, ClipboardPlus, Home, LogOut, ShoppingCart, SquareUser, Stethoscope } from "lucide-react";
-import Link from "next/link";
+import { ClipboardPlus, Home, SquareUser, Stethoscope } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "../app/store/root-reducer"
 import ActiveLink from "./activeLink";
-import { useState, useEffect } from "react";
-import Cookie from "js-cookie";
 
 const MenuFooter = () => {
 
@@ -16,11 +13,7 @@ const MenuFooter = () => {
   const isLoginPage = currentPage === "/login"
 
   const { nivel } = useSelector((state: RootState) => state.usuarioReducer);
-  // const [nivel, setNivel] = useState(0);
-  // useEffect(()=>{
-  //   const _nivel = Number(Cookie.get("nivel"));
-  //   setNivel(_nivel);
-  // },[nivel])
+
 
   return (
 
