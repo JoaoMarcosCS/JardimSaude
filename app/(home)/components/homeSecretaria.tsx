@@ -1,6 +1,9 @@
-import FuncionariosCard from "./FuncionariosCard";
-import MedicamentosCard from "./MedicamentosCard";
-import OrcamentoCard from "./OrcamentoCard";
+
+import FuncionariosCard from "./cards/FuncionariosCard";
+import MedicamentosCard from "./cards/MedicamentosCard";
+import OrcamentoCard from "./cards/OrcamentoCard";
+import PacientesCard from "./cards/PacientesCard";
+import TratamentosCard from "./cards/TratamentosCard";
 
 const HomeSecretaria = () => {
 
@@ -15,6 +18,8 @@ const HomeSecretaria = () => {
         <OrcamentoCard />
         <FuncionariosCard/>
         <MedicamentosCard/>
+        <PacientesCard/>
+        <TratamentosCard/>
       </div>
     </section>
 

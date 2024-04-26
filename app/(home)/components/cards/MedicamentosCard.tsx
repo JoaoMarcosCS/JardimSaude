@@ -1,8 +1,6 @@
 import { Card, CardHeader, CardDescription, CardTitle, CardFooter } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { useHospitalData } from "../../hooks/useHospitalData";
 import { EllipsisVertical, Info, Home, Users, Pill } from "lucide-react";
-import CardSkeleton from "./skeletons/cardSkeleton";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link";
 import { useTotalMedicamentos } from "@/app/hooks/useTotalMedicamentos";
+import CardSkeleton from "../skeletons/cardSkeleton";
 
 const MedicamentosCard = () => {
 
@@ -24,10 +23,10 @@ const MedicamentosCard = () => {
       {isLoading ? (
         <CardSkeleton />
       ) : (
-        <Card className="shadow">
+        <Card className="shadow min-w-[280px]">
           <CardHeader className="pb-2">
             <CardDescription className="font-medium text-base gap-1 justify-between px-1 flex items-center">
-              <p className="flex flex-row items-center">Tipos de medicamentos
+              <p className="flex flex-row items-center gap-1">Tipos de medicamentos
                 <TooltipProvider delayDuration={200}>
                   <Tooltip>
                     <TooltipTrigger asChild>
@@ -57,7 +56,6 @@ const MedicamentosCard = () => {
                       <Link href={"#"}>Histórico de compras</Link>
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
-                  <DropdownMenuSeparator />
                 </DropdownMenuContent>
               </DropdownMenu>
             </CardDescription>
