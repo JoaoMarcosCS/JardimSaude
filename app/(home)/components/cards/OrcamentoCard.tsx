@@ -28,7 +28,7 @@ const OrcamentoCard = () => {
       {isLoading ? (
         <CardSkeleton />
       ) : (
-        <Card className="shadow min-w-[280px]">
+        <Card className="shadow min-w-[330px]">
           <CardHeader className="pb-2">
             <CardDescription className="font-medium text-base gap-1 justify-between px-1 flex items-center">
               <p className="flex flex-row items-center gap-1">Orçamento
