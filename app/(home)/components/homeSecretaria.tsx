@@ -1,3 +1,5 @@
+import FuncionariosCard from "./FuncionariosCard";
+import MedicamentosCard from "./MedicamentosCard";
 import OrcamentoCard from "./OrcamentoCard";
 
 const HomeSecretaria = () => {
@@ -11,10 +13,8 @@ const HomeSecretaria = () => {
       </div>
       <div className="flex flex-wrap gap-4 items-center justify-around mt-3">
         <OrcamentoCard />
-        <OrcamentoCard />
-        <OrcamentoCard />
-        <OrcamentoCard />
-        <OrcamentoCard />
+        <FuncionariosCard/>
+        <MedicamentosCard/>
       </div>
     </section>
 
