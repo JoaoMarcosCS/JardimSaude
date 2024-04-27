@@ -29,9 +29,10 @@ const MainContentProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      {(isLoginPage) ?
+      {/**precisa dessa validação para não aplicar1 com o margin-left */
+      (isLoginPage) ?
         (
-          <main className="max-sm:ml-0 ">
+          <main className="max-sm:ml-0">
             <Header />
             {children}
             <MenuFooter />
@@ -40,9 +41,10 @@ const MainContentProvider = ({ children }: { children: React.ReactNode }) => {
         (
           <main className="max-sm:ml-0 ml-[91px]">
             <Header />
-            <div>{children}</div>
+            <div className="pt-24">{children}</div>
             <MenuFooter />
-          </main>)
+          </main>
+          )
       }
     </>
   )

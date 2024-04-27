@@ -11,7 +11,7 @@ const HomeMedico = () => {
 
 
   return (
-    <section className="flex justify-center items-center flex-col pt-4">
+    <section className="flex justify-center items-center flex-col  pt-32">
       <div className="w-full flex items-center flex-col justify-center">
         <h1 className="text-green-400 text-3xl font-bold ">Olá, Dr(a) {nome}</h1>
         <div className="w-full flex justify-center items-center px-4 pt-4">

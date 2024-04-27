@@ -31,7 +31,7 @@ const Header = () => {
   return (
     <>
       {!isLoginPage &&
-        <nav className="w-full flex justify-between items-center min-h-8 py-2 pl-1 shadow-md">
+        <nav className="w-full flex bg-slate-50 pr-24 max-sm:pr-0 fixed justify-between items-center min-h-8 py-2 pl-1 shadow-md">
           <div className=" flex justify-center items-center gap-3  ">
             <Image src="/logo.png" alt="Logo" width={30} height={30} />
             <p className="text-xl tracking-wide text-green-500 font-semibold flex max-sm:hidden">Jardim Saúde</p>
