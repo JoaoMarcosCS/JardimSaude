@@ -41,7 +41,7 @@ const MainContentProvider = ({ children }: { children: React.ReactNode }) => {
         (
           <main className="max-sm:ml-0 ml-[91px]">
             <Header />
-            <div className="pt-24">{children}</div>
+            <div className="py-24">{children}</div>
             <MenuFooter />
           </main>
           )
