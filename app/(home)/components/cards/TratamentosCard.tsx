@@ -11,9 +11,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link";
-import { useTotalFuncionarios } from "@/app/hooks/useTotalFuncionarios";
+import { useTotalFuncionarios } from "@/app/(home)/hooks/useTotalFuncionarios";
 import CardSkeleton from "../skeletons/cardSkeleton";
-import { useTotalTratamentos } from "@/app/hooks/useTotalTratamentos";
+import { useTotalTratamentos } from "@/app/(home)/hooks/useTotalTratamentos";
+import CardDashboard from "./CardDashboard";
 
 const TratamentosCard = () => {
 
@@ -24,50 +25,16 @@ const TratamentosCard = () => {
       {isLoading ? (
         <CardSkeleton />
       ) : (
-        <Card className="shadow min-w-[330px]">
-          <CardHeader className="pb-2">
-            <CardDescription className="font-medium text-base gap-1 justify-between px-1 flex items-center">
-              <p className="flex flex-row items-center gap-1">Tratamentos realizados
-                <TooltipProvider delayDuration={200}>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Info size={15} />
-                    </TooltipTrigger>
-                    <TooltipContent side={"right"} className="text-xs text-neutral-700 text-left w-80 text-wrap">
-                      Essa é a quantidade de tratamentos realizados pelo Jardim Saúde desde o seu início, em 01/01/2023
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              </p>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <EllipsisVertical size={18} className="hover:scale-105 transition-all" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent >
-                  <DropdownMenuLabel className="px-2 flex flex-row items-center"> <Stethoscope size={15} /> Tratamentos</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuGroup>
-                    <DropdownMenuItem>
-                      <Link href={"#"} >ver tratamentos</Link>
-                    </DropdownMenuItem>
-                  </DropdownMenuGroup>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </CardDescription>
-            <CardTitle className="text-4xl flex flex-row items-center text-cyan-500 gap-1">
-              {/* {Intl.NumberFormat('pt-BR', {
-                style: "currency",
-                currency: 'BRL'
-              }).format(Number(data))
-              } */}
-              <Stethoscope size={35} />{data}
-            </CardTitle>
-          </CardHeader>
-          <CardFooter>
-            <CardDescription className="text-sm">Tratamentos realizados desde 01/01/2023</CardDescription>
-          </CardFooter>
-        </Card>
-
+        <CardDashboard
+          title="Tratamentos realizados"
+          tooltipTextHelp={"Essa é a quantidade de tratamentos realizados pelo Jardim Saúde desde o seu início, em 01/01/2023."}
+          color={"text-cyan-500"}
+          description={"Tratamentos realizados desde 01/01/2023"}
+          dataToDisplay={data}
+          icon={<><Stethoscope size={35} /></>}
+        >
+          <Link href={"#"} >Ver tratamentos</Link>
+        </CardDashboard>
       )}
     </>
   )

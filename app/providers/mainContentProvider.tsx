@@ -1,13 +1,13 @@
 "use client"
 
-import MenuFooter from "@/components/menuFooter";
-import Header from "@/components/menuHeader";
 import { usePathname, useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/root-reducer";
 import Cookie from "js-cookie";
 import api from "../services/axios";
 import { useEffect } from "react";
+import MenuFooter from "../layout/menuFooter";
+import Header from "../layout/menuHeader";
 
 const MainContentProvider = ({ children }: { children: React.ReactNode }) => {
 
@@ -17,9 +17,7 @@ const MainContentProvider = ({ children }: { children: React.ReactNode }) => {
   const {nivel} = useSelector((state:RootState) => state.usuarioReducer);
 
   useEffect(()=>{
-    console.log("Nivel value: " + nivel);
     if(nivel === null){
-      console.log("Chegou no service");
       Cookie.remove("auth_token");
       Cookie.remove("nivel");
       delete api.defaults.headers.Authorization;
@@ -29,7 +27,7 @@ const MainContentProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      {/**precisa dessa validação para não aplicar1 com o margin-left */
+      {/**precisa dessa validação para não aplicar com o margin-left */
       (isLoginPage) ?
         (
           <main className="max-sm:ml-0">

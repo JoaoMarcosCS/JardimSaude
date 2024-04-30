@@ -6,9 +6,10 @@ import { ReduxProvider } from "@providers/ReduxProvider";
 import ReactQueryProvider from "@providers/ReactQueryProvider";
 import { Toaster } from "@/components/ui/sonner";
 import { CircleAlert } from "lucide-react";
-import SideBar from "@/components/sideBar";
+
 import MainContentProvider from "./providers/mainContentProvider";
 import PersistorReduxStore from "./providers/PersistorReduxProvider";
+import SideBar from "./layout/sideBar";
 
 const inter = Inter({ subsets: ["latin"] });
 

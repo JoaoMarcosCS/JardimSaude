@@ -17,36 +17,6 @@ const HomeSecretaria = () => {
         <MedicamentosCard/>
         <PacientesCard/>
         <TratamentosCard/>
-        <OrcamentoCard />
-        <FuncionariosCard/>
-        <MedicamentosCard/>
-        <PacientesCard/>
-        <TratamentosCard/>
-        <OrcamentoCard />
-        <FuncionariosCard/>
-        <MedicamentosCard/>
-        <PacientesCard/>
-        <TratamentosCard/>
-        <OrcamentoCard />
-        <FuncionariosCard/>
-        <MedicamentosCard/>
-        <PacientesCard/>
-        <TratamentosCard/>
-        <OrcamentoCard />
-        <FuncionariosCard/>
-        <MedicamentosCard/>
-        <PacientesCard/>
-        <TratamentosCard/>
-        <OrcamentoCard />
-        <FuncionariosCard/>
-        <MedicamentosCard/>
-        <PacientesCard/>
-        <TratamentosCard/>
-        <OrcamentoCard />
-        <FuncionariosCard/>
-        <MedicamentosCard/>
-        <PacientesCard/>
-        <TratamentosCard/>
       </div>
     </section>
 

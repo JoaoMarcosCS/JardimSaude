@@ -28,9 +28,9 @@
       "@types/*":["./app/types/*"],
       "@endpointsAPI":["./app/constants/apiEndPoints.ts"],
       "@services/*":["./app/services/*"],
-      "@hooks/*":["./app/hooks/*"],
+      "@store/*":["./app/store/*"],
       "@schemas/*":["./app/schemas/*"],
-      "@utils/*":["./utils/*"]
+      "@utils/*":["./app/utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

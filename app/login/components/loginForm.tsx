@@ -3,14 +3,13 @@ import UsuarioToken from "@/app/interfaces/token/tokenInterface";
 import api from "@/app/services/axios";
 import fetchToken from "@/app/services/fetchToken";
 import { loginFailed, loginSuccess } from "@/app/states/usuarios/usuarioSlice";
-import { RootState } from "@/app/store/root-reducer";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Cookie from "js-cookie"
 import * as jwtDecode from "jwt-decode";
 import { Loader2 } from "lucide-react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";

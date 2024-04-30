@@ -1,12 +1,12 @@
 "use client";
 
-import { Activity, Boxes, CircleUserRound, ClipboardPlus, Home, LineChart, LogOut, ShoppingCart, SquareUser, Stethoscope, Store, User, Users } from "lucide-react";
+import { Boxes, ClipboardPlus, Home, LineChart, SquareUser, Stethoscope, Store, User, Users } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
-import { Avatar, AvatarFallback } from "./ui/avatar";
-import { RootState } from "../app/store/root-reducer"
 import ActiveLink from "./activeLink";
-import takeInitialLetters from "@utils/takeInitialLetters";
+import takeInitialLetters from "@/app/utils/takeInitialLetters";
+import { RootState } from "../store/root-reducer";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 
 const SideBar = () => {
@@ -34,12 +34,12 @@ const SideBar = () => {
           <ul className="flex flex-col pt-3 pb-5 w-full h-screen justify-start gap-2 items-center md:mr-10 overflow-hidden">
             <ActiveLink directionTooltip="right" href="/" tooltipText="Home"><Home /> Home</ActiveLink>
             <ActiveLink directionTooltip="right" href="/tratamentos" tooltipText="Tratamentos"><Stethoscope /> Tratamentos</ActiveLink>
-            {(nivel==1) && <ActiveLink directionTooltip="right" href="/funcionarios" tooltipText="Funcionários"><Users /> Funcionários</ActiveLink>}
+            {(nivel == 1) && <ActiveLink directionTooltip="right" href="/funcionarios" tooltipText="Funcionários"><Users /> Funcionários</ActiveLink>}
             <ActiveLink directionTooltip="right" href="/pacientes" tooltipText="Pacientes"><SquareUser /> Pacientes</ActiveLink>
             <ActiveLink directionTooltip="right" href="/consultas" tooltipText="Consultas"><ClipboardPlus /> Consultas</ActiveLink>
-            {(nivel==1) && <ActiveLink directionTooltip="right" href="/estoque" tooltipText="Estoque"> <Boxes /> Estoque</ActiveLink>}
-            {(nivel==1) && <ActiveLink directionTooltip="right" href="/financeiro" tooltipText="Financeiro"> <LineChart /> Financeiro</ActiveLink>}
-            {(nivel==1) && <ActiveLink directionTooltip="right" href="/shopping" tooltipText="Shopping"><Store /> Shopping</ActiveLink>}
+            {(nivel == 1) && <ActiveLink directionTooltip="right" href="/estoque" tooltipText="Estoque"> <Boxes /> Estoque</ActiveLink>}
+            {(nivel == 1) && <ActiveLink directionTooltip="right" href="/financeiro" tooltipText="Financeiro"> <LineChart /> Financeiro</ActiveLink>}
+            {(nivel == 1) && <ActiveLink directionTooltip="right" href="/shopping" tooltipText="Shopping"><Store /> Shopping</ActiveLink>}
           </ul>
 
         </nav>

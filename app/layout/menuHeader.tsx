@@ -1,22 +1,18 @@
 "use client";
 
-import { Boxes, CircleUserRound, ClipboardPlus, Home, LineChart, LogOut, Menu, ShoppingCart, SquareUser, Stethoscope, Store, Users } from "lucide-react";
+import { CircleUserRound, Menu, ShoppingCart } from "lucide-react";
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Image from "next/image"
 import { useSelector } from "react-redux";
-import { RootState } from "../app/store/root-reducer"
 import ActiveLink from "./activeLink";
 import LogoutDialog from "./logoutDialog";
-import { useState, useEffect } from "react";
-import Cookie from "js-cookie";
-import { Avatar, AvatarFallback } from "./ui/avatar";
-import takeInitialLetters from "@/utils/takeInitialLetters";
 import SheetContentMenu from "./SheetContentMenu";
+import { RootState } from "@store/root-reducer"
 
 
 const Header = () => {
@@ -26,7 +22,7 @@ const Header = () => {
   const isLoginPage = currentPage === "/login"
 
 
-  const { nivel, nome } = useSelector((state: RootState) => state.usuarioReducer);
+  const { nivel } = useSelector((state: RootState) => state.usuarioReducer);
 
   return (
     <>
@@ -42,7 +38,7 @@ const Header = () => {
                     <Menu className=" max-sm:flex hidden" />
                   </SheetTrigger>
                   <SheetContent side={"left"}>
-                    <SheetContentMenu/>
+                    <SheetContentMenu />
                   </SheetContent>
 
                 </Sheet>

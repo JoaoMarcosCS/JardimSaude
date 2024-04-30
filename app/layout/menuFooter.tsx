@@ -3,8 +3,8 @@
 import { ClipboardPlus, Home, SquareUser, Stethoscope } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
-import { RootState } from "../app/store/root-reducer"
 import ActiveLink from "./activeLink";
+import { RootState } from "../store/root-reducer";
 
 const MenuFooter = () => {
 

@@ -11,9 +11,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import Link from "next/link";
-import { useTotalMedicamentos } from "@/app/hooks/useTotalMedicamentos";
+import { useTotalMedicamentos } from "@/app/(home)/hooks/useTotalMedicamentos";
 import CardSkeleton from "../skeletons/cardSkeleton";
-
+import CardDashboard from "./CardDashboard";
 const MedicamentosCard = () => {
 
   const { data, isLoading } = useTotalMedicamentos();
@@ -23,56 +23,17 @@ const MedicamentosCard = () => {
       {isLoading ? (
         <CardSkeleton />
       ) : (
-        <Card className="shadow min-w-[330px]">
-          <CardHeader className="pb-2">
-            <CardDescription className="font-medium text-base gap-1 justify-between px-1 flex items-center">
-              <p className="flex flex-row items-center gap-1">Tipos de medicamentos
-                <TooltipProvider delayDuration={200}>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Info size={15} />
-                    </TooltipTrigger>
-                    <TooltipContent side={"right"} className="text-xs text-neutral-700 text-left w-80 text-wrap">
-                      Esse dado representa a quantidade de tipos de medicamentos que existem no nosso estoque. Não
-                      representa a quantidade de medicamentos, e sim a quantidade de tipos. Para ver a quantidade
-                      de medicamentos, vá nos menu do card e terá a opção &quot;Ver medicamentos&quot;, e clicando nessa opção
-                       você poderá ver uma tabela com todos os medicamentos e suas quantidades.
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              </p>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <EllipsisVertical size={18} className="hover:scale-105 transition-all" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent >
-                  <DropdownMenuLabel className="px-2 flex flex-row items-center"><Pill size={15}/> Tipos de medicamentos</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuGroup>
-                    <DropdownMenuItem>
-                      <Link href={"#"} >Ver medicamentos</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      <Link href={"#"}>Histórico de compras</Link>
-                    </DropdownMenuItem>
-                  </DropdownMenuGroup>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </CardDescription>
-            <CardTitle className="text-4xl flex flex-row items-center text-rose-500 gap-1">
-              {/* {Intl.NumberFormat('pt-BR', {
-                style: "currency",
-                currency: 'BRL'
-              }).format(Number(data))
-              } */}
-              <Pill size={35}/>{data}
-            </CardTitle>
-          </CardHeader>
-          <CardFooter>
-            <CardDescription className="text-sm">Tipos de medicamentos adquiridos</CardDescription>
-          </CardFooter>
-        </Card>
-
+        <CardDashboard
+          title="Tipos de medicamentos"
+          tooltipTextHelp={"Esse dado representa a quantidade de tipos de medicamentos que existem no nosso estoque. Não representa a quantidade de medicamentos, e sim a quantidade de tipos. Para ver a quantidade medicamentos, vá nos menu do card e terá a opção ''Ver medicamentos'' e clicando nessa opção você poderá ver uma tabela com todos os medicamentos e suas quantidades."}
+          color={"text-rose-500"}
+          description={"Tipos de medicamentos adquiridos"}
+          dataToDisplay={data}
+          icon={<><Pill size={35} /></>}
+        >
+          <Link href={"#"}>Ver medicamentos</Link>
+          <Link href={"#"}>Histórico de compras</Link>
+        </CardDashboard>
       )}
     </>
   )
