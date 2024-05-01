@@ -18,8 +18,8 @@ const HomeSecretaria = () => {
         <MedicamentosCard/>
         <PacientesCard/>
         <TratamentosCard/>
-        <TratamentoTable/>
       </div>
+      <TratamentoTable/>
     </section>
 
   )

@@ -206,7 +206,7 @@ const Tratamentos = async () => {
   const data = await getData()
 
   return(
-    <section className="py-24">
+    <section className="">
       <div className="container">
         <h1 className="font-bold text-2xl">All Users</h1>
         <DataTable columns={columns} data={data} />
