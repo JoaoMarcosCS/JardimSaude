@@ -13,7 +13,7 @@ import ActiveLink from "./activeLink";
 import LogoutDialog from "./logoutDialog";
 import SheetContentMenu from "./SheetContentMenu";
 import { RootState } from "@store/root-reducer"
-
+import Cookie from "js-cookie";
 
 const Header = () => {
 
@@ -21,13 +21,12 @@ const Header = () => {
 
   const isLoginPage = currentPage === "/login"
 
-
   const { nivel } = useSelector((state: RootState) => state.usuarioReducer);
 
   return (
     <>
       {!isLoginPage &&
-        <nav className="w-full flex bg-slate-50 pr-24 z-50 max-sm:pr-0 fixed justify-between items-center min-h-8 py-2 pl-1 shadow-md">
+        <nav className="w-full flex bg-slate-50 z-50 pr-24 max-sm:pr-0 fixed justify-between items-center min-h-8 py-2 pl-1 shadow-md">
           <div className=" flex justify-center items-center gap-3  ">
             <Image src="/logo.png" alt="Logo" width={30} height={30} />
             <p className="text-xl tracking-wide text-green-500 font-semibold flex max-sm:hidden">Jardim Saúde</p>

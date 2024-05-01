@@ -2,7 +2,7 @@ import { loginPayloadInterface } from "@/app/interfaces/login/loginPayload";
 import UsuarioToken from "@/app/interfaces/token/tokenInterface";
 import api from "@/app/services/axios";
 import fetchToken from "@/app/services/fetchToken";
-import { loginFailed, loginSuccess } from "@/app/states/usuarios/usuarioSlice";
+import { loginSuccess } from "@/app/states/usuarios/usuarioSlice";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -47,8 +47,6 @@ const LoginForm = () => {
         senha: data.senha,
       }
 
-
-
       const response = await fetchToken(payload);
 
       const token = response.data.token;
@@ -62,19 +60,15 @@ const LoginForm = () => {
 
       push("/");
 
-
     } catch (error: any) {
 
       const errors = error.response?.data.message || "Erro do servidor, tente novamente em alguns instantes.";
       toast.error(errors);
-      dispatch(loginFailed({ errors }))
 
     } finally {
       setIsLoading(false);
     }
   }
-
-
   return (
     <div className="mt-8">
       <form action="" onSubmit={handleSubmit(handleLogin)}>
@@ -88,7 +82,7 @@ const LoginForm = () => {
         <br />
         <br />
         <Button
-         type="submit"
+          type="submit"
           className="w-full
                         bg-green-600
                         text-base

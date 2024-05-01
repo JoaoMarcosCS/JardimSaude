@@ -17,7 +17,7 @@ const SideBar = () => {
 
   const { nivel, nome } = useSelector((state: RootState) => state.usuarioReducer);
 
-  const userName = nome ? takeInitialLetters(nome) : "US";
+  const userName = nome ? takeInitialLetters(nome) : "JS";
 
 
 

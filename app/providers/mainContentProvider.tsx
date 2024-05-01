@@ -26,7 +26,7 @@ const MainContentProvider = ({ children }: { children: React.ReactNode }) => {
   },[nivel, push])
 
   return (
-    <>
+    <div>
       {/**precisa dessa validação para não aplicar com o margin-left */
       (isLoginPage) ?
         (
@@ -44,7 +44,7 @@ const MainContentProvider = ({ children }: { children: React.ReactNode }) => {
           </main>
           )
       }
-    </>
+    </div>
   )
 }
 
