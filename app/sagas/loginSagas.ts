@@ -3,7 +3,7 @@ import fetchToken from '../services/fetchToken';
 import { AxiosResponse } from 'axios';
 import * as jwtDecode from "jwt-decode"
 import api from "@services/axios"
-import { loginFailed, loginSuccess } from "@states/usuarios/usuarioSlice"
+import { loginSuccess } from "@states/usuarios/usuarioSlice"
 import UsuarioToken from '@interfaces/token/tokenInterface';
 import { toast } from 'sonner';
 import Cookie from "js-cookie"
@@ -32,8 +32,6 @@ function* loginRequest({ payload }: { payload: loginPayloadInterface }) {
     const errors = error.response?.data.message || "Erro do servidor, tente novamente em alguns instantes.";
     toast.error(error);
     console.log(error);
-    yield put(loginFailed({ errors }))
-
   }
 }
 
