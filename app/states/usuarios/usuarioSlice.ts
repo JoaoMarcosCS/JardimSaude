@@ -1,5 +1,6 @@
-import { UsuarioState } from "@interfaces/usuarios/interfaceUsuarioState"
+
 import { createSlice } from "@reduxjs/toolkit"
+import { UsuarioState } from "./interfaceUsuarioState";
 
 const initialState: UsuarioState = {
   nome: null,

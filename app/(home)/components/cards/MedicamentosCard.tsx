@@ -14,6 +14,7 @@ import Link from "next/link";
 import { useTotalMedicamentos } from "@/app/(home)/hooks/useTotalMedicamentos";
 import CardSkeleton from "../skeletons/cardSkeleton";
 import CardDashboard from "./CardDashboard";
+
 const MedicamentosCard = () => {
 
   const { data, isLoading } = useTotalMedicamentos();

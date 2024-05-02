@@ -1,6 +1,6 @@
-import { TRATAMENTOS } from "@/app/constants/apiEndPoints"
-import api from "../axios"
-import { Tratamento } from "@/app/(home)/components/tables/tratamentos/columns";
+import { TRATAMENTOS } from "@/app/constants/apiEndPoints";
+import api from "@/app/services/axios";
+import { Tratamento } from "../interfaces/tratamentoInterface";
 
 const fetchTratamentos = async ():Promise<Tratamento[]> => {
   const response = await api.get(`${TRATAMENTOS}?field=nome`);

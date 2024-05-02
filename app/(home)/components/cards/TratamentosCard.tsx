@@ -27,9 +27,9 @@ const TratamentosCard = () => {
       ) : (
         <CardDashboard
           title="Tratamentos realizados"
-          tooltipTextHelp={"Essa é a quantidade de tratamentos realizados pelo Jardim Saúde desde o seu início, em 01/01/2023."}
+          tooltipTextHelp={"Essa é a quantidade de tratamentos realizados pelo Jardim Saúde desde o seu início, em 31/12/2022."}
           color={"text-cyan-500"}
-          description={"Tratamentos realizados desde 01/01/2023"}
+          description={"Tratamentos realizados desde 31/12/2022"}
           dataToDisplay={data}
           icon={<><Stethoscope size={35} /></>}
         >

@@ -19,7 +19,7 @@ const MenuFooter = () => {
 
     <>
     {(!isLoginPage && nivel===2) &&
-    <nav className="w-full justify-between bg-white fixed bottom-0 items-center rounded-md border-t-2 bg-slate-50 border-slate-200 max-sm:flex hidden">
+    <nav className="w-full justify-between bg-white fixed bottom-0 items-center rounded-md border-t-2 border-slate-200 max-sm:flex hidden">
       <ul className="flex justify-between items-center w-full px-2">
         <ActiveLink href="/" directionTooltip="top" tooltipText="Home"><Home /> Home</ActiveLink>
         <ActiveLink href="/tratamentos" directionTooltip="top" tooltipText="Tratamentos"><Stethoscope /> Tratamentos</ActiveLink>
