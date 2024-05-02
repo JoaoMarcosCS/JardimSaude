@@ -7,7 +7,6 @@ export function useTratamentosData() {
     queryFn: fetchTratamentos,
     queryKey: ["tratamento-data"]
   })
-  const tratamentos = query.data || [];
 
-  return { ...query, data: tratamentos };
+  return query
 }
