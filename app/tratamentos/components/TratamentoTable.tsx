@@ -6,7 +6,7 @@ import { DataTable } from "./data-table";
 
 const TratamentoTable = () => {
   const {data, isLoading} = useTratamentosData();
-
+  
   return(
     <>
     {isLoading ? (
