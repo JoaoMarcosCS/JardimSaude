@@ -26,7 +26,7 @@ export const useAuth = () => {
       addAuthorizationHeaderAPI(token);
 
       dispatch(loginSuccess({ name, id, email, nivel }))
-      toast.loading("caso demore, recarregue a página.");
+      toast.loading("Caso demore, recarregue a página.");
       push("/");
 
     } catch (error: any) {
