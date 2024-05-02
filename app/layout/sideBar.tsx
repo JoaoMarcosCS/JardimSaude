@@ -24,7 +24,7 @@ const SideBar = () => {
   return (
     <>
       {!isLoginPage &&
-        <nav className="h-screen flex max-sm:hidden fixed flex-col border-r-2 w-[90px] ">
+        <nav className="h-screen bg-white flex max-sm:hidden fixed flex-col border-r-2 w-[90px] ">
           <div className=" min-h-[70px]  flex justify-center items-center bg-green-400">
             <Avatar >
               <AvatarFallback>{userName}</AvatarFallback>

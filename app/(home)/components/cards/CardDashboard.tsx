@@ -1,6 +1,6 @@
 import { Card, CardHeader, CardDescription, CardTitle, CardFooter } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { EllipsisVertical, Info } from "lucide-react";
+import { EllipsisVertical, Info, MoreHorizontal } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,7 +26,7 @@ import CardDashboardProps from "../../interface/CardDashboardProps";
  */
 const CardDashboard = ({ title, tooltipTextHelp, dataToDisplay, icon, color, children, description }: CardDashboardProps) => {
   return (
-    <Card className="shadow min-w-[330px]">
+    <Card className=" shadow min-w-[330px]">
       <CardHeader className="pb-2">
         <CardDescription className="font-medium text-base gap-1 justify-between px-1 flex items-center">
           <p className="flex flex-row items-center gap-1">{title}
@@ -43,7 +43,7 @@ const CardDashboard = ({ title, tooltipTextHelp, dataToDisplay, icon, color, chi
           </p>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <EllipsisVertical size={18} className="hover:scale-105 transition-all" />
+              <MoreHorizontal size={18} className="hover:scale-105 transition-all hover:cursor-pointer" />
             </DropdownMenuTrigger>
             <DropdownMenuContent >
               <DropdownMenuLabel className="px-2 flex flex-row items-center">Ações disponíveis</DropdownMenuLabel>

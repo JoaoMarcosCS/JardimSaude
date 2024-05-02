@@ -2,13 +2,14 @@ import { useRouter } from "next/navigation";
 import Cookie from "js-cookie";
 import api from "./axios";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import removeAuthorizationHeaderAPI from "../utils/removeAuthorizationHeaderaApi";
 
 const useLogoutService = (router: AppRouterInstance) => {
     // const {push} = useRouter();
 
     Cookie.remove("auth_token");
     Cookie.remove("nivel");
-    delete api.defaults.headers.Authorization;
+    removeAuthorizationHeaderAPI();
     router.push("/login");
 
 }
