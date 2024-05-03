@@ -4,6 +4,7 @@ import OrcamentoCard from "./cards/OrcamentoCard";
 import PacientesCard from "./cards/PacientesCard";
 import TratamentosCard from "./cards/TratamentosCard";
 import TratamentoTable from "../../tratamentos/components/TratamentoTable"
+import { useTratamentosData } from "@/app/tratamentos/hooks/useTratamentosData";
 
 const HomeSecretaria = () => {
 
@@ -24,7 +25,7 @@ const HomeSecretaria = () => {
       <div className="flex flex-row items-center gap-4">
         <h1 className="font-bold text-2xl text-green-500">Tratamentos</h1>
       </div>
-      <TratamentoTable/>
+      <TratamentoTable hookFetchData={useTratamentosData()}/>
       </div>
     </section>
 
