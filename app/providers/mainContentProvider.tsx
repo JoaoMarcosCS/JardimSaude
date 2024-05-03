@@ -3,11 +3,11 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/root-reducer";
-import Cookie from "js-cookie";
-import api from "../services/axios";
 import { useEffect } from "react";
 import MenuFooter from "../layout/menuFooter";
 import Header from "../layout/menuHeader";
+import removeAuthorizationHeaderAPI from "../utils/removeAuthorizationHeaderaAPI";
+import removeCookies from "../utils/removeCookies";
 
 const MainContentProvider = ({ children }: { children: React.ReactNode }) => {
 
@@ -18,9 +18,9 @@ const MainContentProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(()=>{
     if(nivel === null){
-      Cookie.remove("auth_token");
-      Cookie.remove("nivel");
-      delete api.defaults.headers.Authorization;
+      removeCookies();
+      removeAuthorizationHeaderAPI();
+
       push("/login");
     }
   },[nivel, push])

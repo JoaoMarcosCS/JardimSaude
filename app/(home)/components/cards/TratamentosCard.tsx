@@ -1,20 +1,8 @@
-import { Card, CardHeader, CardDescription, CardTitle, CardFooter } from "@/components/ui/card";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { EllipsisVertical, Info, Home, Users, Stethoscope } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import { Stethoscope } from "lucide-react";
 import Link from "next/link";
-import { useTotalFuncionarios } from "@/app/(home)/hooks/useTotalFuncionarios";
-import CardSkeleton from "../skeletons/cardSkeleton";
 import { useTotalTratamentos } from "@/app/(home)/hooks/useTotalTratamentos";
 import CardDashboard from "./CardDashboard";
+import CardSkeleton from "@/app/skeletons/cardSkeleton";
 
 const TratamentosCard = () => {
 

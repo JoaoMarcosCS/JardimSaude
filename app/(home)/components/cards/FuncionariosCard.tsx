@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { useTotalFuncionarios } from "@/app/(home)/hooks/useTotalFuncionarios";
-import CardSkeleton from "../skeletons/cardSkeleton";
 import CardDashboard from "./CardDashboard";
 import { Users } from "lucide-react";
+import CardSkeleton from "@/app/skeletons/cardSkeleton";
 
 const FuncionariosCard = () => {
 

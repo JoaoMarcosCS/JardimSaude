@@ -1,6 +1,6 @@
 import { Card, CardHeader, CardDescription, CardTitle, CardFooter } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { EllipsisVertical, Info, MoreHorizontal } from "lucide-react";
+import {  Info, MoreHorizontal } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,

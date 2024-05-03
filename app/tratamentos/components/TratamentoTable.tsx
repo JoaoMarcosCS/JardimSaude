@@ -15,10 +15,7 @@ const TratamentoTable = () => {
       <TableSkeleton/>
     ) : (
       <section className="w-full">
-      <div className="container">
-        <h1 className="font-bold text-2xl">Tratamentos</h1>
         <DataTable columns={columns} data={tratamentoData} />
-      </div>
     </section>
     )}
   </>

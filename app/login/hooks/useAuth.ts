@@ -5,8 +5,8 @@ import { toast } from "sonner";
 import { loginSuccess } from "@/app/states/usuarios/usuarioSlice";
 import getToken  from "../services/getToken";
 import { loginPayloadInterface } from "../interfaces/loginPayload";
-import saveCookies from "../services/saveCookies";
 import addAuthorizationHeaderAPI from "@/app/utils/addAuthorizationHeaderAPI";
+import saveCookies from "@/app/utils/saveCookies";
 
 export const useAuth = () => {
 
@@ -26,7 +26,9 @@ export const useAuth = () => {
       addAuthorizationHeaderAPI(token);
 
       dispatch(loginSuccess({ name, id, email, nivel }))
+
       toast.loading("Caso demore, recarregue a página.");
+
       push("/");
 
     } catch (error: any) {

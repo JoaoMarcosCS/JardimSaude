@@ -1,24 +1,7 @@
-import { Card, CardHeader, CardDescription, CardTitle, CardFooter } from "@/components/ui/card";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useHospitalData } from "@/app/(home)/hooks/useHospitalData"
-import { EllipsisVertical, Info, Home, Users } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import Link from "next/link";
-import CardSkeleton from "../skeletons/cardSkeleton";
 import CardDashboard from "./CardDashboard";
+import CardSkeleton from "@/app/skeletons/cardSkeleton";
 
 const OrcamentoCard = () => {
 

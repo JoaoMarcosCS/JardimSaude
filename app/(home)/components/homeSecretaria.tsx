@@ -20,8 +20,12 @@ const HomeSecretaria = () => {
         <PacientesCard/>
         <TratamentosCard/>
       </div>
-
+      <div className="container mt-4">
+      <div className="flex flex-row items-center gap-4">
+        <h1 className="font-bold text-2xl text-green-500">Tratamentos</h1>
+      </div>
       <TratamentoTable/>
+      </div>
     </section>
 
   )
