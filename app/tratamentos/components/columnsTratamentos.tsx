@@ -122,8 +122,7 @@ export const columns: ColumnDef<Tratamento>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original
-
+      console.log(row);
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

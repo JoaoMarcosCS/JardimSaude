@@ -1,5 +1,5 @@
-import { medicoInterface } from "@/app/interfaces/medicoInterface";
-import { pacienteInterface } from "@/app/interfaces/pacienteInterface";
+import { MedicoInterface } from "@/app/interfaces/medicoInterface";
+import { PacienteInterface } from "@/app/interfaces/pacienteInterface";
 
 export interface Tratamento {
   id: string;
@@ -9,6 +9,6 @@ export interface Tratamento {
   termino?: Date;
   queixas: string;
   status: "Finalizado" | "Em andamento" | "Cancelado";
-  medico_responsavel:medicoInterface;
-  paciente:pacienteInterface;
+  medico_responsavel:MedicoInterface;
+  paciente:PacienteInterface;
 }

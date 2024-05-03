@@ -1,4 +1,6 @@
-export interface medicoInterface{
+import {EspecialidadeInterface} from "./especialidadeInterface"
+
+export interface MedicoInterface{
   id:number;
   name:string;
   nascimento:Date;
@@ -9,5 +11,5 @@ export interface medicoInterface{
   salario:number;
   nivel:number;
   empregado:boolean;
-  
+  especialidade: EspecialidadeInterface;
 }

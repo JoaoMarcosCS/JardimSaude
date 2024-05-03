@@ -1,4 +1,4 @@
-export interface pacienteInterface{
+export interface PacienteInterface{
   id:number;
   nascimento:Date;
   nome:string;
