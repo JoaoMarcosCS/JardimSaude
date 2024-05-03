@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Tratamento } from "../interfaces/tratamentoInterface"
 import { Badge } from "@/components/ui/badge"
+import ModalDetalhesTratamento from "./modalDetalhesTratamento"
 
 
 
@@ -26,7 +27,7 @@ export const columns: ColumnDef<Tratamento>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Nome
+          Tratamento
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
@@ -122,21 +123,8 @@ export const columns: ColumnDef<Tratamento>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      console.log(row);
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Ver ações</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Ações disponíveis</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>Ver detalhes</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <ModalDetalhesTratamento tratamento={row.original}/>
       )
     },
   }
