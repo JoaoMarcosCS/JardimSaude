@@ -5,8 +5,8 @@ import api from "@/app/services/axios";
 
 const medicosFiltredByEspecialidade = async (especialidade: string):Promise<FuncionarioInterface[]> => {
   const medicos = await fetchFuncionarios();
-  const medicosFiltrados = medicos.filter((medico) => medico.especialidade == especialidade);
-  console.log(medicosFiltrados);
+  const medicosFiltrados = medicos.filter((medico) => medico.especialidade?.nome == especialidade);
+  console.log("Medicos:" + medicosFiltrados);
   return medicosFiltrados;
 }
 
