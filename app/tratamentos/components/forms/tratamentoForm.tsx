@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import { Especialidade } from "@/app/especialidades/interfaces/especialidadeInterface";
 import medicosFiltredByEspecialidade from "../../utils/MedicosFiltredByEspecialidade";
 import { FuncionarioInterface } from "@/app/funcionarios/interfaces/funcionarioInterface";
+import findPacienteByCPF from "../../services/findPacienteByCPF";
+import { PacienteInterface } from "@/app/interfaces/pacienteInterface";
 
 const TratamentoForm = () => {
   const { handleSubmit, register, formState: { errors } } = useForm<TratamentoFormProps>({
@@ -23,6 +25,8 @@ const TratamentoForm = () => {
   const [medicosFiltrados, setMedicosFiltrados] = useState<FuncionarioInterface[]>();
   const [isFiltringMedicos, setIsFiltrigMedicos] = useState(false);
   const [selectedMedico, setSelectedMedico] = useState("");
+  const [paciente, setPaciente] = useState<PacienteInterface | null>();
+  const [cpf, setCPF] = useState("");
 
   const handleSelectEspecialdiade = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedEspecialidade(event.target.value);
@@ -32,17 +36,28 @@ const TratamentoForm = () => {
     setSelectedMedico(event.target.value);
   }
 
+  const handleCPFChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCPF(event.target.value);
+  }
+
   useEffect(() => {
     setIsFiltrigMedicos(true);
+
     async function getFiltredMedicosByEspecialidade() {
       const response = await medicosFiltredByEspecialidade(selectedEspecialidade);
       setMedicosFiltrados(response);
     }
+    async function getPacienteByCPF(){
+      const response = await findPacienteByCPF(cpf);
+      setPaciente(response);
+    }
 
+    getPacienteByCPF();
     getFiltredMedicosByEspecialidade();
+
     setIsFiltrigMedicos(false);
 
-  }, [selectedEspecialidade])
+  }, [selectedEspecialidade, cpf])
 
   const handleTratamentoSubmit = () => {
 
@@ -116,8 +131,10 @@ const TratamentoForm = () => {
             <Input type="number" {...register("valor")} id="valorTratamento" />
             <Label htmlFor="valorTratamento" className="text-red-600">{errors.valor?.message}</Label>
             <br />
-
-
+            <Label htmlFor="cpf">CPF do paiciente</Label>
+            <input type="text"  id="cpf" onChange={handleCPFChange}/>
+            <Label>Paciente escolhido: {paciente ? (<>{paciente.nome}</>) : (<>Nenhum paciente encontrado</>)}</Label>
+            <br />
             <Label htmlFor="queixas">Queixas</Label>
             <br />
             <textarea id="queixas" className="border border-emerald-400 rounded" {...register("queixas")} cols={30} rows={10}></textarea>
