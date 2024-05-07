@@ -22,7 +22,7 @@ const TratamentoForm = () => {
   const [selectedEspecialidade, setSelectedEspecialidade] = useState("");
   const [medicosFiltrados, setMedicosFiltrados] = useState<FuncionarioInterface[]>();
   const [isFiltringMedicos, setIsFiltrigMedicos] = useState(false);
-  const [selecteddMedico, setSelectedMedico] = useState("");
+  const [selectedMedico, setSelectedMedico] = useState("");
 
   const handleSelectEspecialdiade = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedEspecialidade(event.target.value);
@@ -56,14 +56,17 @@ const TratamentoForm = () => {
           <Loader2 className="animate-spin mr-2 h-4 w-4 text-green-500" />
         </div>
       ) : (
-        <section>
-          <form onSubmit={handleSubmit(handleTratamentoSubmit)}>
+        <section className=" items-center justify-start flex-col flex">
+          <form onSubmit={handleSubmit(handleTratamentoSubmit)} >
             <Label htmlFor="nomeTratamento">Nome do tratamento</Label>
             <Input type="text" placeholder="Operação de siso, tratamento oncológico..." {...register("nome")} id="nomeTratamento" />
             <Label htmlFor="nomeTratamento" className="text-red-600">{errors.nome?.message}</Label>
             <br />
-            <Label htmlFor="especialidade">Selecione uma especialidade do Jardim Saúde</Label>
+            <br />
+            <label htmlFor="">Especialidade:</label>
+            <br />
             <select id="especialidade" value={selectedEspecialidade} onChange={handleSelectEspecialdiade}>
+              <option value="">Selecione uma especialidade</option>
               {
                 data!?.length > 0 ? (
                   data?.map((especialidade) => (
@@ -77,16 +80,19 @@ const TratamentoForm = () => {
               }
             </select>
             <br />
+            <br />
             {
-              isFiltringMedicos ? (
+              selectedEspecialidade && (isFiltringMedicos ? (
                 <div className="flex items-center justify-center flex-col">
-                  <h1 className="text-green-500 text-2xl">Criando formulário</h1>
+                  <h1 className="text-green-500 text-2xl">Carregando informações</h1>
                   <Loader2 className="animate-spin mr-2 h-4 w-4 text-green-500" />
                 </div>
               ) : (
                 <>
-                  <Label htmlFor="especialidade">Selecione um médico de {selectedEspecialidade}</Label>
-                  <select id="especialidade" value={selecteddMedico} onChange={handleSelectMedico}>
+                  <label htmlFor="medicos">Médico(a) escolhido:</label>
+                  <br />
+                  <select id="medicos" value={selectedMedico} {...register("id_medico")} onChange={handleSelectMedico}>
+                    <option value="">Selecione um médico</option>
                     {
                       medicosFiltrados!?.length > 0 ? (
                         medicosFiltrados?.map((medico) => (
@@ -99,9 +105,23 @@ const TratamentoForm = () => {
                       )
                     }
                   </select>
+                  <br />
+                  <Label htmlFor="medicos" className="text-red-600">{errors.id_medico?.message}</Label>
                 </>
-              )
+              ))
             }
+            <br />
+            <br />
+            <Label htmlFor="valorTratamento">Valor do tratamento</Label>
+            <Input type="number" {...register("valor")} id="valorTratamento" />
+            <Label htmlFor="valorTratamento" className="text-red-600">{errors.valor?.message}</Label>
+            <br />
+
+
+            <Label htmlFor="queixas">Queixas</Label>
+            <br />
+            <textarea id="queixas" className="border border-emerald-400 rounded" {...register("queixas")} cols={30} rows={10}></textarea>
+            <br />
 
           </form>
         </section>

@@ -14,6 +14,7 @@ const Tratamentos = () => {
       <div className="flex flex-row items-center gap-4">
         <h1 className="font-bold text-2xl text-green-500">Tratamentos</h1>
         <ModalFormTratamento/>
+        <Link href="/tratamentos/novoTratamento">+Tratamentos</Link>
       </div>
       <div className="py-1">
         <Breadcrumb>
