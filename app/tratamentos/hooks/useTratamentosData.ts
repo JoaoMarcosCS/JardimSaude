@@ -5,7 +5,8 @@ import fetchTratamentos from "../services/fetchTratamentos"
 export function useTratamentosData() {
   const query = useQuery({
     queryFn: fetchTratamentos,
-    queryKey: ["tratamento-data"]
+    queryKey: ["tratamento-data"],
+    refetchOnWindowFocus:true,
   })
 
   return query

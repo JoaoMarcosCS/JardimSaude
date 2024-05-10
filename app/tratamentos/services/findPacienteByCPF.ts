@@ -5,7 +5,6 @@ import { PacienteInterface } from "@/app/interfaces/pacienteInterface";
 const findPacienteByCPF = async (cpf:string):Promise<PacienteInterface | null> => {
   try{
     const response = await api.get(`${FINDPACIENTEBYCPF}/${cpf}`);
-    console.log("Foi uma vez")
     return response.data;
   }catch(error){
     return null;

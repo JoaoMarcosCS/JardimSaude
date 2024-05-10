@@ -5,13 +5,15 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useEspecialidadesData } from "@/app/especialidades/hooks/useEspecialidadesData";
 import { Loader2 } from "lucide-react";
-import { useFuncionariosData } from "@/app/funcionarios/hooks/useFuncionariosData[";
 import { useEffect, useState } from "react";
-import { Especialidade } from "@/app/especialidades/interfaces/especialidadeInterface";
 import medicosFiltredByEspecialidade from "../../utils/MedicosFiltredByEspecialidade";
 import { FuncionarioInterface } from "@/app/funcionarios/interfaces/funcionarioInterface";
 import findPacienteByCPF from "../../services/findPacienteByCPF";
 import { PacienteInterface } from "@/app/interfaces/pacienteInterface";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import createTratamento from "../../services/createTratamento";
+import { useRouter } from "next/navigation";
 
 const TratamentoForm = () => {
   const { handleSubmit, register, formState: { errors } } = useForm<TratamentoFormProps>({
@@ -22,11 +24,12 @@ const TratamentoForm = () => {
 
   const { data, isLoading } = useEspecialidadesData();
   const [selectedEspecialidade, setSelectedEspecialidade] = useState("");
-  const [medicosFiltrados, setMedicosFiltrados] = useState<FuncionarioInterface[]>();
+  const [medicosFiltrados, setMedicosFiltrados] = useState<FuncionarioInterface[] | null>();
   const [isFiltringMedicos, setIsFiltrigMedicos] = useState(false);
   const [selectedMedico, setSelectedMedico] = useState("");
   const [paciente, setPaciente] = useState<PacienteInterface | null>();
   const [cpf, setCPF] = useState("");
+  const {push} = useRouter();
 
   const handleSelectEspecialdiade = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedEspecialidade(event.target.value);
@@ -59,20 +62,26 @@ const TratamentoForm = () => {
 
   }, [selectedEspecialidade, cpf])
 
-  const handleTratamentoSubmit = () => {
-
+  const handleTratamentoSubmit = async (data:TratamentoFormProps) => {
+    data.id_paciente = paciente!?.id;
+    data.inicio = new Date();
+    data.status = "Em andamento";
+    toast.info("Criando tratamento...");
+    await createTratamento(data);
+    push("/tratamentos");
   }
 
   return (
     <>
       {isLoading ? (
-        <div className="flex items-center justify-center flex-col">
+        <div className="flex items-center justify-center flex-col mt-2">
           <h1 className="text-green-500 text-2xl">Criando formulário</h1>
           <Loader2 className="animate-spin mr-2 h-4 w-4 text-green-500" />
         </div>
       ) : (
-        <section className=" items-center justify-start flex-col flex">
-          <form onSubmit={handleSubmit(handleTratamentoSubmit)} >
+        <section className="px-4 pt-3 shadow-lg mt-2 rounded max-w-96 items-center justify-start flex-col flex">
+          <h1 className="text-2xl text-center font-semibold text-emerald-500 w-full">Iniciar tratamento</h1>
+          <form action="" onSubmit={handleSubmit(handleTratamentoSubmit)} >
             <Label htmlFor="nomeTratamento">Nome do tratamento</Label>
             <Input type="text" placeholder="Operação de siso, tratamento oncológico..." {...register("nome")} id="nomeTratamento" />
             <Label htmlFor="nomeTratamento" className="text-red-600">{errors.nome?.message}</Label>
@@ -133,13 +142,24 @@ const TratamentoForm = () => {
             <br />
             <Label htmlFor="cpf">CPF do paiciente</Label>
             <input type="text"  id="cpf" onChange={handleCPFChange}/>
-            <Label>Paciente escolhido: {paciente ? (<>{paciente.nome}</>) : (<>Nenhum paciente encontrado</>)}</Label>
+            <Label >Paciente escolhido: {paciente ? (<>{paciente.nome}</>) : (<>Nenhum paciente encontrado</>)}</Label>
             <br />
             <Label htmlFor="queixas">Queixas</Label>
             <br />
             <textarea id="queixas" className="border border-emerald-400 rounded" {...register("queixas")} cols={30} rows={10}></textarea>
             <br />
-
+            <Label>
+              valor: {errors.valor?.message}
+              Paciente: {errors.id_paciente?.message}
+              Queixas: {errors.queixas?.message}
+              Incio: {errors.inicio?.message}
+              Status: {errors.status?.message}
+              Termino: {errors.termino?.message}
+              Nome: {errors.nome?.message}
+              Root: {errors.root?.message}
+              Medico: {errors.id_medico?.message}
+            </Label>
+            <Button type="submit">Criar</Button>
           </form>
         </section>
       )

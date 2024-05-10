@@ -1,5 +1,5 @@
 export interface PacienteInterface{
-  id:number;
+  id:string;
   nascimento:Date;
   nome:string;
   altura:string;

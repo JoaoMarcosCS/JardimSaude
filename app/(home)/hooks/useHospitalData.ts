@@ -5,7 +5,8 @@ export function useHospitalData() {
   const query = useQuery({
     queryFn: fetchHospital,
     queryKey: ['hospital-data'],
-    refetchInterval:1000 * 60 /**1 minuto */
+    refetchInterval:1000 * 60, /**1 minuto */
+    refetchOnWindowFocus:true
   });
   return query;
 }
