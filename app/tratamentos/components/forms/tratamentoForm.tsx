@@ -66,7 +66,8 @@ const TratamentoForm = () => {
     data.id_paciente = paciente!?.id;
     data.inicio = new Date();
     data.status = "Em andamento";
-    toast.info("Criando tratamento...");
+    data.queixas = data.queixas || "Nenhuma queixa registrada";
+    toast.loading("Criando tratamento...");
     await createTratamento(data);
     push("/tratamentos");
   }

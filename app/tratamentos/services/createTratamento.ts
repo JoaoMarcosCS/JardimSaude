@@ -11,7 +11,8 @@ const createTratamento = async (data: TratamentoFormProps) => {
     const response = await api.post(`${TRATAMENTOS}`, data);
     toast.success("Tratamento criado!")
   }catch(error){
-    console.log("Erro: " + error)
+    console.log("Erro: " + error);
+    toast.error("Erro: " + error)
   }
 }
 
