@@ -11,11 +11,13 @@ export default function Home() {
 
   return (
     <>
-    {(nivel === 1) ? (
-      <HomeSecretaria/>
-    ) : (
-    <HomeMedico/>
-    )}
+      {nivel === 1 ? (
+        <HomeSecretaria />
+      ) : nivel === 2 ? (
+        <HomeMedico />
+      ) : (
+        "use client"
+      )}
     </>
   );
 }

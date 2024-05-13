@@ -69,7 +69,6 @@ const TratamentoForm = () => {
     data.inicio = new Date();
     data.status = "Em andamento";
     data.queixas = data.queixas || "Nenhuma queixa registrada";
-    toast.loading("Criando tratamento...");
     await createTratamento(data);
     push("/tratamentos");
   }
