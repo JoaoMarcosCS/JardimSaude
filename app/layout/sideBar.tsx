@@ -36,7 +36,6 @@ const SideBar = () => {
             <ActiveLink directionTooltip="right" href="/tratamentos" tooltipText="Tratamentos"><Stethoscope /> Tratamentos</ActiveLink>
             {(nivel == 1) && <ActiveLink directionTooltip="right" href="/funcionarios" tooltipText="Funcionários"><Users /> Funcionários</ActiveLink>}
             <ActiveLink directionTooltip="right" href="/pacientes" tooltipText="Pacientes"><SquareUser /> Pacientes</ActiveLink>
-            <ActiveLink directionTooltip="right" href="/consultas" tooltipText="Consultas"><ClipboardPlus /> Consultas</ActiveLink>
             {(nivel == 1) && <ActiveLink directionTooltip="right" href="/estoque" tooltipText="Estoque"> <Boxes /> Estoque</ActiveLink>}
             {(nivel == 1) && <ActiveLink directionTooltip="right" href="/financeiro" tooltipText="Financeiro"> <LineChart /> Financeiro</ActiveLink>}
             {(nivel == 1) && <ActiveLink directionTooltip="right" href="/shopping" tooltipText="Shopping"><Store /> Shopping</ActiveLink>}

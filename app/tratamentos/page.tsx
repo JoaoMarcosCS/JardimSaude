@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import TratamentoTable from "./components/TratamentoTable";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import { useTratamentosData } from "./hooks/useTratamentosData";
 
@@ -13,7 +13,7 @@ const Tratamentos = () => {
       <div className="flex flex-row items-center gap-4">
         <h1 className="font-bold text-2xl text-green-500">Tratamentos</h1>
         <Button className="bg-emerald-400 text-sm">
-        <Link href="/tratamentos/novoTratamento">+Novo</Link>
+        <Link href="/tratamentos/novo">+Novo</Link>
         </Button>
 
       </div>
