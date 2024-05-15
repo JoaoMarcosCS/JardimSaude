@@ -21,7 +21,7 @@ export const useAuth = () => {
 
       const { name, id, email, nivel, token} = await getToken(data);
 
-      saveCookies({token, nivel});
+      saveCookies({token, nivel, id, name});
 
       addAuthorizationHeaderAPI(token);
 

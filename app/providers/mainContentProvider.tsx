@@ -11,6 +11,7 @@ import removeCookies from "../utils/removeCookies";
 import Cookie from "js-cookie";
 import { reloadState } from "../states/usuarios/usuarioSlice";
 import addAuthorizationHeaderAPI from "../utils/addAuthorizationHeaderAPI";
+import getCookies from "../utils/getCookies";
 
 const MainContentProvider = ({ children }: { children: React.ReactNode }) => {
 
@@ -22,16 +23,15 @@ const MainContentProvider = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useDispatch();
 
   useEffect(()=>{
-    const nivel = Number(Cookie.get("nivel"));
-    const token = Cookie.get("auth_token");
-    if(nivel === null || nivel === undefined || token === undefined){
+    const {id, name, nivel, token} = getCookies()
+    if(nivel === null || token === undefined){
       removeCookies();
       removeAuthorizationHeaderAPI();
 
       push("/login");
     }else{
       addAuthorizationHeaderAPI(token!);
-      dispatch(reloadState({nivel}));
+      dispatch(reloadState({nivel, id, name}));
     }
   },[dispatch, nivel, push])
 

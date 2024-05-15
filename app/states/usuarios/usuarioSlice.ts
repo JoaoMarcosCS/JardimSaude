@@ -26,6 +26,8 @@ const usuarioSlice: any = createSlice({
     },
     reloadState: (state, action) => {
       state.nivel = action.payload.nivel;
+      state.id = action.payload.id;
+      state.nome = action.payload.name;
     }
   }
 })
