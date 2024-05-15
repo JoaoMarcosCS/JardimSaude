@@ -17,11 +17,9 @@ const Tratamentos = () => {
     <section className="container">
       <div className="flex flex-row items-center gap-4">
         <h1 className="font-bold text-2xl text-green-500">Tratamentos</h1>
-        {(nivel == 1) &&
-          <Button className="bg-emerald-400 text-sm">
-            <Link href="/tratamentos/novoTratamento">+Novo</Link>
-          </Button>
-        }
+        <Button className="bg-emerald-400 text-sm">
+        <Link href="/tratamentos/novoTratamento">+Novo</Link>
+        </Button>
 
       </div>
       <div className="py-1">

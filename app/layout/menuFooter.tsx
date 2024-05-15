@@ -24,7 +24,6 @@ const MenuFooter = () => {
         <ActiveLink href="/" directionTooltip="top" tooltipText="Home"><Home /> Home</ActiveLink>
         <ActiveLink href="/tratamentos" directionTooltip="top" tooltipText="Tratamentos"><Stethoscope /> Tratamentos</ActiveLink>
         <ActiveLink href="/pacientes" directionTooltip="top" tooltipText="Pacientes"><SquareUser /> Pacientes</ActiveLink>
-        <ActiveLink href="/consultas" directionTooltip="top" tooltipText="Consultas"><ClipboardPlus /> Consultas</ActiveLink>
       </ul>
     </nav>}
   </>

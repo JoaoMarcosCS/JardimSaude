@@ -49,12 +49,6 @@ const SheetContentMenu = () => {
           <p className="text-base tracking-wide font-medium">Pacientes</p>
         </li>
         <li className="flex flex-row items-center ">
-          <ActiveLink directionTooltip="right" href="/consultas" tooltipText="Consultas">
-            <ClipboardPlus />
-          </ActiveLink>
-          <p className="text-base tracking-wide font-medium">Consultas</p>
-        </li>
-        <li className="flex flex-row items-center ">
           <ActiveLink directionTooltip="right" href="/estoque" tooltipText="Estoque">
             <Boxes />
           </ActiveLink>
