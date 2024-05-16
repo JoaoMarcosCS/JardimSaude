@@ -8,6 +8,8 @@ import { useTratamentosData } from "./hooks/useTratamentosData";
 import { RootState } from "../store/root-reducer";
 import { useSelector } from "react-redux";
 import { useMedicoTratamentoData } from "./hooks/useMedicoTratamentoData";
+import TratamentoSecretaria from "./components/screens/tratamentoSecretaria";
+import TratamentoMedico from "./components/screens/tratamentoMedico";
 
 const Tratamentos = () => {
 
@@ -17,10 +19,11 @@ const Tratamentos = () => {
     <section className="container">
       <div className="flex flex-row items-center gap-4">
         <h1 className="font-bold text-2xl text-green-500">Tratamentos</h1>
-        <Button className="bg-emerald-400 text-sm">
-        <Link href="/tratamentos/novoTratamento">+Novo</Link>
-        </Button>
-
+        {nivel === 1 &&
+          <Button className="bg-emerald-400 text-sm">
+            <Link href="/tratamentos/novoTratamento">+Novo</Link>
+          </Button>
+        }
       </div>
       <div className="py-1">
         <Breadcrumb>
@@ -35,13 +38,13 @@ const Tratamentos = () => {
           </BreadcrumbList>
         </Breadcrumb>
       </div>
-      {
-        (nivel===1) ? (
-          <TratamentoTable hookFetchData={useTratamentosData()} />
-        ) : (
-          <TratamentoTable hookFetchData={useMedicoTratamentoData()} />
-        )
-      }
+      {nivel === 1 ? (
+        <TratamentoSecretaria />
+      ) : nivel === 2 ? (
+        <TratamentoMedico />
+      ) : (
+        "use client"
+      )}
 
     </section>
   )
