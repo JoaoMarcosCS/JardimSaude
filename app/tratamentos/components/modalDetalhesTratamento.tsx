@@ -5,6 +5,17 @@ import { MoreHorizontal } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ptBR } from "date-fns/locale";
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import {
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -12,13 +23,37 @@ import {
 } from "@/components/ui/accordion"
 
 import { format } from "date-fns";
-import Link from "next/link";
+import finalizarTratamento from "../services/finalizarTratamento";
+import { toast } from "sonner";
+import { useFinalizarTratamentoMutate } from "../hooks/useFinalizarTratamentoMutate";
+import { useState } from "react";
+import { useActionTratamentoMutate } from "../hooks/useActionTratamentoMutate";
+
+
 interface ModalDetalhesTratamentoProps {
   tratamento: Tratamento;
   nivel: number;
 }
 
 const ModalDetalhesTratamento = ({ tratamento, nivel }: ModalDetalhesTratamentoProps) => {
+  const {mutate} = useActionTratamentoMutate()
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleFinalizarTratamento = () => {
+      mutate({id: tratamento.id, action:"finalizar"})
+      setIsOpen(false);
+  }
+
+  const handleCancelarTratamento = () => {
+      mutate({id: tratamento.id, action:"cancelar"})
+      setIsOpen(false);
+  }
+
+  const openDialog = () => {
+    setIsOpen(true);
+  };
+
+
   let colorBg = "text-yellow-400";
   if (tratamento.status === "Em andamento") {
     colorBg = "text-yellow-400";
@@ -28,8 +63,8 @@ const ModalDetalhesTratamento = ({ tratamento, nivel }: ModalDetalhesTratamentoP
     colorBg = "text-red-400";
   }
   return (
-    <Dialog>
-      <DialogTrigger asChild>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger onClick={openDialog} asChild>
         <MoreHorizontal />
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] border rounded max-h-[450px] border-emerald-300 shadow overflow-y-scroll">
@@ -39,11 +74,46 @@ const ModalDetalhesTratamento = ({ tratamento, nivel }: ModalDetalhesTratamentoP
             {
               (nivel === 1 && tratamento.status === "Em andamento") &&
               <div className="w-full flex justify-center gap-3 mt-2 items-center">
-                <Button variant={"destructive"}><Link href="">Cancelar</Link></Button>
-                <Button className="bg-emerald-700 "><Link href="">Finalizar</Link></Button>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                  <Button variant={"destructive"}>Cancelar</Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Você tem certeza?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Essa ação não pode ser revertida. Caso tenha cometido um erro ao cancelar esse tratamento,
+                        você terá que pedir para uma secretária(o) criar um novo para você com o mesmo paciente.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Voltar</AlertDialogCancel>
+                      <AlertDialogAction className="bg-destructive" onClick={handleCancelarTratamento}>Cancler</AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                  <Button className="bg-emerald-700 ">Finalizar</Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>Você tem certeza?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        Essa ação não pode ser revertida. Caso tenha cometido um erro ao finalizar esse tratamento,
+                        você terá que pedir para uma secretária(o) criar um novo para você com o mesmo paciente.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Voltar</AlertDialogCancel>
+                      <AlertDialogAction className="bg-emerald-700"  onClick={handleFinalizarTratamento}>Finalizar</AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
               </div>
             }
-            </DialogTitle>
+          </DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="flex w-full justify-between px-2 items-center">
@@ -76,7 +146,7 @@ const ModalDetalhesTratamento = ({ tratamento, nivel }: ModalDetalhesTratamentoP
           <hr />
           <div className="flex w-full justify-between px-2 items-center">
             <h2>Medicamentos aplicados: </h2>
-            <h1>{}
+            <h1>{ }
             </h1>
           </div>
           <hr />
@@ -90,7 +160,7 @@ const ModalDetalhesTratamento = ({ tratamento, nivel }: ModalDetalhesTratamentoP
                 </h1>
               </div>
               <hr />
-              </>
+            </>
             )
           }
 
@@ -121,7 +191,7 @@ const ModalDetalhesTratamento = ({ tratamento, nivel }: ModalDetalhesTratamentoP
         </div>
         <DialogFooter>
           <DialogClose asChild>
-          <Button className="bg-emerald-500">Fechar</Button>
+            <Button className="bg-emerald-500">Fechar</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>
