@@ -114,7 +114,7 @@ export const columns: ColumnDef<Tratamento>[] = [
     id: "actions",
     cell: ({ row }) => {
       return (
-        <ModalDetalhesTratamento tratamento={row.original} nivel={1}/>
+        <ModalDetalhesTratamento tratamento={row.original}/>
       )
     },
   }

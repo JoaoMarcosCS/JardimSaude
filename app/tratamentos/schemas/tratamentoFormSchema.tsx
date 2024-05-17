@@ -8,7 +8,7 @@ export const schemaTratamentoForm = z.object({
   inicio:z.date().optional(),
   id_medico: z.string().min(1,"Escolha um médico para realizar esse tratamento"),
   id_paciente:z.string().optional(),
-  status: z.enum(["Em andamento", "Finalizado", "Cancelado"]).default("Em andamento").optional(),
+  status: z.enum(["Em andamento", "Finalizado", "Cancelado"]).default("Em andamento").optional()
 })
 
 export type TratamentoFormProps = z.infer<typeof schemaTratamentoForm>;

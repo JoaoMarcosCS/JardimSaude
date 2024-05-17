@@ -28,25 +28,28 @@ import { toast } from "sonner";
 import { useFinalizarTratamentoMutate } from "../hooks/useFinalizarTratamentoMutate";
 import { useState } from "react";
 import { useActionTratamentoMutate } from "../hooks/useActionTratamentoMutate";
+import { RootState } from "@/app/store/root-reducer";
+import { useSelector } from "react-redux";
 
 
 interface ModalDetalhesTratamentoProps {
   tratamento: Tratamento;
-  nivel: number;
 }
 
-const ModalDetalhesTratamento = ({ tratamento, nivel }: ModalDetalhesTratamentoProps) => {
-  const {mutate} = useActionTratamentoMutate()
+const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) => {
+
+  const { nivel } = useSelector((state: RootState) => state.usuarioReducer);
+  const { mutate } = useActionTratamentoMutate()
   const [isOpen, setIsOpen] = useState(false);
 
   const handleFinalizarTratamento = () => {
-      mutate({id: tratamento.id, action:"finalizar"})
-      setIsOpen(false);
+    mutate({ id: tratamento.id, action: "finalizar" })
+    setIsOpen(false);
   }
 
   const handleCancelarTratamento = () => {
-      mutate({id: tratamento.id, action:"cancelar"})
-      setIsOpen(false);
+    mutate({ id: tratamento.id, action: "cancelar" })
+    setIsOpen(false);
   }
 
   const openDialog = () => {
@@ -72,11 +75,11 @@ const ModalDetalhesTratamento = ({ tratamento, nivel }: ModalDetalhesTratamentoP
           <DialogTitle className="text-emerald-400 flex-col flex">
             <h1 className="w-full text-center">Detalhes do tratamento</h1>
             {
-              (nivel === 1 && tratamento.status === "Em andamento") &&
+              (nivel === 2 && tratamento.status === "Em andamento") &&
               <div className="w-full flex justify-center gap-3 mt-2 items-center">
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                  <Button variant={"destructive"}>Cancelar</Button>
+                    <Button variant={"destructive"}>Cancelar</Button>
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
@@ -95,7 +98,7 @@ const ModalDetalhesTratamento = ({ tratamento, nivel }: ModalDetalhesTratamentoP
 
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                  <Button className="bg-emerald-700 ">Finalizar</Button>
+                    <Button className="bg-emerald-700 ">Finalizar</Button>
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
@@ -107,7 +110,7 @@ const ModalDetalhesTratamento = ({ tratamento, nivel }: ModalDetalhesTratamentoP
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Voltar</AlertDialogCancel>
-                      <AlertDialogAction className="bg-emerald-700"  onClick={handleFinalizarTratamento}>Finalizar</AlertDialogAction>
+                      <AlertDialogAction className="bg-emerald-700" onClick={handleFinalizarTratamento}>Finalizar</AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>
@@ -144,12 +147,6 @@ const ModalDetalhesTratamento = ({ tratamento, nivel }: ModalDetalhesTratamentoP
             </h1>
           </div>
           <hr />
-          <div className="flex w-full justify-between px-2 items-center">
-            <h2>Medicamentos aplicados: </h2>
-            <h1>{ }
-            </h1>
-          </div>
-          <hr />
           {
             tratamento.termino && (<>
               <div className="flex w-full justify-between px-2 items-center">
@@ -180,13 +177,28 @@ const ModalDetalhesTratamento = ({ tratamento, nivel }: ModalDetalhesTratamentoP
           <div className="flex w-full justify-between px-2 items-center">
             <Accordion type="single" collapsible className="w-full ">
               <AccordionItem value="item-1" className="">
+                <AccordionTrigger>Medicamentos aplicados</AccordionTrigger>
+                <AccordionContent className="border-2 rounded border-slate-200 p-2">
+                  {tratamento.aplicacoes!?.length > 0 ? (
+                    tratamento.aplicacoes?.map((aplicacao) => (
+                      <p key={aplicacao.id}>{aplicacao.medicamento.nome}</p>
+                    ))
+                  ) : (
+                    <p>Nenhum medicamento aplicado ainda.</p>
+                  )}
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
+          <div className="flex w-full justify-between px-2 items-center">
+            <Accordion type="single" collapsible className="w-full ">
+              <AccordionItem value="item-1" className="">
                 <AccordionTrigger>Queixas</AccordionTrigger>
                 <AccordionContent className="border-2 rounded border-slate-200 p-2">
                   {tratamento.queixas}
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
-
           </div>
         </div>
         <DialogFooter>
