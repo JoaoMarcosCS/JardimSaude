@@ -12,11 +12,13 @@ import {
 } from "@/components/ui/accordion"
 
 import { format } from "date-fns";
+import Link from "next/link";
 interface ModalDetalhesTratamentoProps {
-  tratamento: Tratamento
+  tratamento: Tratamento;
+  nivel: number;
 }
 
-const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) => {
+const ModalDetalhesTratamento = ({ tratamento, nivel }: ModalDetalhesTratamentoProps) => {
   let colorBg = "text-yellow-400";
   if (tratamento.status === "Em andamento") {
     colorBg = "text-yellow-400";
@@ -32,7 +34,16 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] border rounded max-h-[450px] border-emerald-300 shadow overflow-y-scroll">
         <DialogHeader className="rounded">
-          <DialogTitle className="text-emerald-400">Detalhes do tratamento</DialogTitle>
+          <DialogTitle className="text-emerald-400 flex-col flex">
+            <h1 className="w-full text-center">Detalhes do tratamento</h1>
+            {
+              (nivel === 1 && tratamento.status === "Em andamento") &&
+              <div className="w-full flex justify-center gap-3 mt-2 items-center">
+                <Button variant={"destructive"}><Link href="">Cancelar</Link></Button>
+                <Button className="bg-emerald-700 "><Link href="">Finalizar</Link></Button>
+              </div>
+            }
+            </DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="flex w-full justify-between px-2 items-center">
@@ -60,6 +71,12 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
             <h1>{format(tratamento.inicio, "dd 'de' MMMM 'de' yyyy", {
               locale: ptBR
             })}
+            </h1>
+          </div>
+          <hr />
+          <div className="flex w-full justify-between px-2 items-center">
+            <h2>Medicamentos aplicados: </h2>
+            <h1>{}
             </h1>
           </div>
           <hr />

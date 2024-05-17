@@ -1,22 +1,11 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { MoreHorizontal, ArrowUpDown } from "lucide-react"
-
+import { ArrowUpDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import { Tratamento } from "../interfaces/tratamentoInterface"
 import { Badge } from "@/components/ui/badge"
 import ModalDetalhesTratamento from "./modalDetalhesTratamento"
-
-
 
 export const columns: ColumnDef<Tratamento>[] = [
   {
@@ -109,6 +98,7 @@ export const columns: ColumnDef<Tratamento>[] = [
     cell: ({ row }) => {
       let colorBg = "text-yellow-400";
       const status:any = row.getValue("status");
+
       if(status === "Em andamento"){
         colorBg = "text-yellow-400";
       }else if(status === "Finalizado"){
@@ -124,7 +114,7 @@ export const columns: ColumnDef<Tratamento>[] = [
     id: "actions",
     cell: ({ row }) => {
       return (
-        <ModalDetalhesTratamento tratamento={row.original}/>
+        <ModalDetalhesTratamento tratamento={row.original} nivel={1}/>
       )
     },
   }
