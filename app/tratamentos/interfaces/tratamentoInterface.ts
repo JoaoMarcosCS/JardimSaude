@@ -12,5 +12,5 @@ export interface Tratamento {
   status: "Finalizado" | "Em andamento" | "Cancelado";
   medico_responsavel:MedicoInterface;
   paciente:PacienteInterface;
-  aplicacoes?: AplicacaoMedicamento[] | []
+  aplicacoes_medicamentos: AplicacaoMedicamento[]
 }

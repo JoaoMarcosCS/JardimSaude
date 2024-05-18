@@ -23,13 +23,11 @@ import {
 } from "@/components/ui/accordion"
 
 import { format } from "date-fns";
-import finalizarTratamento from "../services/finalizarTratamento";
-import { toast } from "sonner";
-import { useFinalizarTratamentoMutate } from "../hooks/useFinalizarTratamentoMutate";
 import { useState } from "react";
 import { useActionTratamentoMutate } from "../hooks/useActionTratamentoMutate";
 import { RootState } from "@/app/store/root-reducer";
 import { useSelector } from "react-redux";
+import { json } from "stream/consumers";
 
 
 interface ModalDetalhesTratamentoProps {
@@ -65,6 +63,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
   } else if (tratamento.status === "Cancelado") {
     colorBg = "text-red-400";
   }
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger onClick={openDialog} asChild>
@@ -179,12 +178,17 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
               <AccordionItem value="item-1" className="">
                 <AccordionTrigger>Medicamentos aplicados</AccordionTrigger>
                 <AccordionContent className="border-2 rounded border-slate-200 p-2">
-                  {tratamento.aplicacoes!?.length > 0 ? (
-                    tratamento.aplicacoes?.map((aplicacao) => (
-                      <p key={aplicacao.id}>{aplicacao.medicamento.nome}</p>
+                  {tratamento.aplicacoes_medicamentos!?.length > 0 ? (
+                    tratamento.aplicacoes_medicamentos?.map((aplicacao) => (
+                      <div className="flex justify-around" key={aplicacao.id}>
+                        <p>{aplicacao.medicamento.nome}</p>
+                        <p>{aplicacao.quantidade_aplicada} uni</p>
+                        <p>{new Date(aplicacao.hora_aplicacao).toLocaleTimeString()}</p>
+                        <p>{new Date(aplicacao.hora_aplicacao).toLocaleDateString()}</p>
+                      </div>
                     ))
                   ) : (
-                    <p>Nenhum medicamento aplicado ainda.</p>
+                    <p>Nenhum medicamento aplicado.</p>
                   )}
                 </AccordionContent>
               </AccordionItem>

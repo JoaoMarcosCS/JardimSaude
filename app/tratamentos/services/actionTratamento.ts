@@ -11,6 +11,7 @@ interface ActionTratamentoInterface {
 const actionTratamento = async ({id, action}: ActionTratamentoInterface) => {
   await api.put(`${TRATAMENTOS}/${id}/${action}`, {});
   toast.success("Tratamento finalizado!");
+  return;
 }
 
 export default actionTratamento;

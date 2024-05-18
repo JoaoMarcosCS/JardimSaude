@@ -5,6 +5,5 @@ export interface AplicacaoMedicamento{
   id:string;
   hora_aplicacao: Date;
   quantidade_aplicada: number;
-  tratamento: Tratamento;
   medicamento: Medicamento;
 }
