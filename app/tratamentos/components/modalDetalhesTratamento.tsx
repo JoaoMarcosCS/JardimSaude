@@ -1,7 +1,7 @@
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Tratamento } from "../interfaces/tratamentoInterface";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, PlusCircleIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ptBR } from "date-fns/locale";
 import {
@@ -14,7 +14,11 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+} from "@/components/ui/alert-dialog";
+
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+
 import {
   Accordion,
   AccordionContent,
@@ -27,7 +31,7 @@ import { useState } from "react";
 import { useActionTratamentoMutate } from "../hooks/useActionTratamentoMutate";
 import { RootState } from "@/app/store/root-reducer";
 import { useSelector } from "react-redux";
-import { json } from "stream/consumers";
+
 
 
 interface ModalDetalhesTratamentoProps {
@@ -89,7 +93,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogCancel>Voltar</AlertDialogCancel>
+                      <AlertDialogCancel className="border-none">Voltar</AlertDialogCancel>
                       <AlertDialogAction className="bg-destructive" onClick={handleCancelarTratamento}>Cancler</AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
@@ -97,7 +101,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
 
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                    <Button className="bg-emerald-700 ">Finalizar</Button>
+                    <Button className="bg-emerald-700 hover:bg-emerald-800">Finalizar</Button>
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
@@ -108,11 +112,35 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogCancel>Voltar</AlertDialogCancel>
-                      <AlertDialogAction className="bg-emerald-700" onClick={handleFinalizarTratamento}>Finalizar</AlertDialogAction>
+                      <AlertDialogCancel className="border-none">Voltar</AlertDialogCancel>
+                      <AlertDialogAction className="bg-emerald-700 hover:bg-emerald-800" onClick={handleFinalizarTratamento}>Finalizar</AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
                 </AlertDialog>
+
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button className="bg-yellow-400 hover:bg-yellow-500">+Aplicar</Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                      <DialogTitle>Aplicar medicação</DialogTitle>
+                      <DialogDescription>
+                        Agora você está escolhendo um medicamento para aplicar em {tratamento.paciente.nome}.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="grid gap-4 py-4">
+
+                    </div>
+                    <DialogFooter>
+                      <DialogClose asChild>
+                        <Button className="border-none bg-white text-black hover:bg-gray-100">Cancelar</Button>
+                      </DialogClose>
+                      <Button className="bg-yellow-400 hover:bg-yellow-500">+Aplicar</Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+
               </div>
             }
           </DialogTitle>
