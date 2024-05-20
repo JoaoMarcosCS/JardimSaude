@@ -21,7 +21,7 @@ const Tratamentos = () => {
         <h1 className="font-bold text-2xl text-green-500">Tratamentos</h1>
         {nivel === 1 &&
           <Button className="bg-emerald-400 text-sm">
-            <Link href="/tratamentos/novoTratamento">+Novo</Link>
+            <Link href="/tratamentos/novo">+Novo</Link>
           </Button>
         }
       </div>
