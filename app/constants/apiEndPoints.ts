@@ -6,3 +6,4 @@ export const PACIENTES = "/paciente";
 export const TRATAMENTOS = "/tratamento";
 export const HOSPITAL = "/hospital";
 export const FINDPACIENTEBYCPF = "/findPacienteByCPF";
+export const RETURNMEDICAMENTOSBYNOME = "/returnMedicamentosByNome"

@@ -27,10 +27,12 @@ import {
 } from "@/components/ui/accordion"
 
 import { format } from "date-fns";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useActionTratamentoMutate } from "../hooks/useActionTratamentoMutate";
 import { RootState } from "@/app/store/root-reducer";
 import { useSelector } from "react-redux";
+import returnMedicamentosByNome from "../services/returnMedicamentosByNome";
+import { Medicamento } from "@/app/medicamentos/interfaces/medicamentoInterface";
 
 
 
@@ -43,6 +45,8 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
   const { nivel } = useSelector((state: RootState) => state.usuarioReducer);
   const { mutate } = useActionTratamentoMutate()
   const [isOpen, setIsOpen] = useState(false);
+  const [nomeMedicamento, setNomeMedicamento] = useState("");
+  const [medicamentos, setMedicamentos] = useState<Medicamento[] | null>()
 
   const handleFinalizarTratamento = () => {
     mutate({ id: tratamento.id, action: "finalizar" })
@@ -54,10 +58,22 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
     setIsOpen(false);
   }
 
+  const handleNomeMedicamentoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNomeMedicamento(event.target.value);
+  }
+
   const openDialog = () => {
     setIsOpen(true);
   };
 
+  useEffect(() => {
+    async function searchMedicamento() {
+      const response = await returnMedicamentosByNome(nomeMedicamento);
+      setMedicamentos(response);
+    }
+
+    searchMedicamento();
+  }, [nomeMedicamento])
 
   let colorBg = "text-yellow-400";
   if (tratamento.status === "Em andamento") {
@@ -127,6 +143,15 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
                       <DialogTitle>Aplicar medicação</DialogTitle>
                       <DialogDescription>
                         Agora você está escolhendo um medicamento para aplicar em {tratamento.paciente.nome}.
+                        <input type="text" onChange={handleNomeMedicamentoChange} />
+                        <br />
+                        <div>
+                          {medicamentos?.map((medicamento, index) => (
+                            <div key={index}>
+                              {medicamento.nome} - {medicamento.peso}
+                            </div>
+                          ))}
+                        </div>
                       </DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
