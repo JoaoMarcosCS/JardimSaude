@@ -8,7 +8,7 @@ export interface Medicamento {
   peso:number;
   descricao:string;
   tipo:string;
-  codig: number;
+  codigo: number;
   aplicacoes: AplicacaoMedicamento[];
   historico_compras:any;
 }

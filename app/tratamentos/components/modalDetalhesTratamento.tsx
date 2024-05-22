@@ -46,7 +46,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
   const { mutate } = useActionTratamentoMutate()
   const [isOpen, setIsOpen] = useState(false);
   const [nomeMedicamento, setNomeMedicamento] = useState("");
-  const [medicamentos, setMedicamentos] = useState<Medicamento[] | null>()
+  const [medicamentos, setMedicamentos] = useState<Medicamento[] | null>([])
 
   const handleFinalizarTratamento = () => {
     mutate({ id: tratamento.id, action: "finalizar" })
@@ -145,13 +145,18 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
                         Agora você está escolhendo um medicamento para aplicar em {tratamento.paciente.nome}.
                         <input type="text" onChange={handleNomeMedicamentoChange} />
                         <br />
-                        <div>
-                          {medicamentos?.map((medicamento, index) => (
-                            <div key={index}>
-                              {medicamento.nome} - {medicamento.peso}
-                            </div>
-                          ))}
-                        </div>
+                        <select>
+                          <option value="">Selecione um medicamento</option>
+                          {
+
+                            medicamentos!?.length > 0 ? (medicamentos?.map((medicamento, index) => (
+                              <option value={medicamento.codigo}>{medicamento.nome}({medicamento.peso} mg)</option>
+                            ))
+                            ) : (
+                              <option disabled>Nenhum {nomeMedicamento} encontrado no estoque.</option>
+                            )
+                          }
+                        </select>
                       </DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
