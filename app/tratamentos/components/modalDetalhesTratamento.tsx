@@ -150,7 +150,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
                           {
 
                             medicamentos!?.length > 0 ? (medicamentos?.map((medicamento, index) => (
-                              <option value={medicamento.codigo}>{medicamento.nome}({medicamento.peso} mg)</option>
+                              <option key={medicamento.id} value={medicamento.codigo}>{medicamento.nome}({medicamento.peso} mg)</option>
                             ))
                             ) : (
                               <option disabled>Nenhum {nomeMedicamento} encontrado no estoque.</option>
