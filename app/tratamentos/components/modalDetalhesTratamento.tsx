@@ -48,6 +48,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
   const [nomeMedicamento, setNomeMedicamento] = useState("");
   const [medicamentos, setMedicamentos] = useState<Medicamento[] | null>([])
 
+
   const handleFinalizarTratamento = () => {
     mutate({ id: tratamento.id, action: "finalizar" })
     setIsOpen(false);
@@ -140,17 +141,21 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
-                      <DialogTitle>Aplicar medicação</DialogTitle>
+                      <DialogTitle>Aplicar medicação em {tratamento.paciente.nome}</DialogTitle>
                       <DialogDescription>
-                        Agora você está escolhendo um medicamento para aplicar em {tratamento.paciente.nome}.
-                        <input type="text" onChange={handleNomeMedicamentoChange} />
                         <br />
-                        <select>
+                        <div className="flex flex-row gap-2 items-center ">
+                          <Label htmlFor="nomeMedicamento">Medicamento:</Label>
+                          <input type="text" className="border-slate-500 border-b shadow" id="nomeMedicamento" onChange={handleNomeMedicamentoChange} placeholder="Dopamina, Morfina" />
+                        </div>
+                        <br />
+                        <p className="w-full text-left">Medicamentos encontrados:</p>
+                        <select className="w-full shadow p-2 border border-emerald-100 rounded">
                           <option value="">Selecione um medicamento</option>
                           {
 
                             medicamentos!?.length > 0 ? (medicamentos?.map((medicamento, index) => (
-                              <option key={medicamento.id} value={medicamento.codigo}>{medicamento.nome}({medicamento.peso} mg)</option>
+                              <option key={medicamento.id} value={medicamento.id}>{medicamento.nome}({medicamento.peso} mg)</option>
                             ))
                             ) : (
                               <option disabled>Nenhum {nomeMedicamento} encontrado no estoque.</option>
