@@ -55,7 +55,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
   const [isOpen, setIsOpen] = useState(false);
   const [nomeMedicamento, setNomeMedicamento] = useState("");
   const [options, setOptions] = useState<SelectOptions[]>([])
-  const [medicamentosSelecionados, setMedicamentosSelecionados] = useState<SelectOptions | unknown>([]);
+  const [medicamentosSelecionados, setMedicamentosSelecionados] = useState<SelectOptions | unknown>();
 
   const handleFinalizarTratamento = () => {
     mutate({ id: tratamento.id, action: "finalizar" })
@@ -72,7 +72,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
   }
 
   const handleSelectedMedicamentos = () => {
-    console.log(medicamentosSelecionados);
+    console.log("ID:" + medicamentosSelecionados);
   }
 
   const openDialog = () => {
