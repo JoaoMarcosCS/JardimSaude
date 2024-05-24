@@ -96,7 +96,7 @@ const TratamentoForm = () => {
                   </BreadcrumbItem>
                   <BreadcrumbSeparator />
                   <BreadcrumbItem>
-                    <Link href="/tratamentos/novoTratamento">Novo</Link>
+                    <Link href="/tratamentos/novo">Novo</Link>
                   </BreadcrumbItem>
                 </BreadcrumbList>
               </Breadcrumb>

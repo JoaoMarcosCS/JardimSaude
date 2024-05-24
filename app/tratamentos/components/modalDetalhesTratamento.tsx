@@ -151,7 +151,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
-                      <DialogTitle>Aplicar medicação</DialogTitle>
+                      <DialogTitle>Aplicar medicação em {tratamento.paciente.nome}</DialogTitle>
                       <DialogDescription>
                         Agora você está escolhendo um medicamento para aplicar em {tratamento.paciente.nome}.
                         <br />
