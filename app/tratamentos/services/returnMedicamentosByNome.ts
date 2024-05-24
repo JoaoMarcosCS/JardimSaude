@@ -4,12 +4,22 @@ import { Tratamento } from "../interfaces/tratamentoInterface";
 import { AplicacaoMedicamento } from "@/app/aplicacoes_medicamentos/interfaces/aplicacaoMedicamentoInterface";
 import { Medicamento } from "@/app/medicamentos/interfaces/medicamentoInterface";
 
-const returnMedicamentosByNome = async (nomeMedicamento:string):Promise<Medicamento[]> => {
-  if(nomeMedicamento){
-  const response = await api.get(`${RETURNMEDICAMENTOSBYNOME}/${nomeMedicamento}`);
-  return response.data;
+export interface PesquisaMedicamento {
+  nome: string,
+  id: number,
+  peso: number
+}
+
+const returnMedicamentosByNome = async (nomeMedicamento: string): Promise<PesquisaMedicamento[]> => {
+  if (nomeMedicamento) {
+    const response = await api.get(`${RETURNMEDICAMENTOSBYNOME}/${nomeMedicamento}`);
+    return response.data;
   }
-  return []
+  return [{
+    nome: "",
+    id: 0,
+    peso: 0
+  }]
 }
 
 export default returnMedicamentosByNome

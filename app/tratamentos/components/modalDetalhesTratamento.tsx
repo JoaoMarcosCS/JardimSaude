@@ -18,6 +18,7 @@ import {
 
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import Select from "react-select";
 
 import {
   Accordion,
@@ -31,7 +32,7 @@ import { useEffect, useState } from "react";
 import { useActionTratamentoMutate } from "../hooks/useActionTratamentoMutate";
 import { RootState } from "@/app/store/root-reducer";
 import { useSelector } from "react-redux";
-import returnMedicamentosByNome from "../services/returnMedicamentosByNome";
+import returnMedicamentosByNome, { PesquisaMedicamento } from "../services/returnMedicamentosByNome";
 import { Medicamento } from "@/app/medicamentos/interfaces/medicamentoInterface";
 
 
@@ -40,13 +41,18 @@ interface ModalDetalhesTratamentoProps {
   tratamento: Tratamento;
 }
 
+interface SelectOptions {
+  value: number;
+  label: string;
+}
+
 const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) => {
 
   const { nivel } = useSelector((state: RootState) => state.usuarioReducer);
   const { mutate } = useActionTratamentoMutate()
   const [isOpen, setIsOpen] = useState(false);
   const [nomeMedicamento, setNomeMedicamento] = useState("");
-  const [medicamentos, setMedicamentos] = useState<Medicamento[] | null>([])
+  const [options, setOptions] = useState<SelectOptions[]>([])
 
   const handleFinalizarTratamento = () => {
     mutate({ id: tratamento.id, action: "finalizar" })
@@ -58,8 +64,8 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
     setIsOpen(false);
   }
 
-  const handleNomeMedicamentoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNomeMedicamento(event.target.value);
+  const handleNomeMedicamentoChange = (newValue: string) => {
+    setNomeMedicamento(newValue);
   }
 
   const openDialog = () => {
@@ -69,7 +75,12 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
   useEffect(() => {
     async function searchMedicamento() {
       const response = await returnMedicamentosByNome(nomeMedicamento);
-      setMedicamentos(response);
+      const formattedOptions = response.map(medicamento => ({
+        value:medicamento.id,
+        label: `${medicamento.nome} ${medicamento.peso}mg`
+      }))
+
+      setOptions(formattedOptions);
     }
 
     searchMedicamento();
@@ -143,20 +154,15 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
                       <DialogTitle>Aplicar medicação</DialogTitle>
                       <DialogDescription>
                         Agora você está escolhendo um medicamento para aplicar em {tratamento.paciente.nome}.
-                        <input type="text" onChange={handleNomeMedicamentoChange} />
                         <br />
-                        <select>
-                          <option value="">Selecione um medicamento</option>
-                          {
-
-                            medicamentos!?.length > 0 ? (medicamentos?.map((medicamento, index) => (
-                              <option key={medicamento.id} value={medicamento.codigo}>{medicamento.nome}({medicamento.peso} mg)</option>
-                            ))
-                            ) : (
-                              <option disabled>Nenhum {nomeMedicamento} encontrado no estoque.</option>
-                            )
-                          }
-                        </select>
+                        <Select
+                          options={options}
+                          defaultInputValue="Nenhum medicamento encontrado"
+                          onInputChange={handleNomeMedicamentoChange}
+                          inputValue={nomeMedicamento}
+                          isMulti
+                          placeholder="Dopamina, Adrenalina..."
+                        />
                       </DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
