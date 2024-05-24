@@ -34,6 +34,8 @@ import { RootState } from "@/app/store/root-reducer";
 import { useSelector } from "react-redux";
 import returnMedicamentosByNome, { PesquisaMedicamento } from "../services/returnMedicamentosByNome";
 import { Medicamento } from "@/app/medicamentos/interfaces/medicamentoInterface";
+import makeAnimated from "react-select/animated"
+import { toast } from "sonner";
 
 
 
@@ -53,6 +55,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
   const [isOpen, setIsOpen] = useState(false);
   const [nomeMedicamento, setNomeMedicamento] = useState("");
   const [options, setOptions] = useState<SelectOptions[]>([])
+  const [medicamentosSelecionados, setMedicamentosSelecionados] = useState<SelectOptions | unknown>([]);
 
   const handleFinalizarTratamento = () => {
     mutate({ id: tratamento.id, action: "finalizar" })
@@ -66,6 +69,10 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
 
   const handleNomeMedicamentoChange = (newValue: string) => {
     setNomeMedicamento(newValue);
+  }
+
+  const handleSelectedMedicamentos = () => {
+    console.log(medicamentosSelecionados);
   }
 
   const openDialog = () => {
@@ -94,6 +101,8 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
   } else if (tratamento.status === "Cancelado") {
     colorBg = "text-red-400";
   }
+
+  const animacao = makeAnimated()
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -157,12 +166,16 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
                         <br />
                         <Select
                           options={options}
-                          defaultInputValue="Nenhum medicamento encontrado"
+                          components={animacao}
+                          onChange={(item) => setMedicamentosSelecionados(item)}
+                          noOptionsMessage={() => "Nenhum medicamento encontrado"}
                           onInputChange={handleNomeMedicamentoChange}
                           inputValue={nomeMedicamento}
-                          isMulti
+                          isClearable={true}
                           placeholder="Dopamina, Adrenalina..."
                         />
+
+                        <Button className="bg-emerald-500 text-emerald-200" onClick={handleSelectedMedicamentos}><PlusCircleIcon/></Button>
                       </DialogDescription>
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
