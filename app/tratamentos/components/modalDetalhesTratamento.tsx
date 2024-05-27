@@ -206,7 +206,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
 
                       { medicamentos.map(medicamento => (
                       <div key={medicamento.id} className="w-full rounded-xl p-3 mt-3 border-emerald-100 border shadow items-center flex flex-row">
-                        <div className="w-11/12 flex flex-col">
+                        <div className="w-11/12 flex flex-col justify-start">
                           <p className="text-base font-semibold">{medicamento.nome} {medicamento.peso}mg</p>
                           <p className="text-muted-foreground text-sm">{medicamento.tipo}</p>
                           <p className="text-sm font-semibold">Qtd disponível: {medicamento.quantidade}</p>
