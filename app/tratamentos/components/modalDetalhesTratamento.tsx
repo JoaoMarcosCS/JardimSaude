@@ -1,7 +1,7 @@
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Tratamento } from "../interfaces/tratamentoInterface";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal, PlusCircleIcon } from "lucide-react";
+import { Minus, MoreHorizontal, Plus, PlusCircleIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ptBR } from "date-fns/locale";
 import {
@@ -127,7 +127,6 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
     colorBg = "text-red-400";
   }
 
-  const animacao = makeAnimated()
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -186,10 +185,13 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
                   <DialogContent className="sm:max-w-[425px] max-h-[450px] overflow-y-scroll overflow-x-hidden">
                     <DialogHeader>
                       <DialogTitle>Aplicar medicação em {tratamento.paciente.nome}</DialogTitle>
-                      <DialogDescription>
-                        Agora você está escolhendo um medicamento para aplicar em {tratamento.paciente.nome}.
+                      <DialogDescription >
+                        Digite o nome do medicamento e selecione a dosagem.
                         <br />
+                        <br />
+                        <div className="flex flex-row gap-1 w-full">
                         <AsyncSelect
+                          className="w-11/12"
                           loadOptions={loadOptions}
                           placeholder={"Dopamina, Adrenalina..."}
                           onChange={handleChange1}
@@ -197,14 +199,25 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
                           loadingMessage={() => "Procurando..."}
                         />
 
-                        <Button className="bg-emerald-500 text-emerald-200" onClick={handleButtonClick}><PlusCircleIcon/></Button>
+                        <Button className="bg-emerald-500 text-white" onClick={handleButtonClick}><PlusCircleIcon/></Button>
+                        </div>
+
                       </DialogDescription>
 
                       { medicamentos.map(medicamento => (
-                      <div key={medicamento.id}>
-                        <h1>{medicamento.nome} {medicamento.peso}mg</h1>
-                        <p>{medicamento.quantidade}</p>
+                      <div key={medicamento.id} className="w-full rounded-xl p-3 mt-3 border-emerald-100 border shadow items-center flex flex-row">
+                        <div className="w-11/12 flex flex-col">
+                          <p className="text-base font-semibold">{medicamento.nome} {medicamento.peso}mg</p>
+                          <p className="text-muted-foreground text-sm">{medicamento.tipo}</p>
+                          <p className="text-sm font-semibold">Qtd disponível: {medicamento.quantidade}</p>
+                        </div>
+                        <div className="w-1/3 flex flex-row bg-slate-100 rounded-md h-6 justify-center items-center gap-2">
+                            <Minus size={20}/>
+                            <p className="text-emerald-400">{0}</p>
+                            <Plus size={20}/>
+                        </div>
                       </div>
+          
                       ))
                       }
 
