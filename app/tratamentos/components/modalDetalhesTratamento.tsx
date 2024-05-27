@@ -18,7 +18,7 @@ import {
 
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import Select from "react-select";
+import AsyncSelect from "react-select/async";
 
 import {
   Accordion,
@@ -36,6 +36,7 @@ import returnMedicamentosByNome, { PesquisaMedicamento } from "../services/retur
 import { Medicamento } from "@/app/medicamentos/interfaces/medicamentoInterface";
 import makeAnimated from "react-select/animated"
 import { toast } from "sonner";
+import findMedicamentoById from "@/app/medicamentos/services/findMedicamentoById";
 
 
 
@@ -56,6 +57,8 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
   const [nomeMedicamento, setNomeMedicamento] = useState("");
   const [options, setOptions] = useState<SelectOptions[]>([])
   const [medicamentosSelecionados, setMedicamentosSelecionados] = useState<SelectOptions | unknown>();
+  const [medicamentoId, setMedicamentoId] = useState(0);
+  const [medicamentos, setMedicamentos] = useState<Medicamento[]>([]);
 
   const handleFinalizarTratamento = () => {
     mutate({ id: tratamento.id, action: "finalizar" })
@@ -79,19 +82,41 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
     setIsOpen(true);
   };
 
-  useEffect(() => {
-    async function searchMedicamento() {
-      const response = await returnMedicamentosByNome(nomeMedicamento);
-      const formattedOptions = response.map(medicamento => ({
+  const loadOptions = async (search: string) => {
+    const response = await returnMedicamentosByNome(search);
+      const formattedOptions:SelectOptions[] = response.map(medicamento => ({
         value:medicamento.id,
         label: `${medicamento.nome} ${medicamento.peso}mg`
       }))
 
-      setOptions(formattedOptions);
-    }
+      console.log('Search:', search);
+      return formattedOptions;
+  }
 
-    searchMedicamento();
-  }, [nomeMedicamento])
+  const handleChange1 = (seletcOption: any) => {
+      console.log('SelectedOption: ', seletcOption);
+      console.log("Value", seletcOption.value);
+      setMedicamentoId(seletcOption.value);
+  }
+
+  const handleButtonClick = async () => {
+      const response = await findMedicamentoById(medicamentoId);
+      setMedicamentos(prevMedicamentos => [...prevMedicamentos, response]);
+  }
+
+  // useEffect(() => {
+  //   async function searchMedicamento() {
+  //     const response = await returnMedicamentosByNome(nomeMedicamento);
+  //     const formattedOptions = response.map(medicamento => ({
+  //       value:medicamento.id,
+  //       label: `${medicamento.nome} ${medicamento.peso}mg`
+  //     }))
+
+  //     setOptions(formattedOptions);
+  //   }
+
+  //   searchMedicamento();
+  // }, [nomeMedicamento])
 
   let colorBg = "text-yellow-400";
   if (tratamento.status === "Em andamento") {
@@ -158,25 +183,31 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
                   <DialogTrigger asChild>
                     <Button className="bg-yellow-400 hover:bg-yellow-500">+Aplicar</Button>
                   </DialogTrigger>
-                  <DialogContent className="sm:max-w-[425px]">
+                  <DialogContent className="sm:max-w-[425px] max-h-[450px] overflow-y-scroll overflow-x-hidden">
                     <DialogHeader>
                       <DialogTitle>Aplicar medicação em {tratamento.paciente.nome}</DialogTitle>
                       <DialogDescription>
                         Agora você está escolhendo um medicamento para aplicar em {tratamento.paciente.nome}.
                         <br />
-                        <Select
-                          options={options}
-                          components={animacao}
-                          onChange={(item) => setMedicamentosSelecionados(item)}
+                        <AsyncSelect
+                          loadOptions={loadOptions}
+                          placeholder={"Dopamina, Adrenalina..."}
+                          onChange={handleChange1}
                           noOptionsMessage={() => "Nenhum medicamento encontrado"}
-                          onInputChange={handleNomeMedicamentoChange}
-                          inputValue={nomeMedicamento}
-                          isClearable={true}
-                          placeholder="Dopamina, Adrenalina..."
+                          loadingMessage={() => "Procurando..."}
                         />
 
-                        <Button className="bg-emerald-500 text-emerald-200" onClick={handleSelectedMedicamentos}><PlusCircleIcon/></Button>
+                        <Button className="bg-emerald-500 text-emerald-200" onClick={handleButtonClick}><PlusCircleIcon/></Button>
                       </DialogDescription>
+
+                      { medicamentos.map(medicamento => (
+                      <div key={medicamento.id}>
+                        <h1>{medicamento.nome} {medicamento.peso}mg</h1>
+                        <p>{medicamento.quantidade}</p>
+                      </div>
+                      ))
+                      }
+
                     </DialogHeader>
                     <div className="grid gap-4 py-4">
 
