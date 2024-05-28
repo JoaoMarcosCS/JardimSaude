@@ -49,14 +49,18 @@ interface SelectOptions {
   label: string;
 }
 
+interface AplicacaoMedicamento{
+  idMedicamento: number;
+  idTratamento: number;
+  isAplication: true;
+  quantidade: number;
+}
+
 const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) => {
 
   const { nivel } = useSelector((state: RootState) => state.usuarioReducer);
   const { mutate } = useActionTratamentoMutate()
   const [isOpen, setIsOpen] = useState(false);
-  const [nomeMedicamento, setNomeMedicamento] = useState("");
-  const [options, setOptions] = useState<SelectOptions[]>([])
-  const [medicamentosSelecionados, setMedicamentosSelecionados] = useState<SelectOptions | unknown>();
   const [medicamentoId, setMedicamentoId] = useState(0);
   const [medicamentos, setMedicamentos] = useState<Medicamento[]>([]);
 
@@ -69,18 +73,29 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
     mutate({ id: tratamento.id, action: "cancelar" })
     setIsOpen(false);
   }
-
-  const handleNomeMedicamentoChange = (newValue: string) => {
-    setNomeMedicamento(newValue);
-  }
-
-  const handleSelectedMedicamentos = () => {
-    console.log("ID:" + medicamentosSelecionados);
-  }
-
   const openDialog = () => {
     setIsOpen(true);
   };
+
+  const handleDiminuirAplicacao = (idMedicamento:string)=>{
+    setMedicamentos(prevState =>
+      prevState.map(medicamento =>
+        medicamento.id === idMedicamento && medicamento.quantidadeAplicada!>0
+        ? {...medicamento, quantidadeAplicada:medicamento.quantidadeAplicada!-1}
+        : medicamento
+        )
+      )
+  }
+
+  const handleAumentarAplicacao = (idMedicamento:string)=>{
+    setMedicamentos(prevState =>
+      prevState.map(medicamento =>
+        medicamento.id === idMedicamento && medicamento.quantidade>medicamento.quantidadeAplicada!
+        ? {...medicamento, quantidadeAplicada:medicamento.quantidadeAplicada!+1}
+        : medicamento
+        )
+      )
+  }
 
   const loadOptions = async (search: string) => {
     const response = await returnMedicamentosByNome(search);
@@ -101,22 +116,9 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
 
   const handleButtonClick = async () => {
       const response = await findMedicamentoById(medicamentoId);
-      setMedicamentos(prevMedicamentos => [...prevMedicamentos, response]);
+      response.quantidadeAplicada=0;
+      setMedicamentos(prevState => [...prevState, response]);
   }
-
-  // useEffect(() => {
-  //   async function searchMedicamento() {
-  //     const response = await returnMedicamentosByNome(nomeMedicamento);
-  //     const formattedOptions = response.map(medicamento => ({
-  //       value:medicamento.id,
-  //       label: `${medicamento.nome} ${medicamento.peso}mg`
-  //     }))
-
-  //     setOptions(formattedOptions);
-  //   }
-
-  //   searchMedicamento();
-  // }, [nomeMedicamento])
 
   let colorBg = "text-yellow-400";
   if (tratamento.status === "Em andamento") {
@@ -130,7 +132,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger onClick={openDialog} asChild>
+      <DialogTrigger onClick={openDialog} asChild className="hover:cursor-pointer">
         <MoreHorizontal />
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] border rounded max-h-[450px] border-emerald-300 shadow overflow-y-scroll">
@@ -206,18 +208,23 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
 
                       { medicamentos.map(medicamento => (
                       <div key={medicamento.id} className="w-full rounded-xl p-3 mt-3 border-emerald-100 border shadow items-center flex flex-row">
-                        <div className="w-11/12 flex flex-col justify-start">
-                          <p className="text-base font-semibold">{medicamento.nome} {medicamento.peso}mg</p>
-                          <p className="text-muted-foreground text-sm">{medicamento.tipo}</p>
-                          <p className="text-sm font-semibold">Qtd disponível: {medicamento.quantidade}</p>
+                        <div className="w-11/12 flex flex-col">
+                          <p className="text-base font-semibold  text-left">{medicamento.nome} {medicamento.peso}mg</p>
+                          <p className="text-muted-foreground text-sm text-left">{medicamento.tipo}</p>
+                          <p className="text-muted-foreground text-sm text-left">Preço unitário: {medicamento.valor_unitario}</p>
+                          <p className="text-sm font-semibold text-left">Qtd disponível: {medicamento.quantidade}</p>
                         </div>
-                        <div className="w-1/3 flex flex-row bg-slate-100 rounded-md h-6 justify-center items-center gap-2">
-                            <Minus size={20}/>
-                            <p className="text-emerald-400">{0}</p>
-                            <Plus size={20}/>
+                        <div className="w-1/3 flex flex-row bg-slate-100 rounded-md h-6 items-center gap-2">
+
+                            <Minus size={20} className="hover:cursor-pointer" onClick={() => handleDiminuirAplicacao(medicamento.id)}/>
+
+                            <p className="text-emerald-400">{medicamento.quantidadeAplicada}</p>
+
+                            <Plus size={20} className="hover:cursor-pointer" onClick={() => handleAumentarAplicacao(medicamento.id)}/>
+
                         </div>
                       </div>
-          
+
                       ))
                       }
 

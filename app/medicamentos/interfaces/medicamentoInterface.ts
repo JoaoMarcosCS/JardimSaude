@@ -11,4 +11,5 @@ export interface Medicamento {
   codigo: number;
   aplicacoes: AplicacaoMedicamento[];
   historico_compras:any;
+  quantidadeAplicada?:number//essa prop só será usada na aplicacao de um medicamento
 }
