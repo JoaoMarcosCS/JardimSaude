@@ -1,7 +1,7 @@
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Tratamento } from "../interfaces/tratamentoInterface";
 import { Button } from "@/components/ui/button";
-import { Minus, MoreHorizontal, Plus, PlusCircleIcon } from "lucide-react";
+import { Minus, MoreHorizontal, Plus, PlusCircleIcon, Trash2Icon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ptBR } from "date-fns/locale";
 import {
@@ -37,6 +37,7 @@ import { Medicamento } from "@/app/medicamentos/interfaces/medicamentoInterface"
 import makeAnimated from "react-select/animated"
 import { toast } from "sonner";
 import findMedicamentoById from "@/app/medicamentos/services/findMedicamentoById";
+import createAplicacao from "@/app/aplicacoes_medicamentos/services/createAplicacao";
 
 
 
@@ -49,12 +50,7 @@ interface SelectOptions {
   label: string;
 }
 
-interface AplicacaoMedicamento{
-  idMedicamento: number;
-  idTratamento: number;
-  isAplication: true;
-  quantidade: number;
-}
+
 
 const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) => {
 
@@ -63,6 +59,9 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
   const [isOpen, setIsOpen] = useState(false);
   const [medicamentoId, setMedicamentoId] = useState(0);
   const [medicamentos, setMedicamentos] = useState<Medicamento[]>([]);
+
+  const teste = JSON.stringify(tratamento)
+  console.log("Tratamento:" + teste);
 
   const handleFinalizarTratamento = () => {
     mutate({ id: tratamento.id, action: "finalizar" })
@@ -80,7 +79,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
   const handleDiminuirAplicacao = (idMedicamento:string)=>{
     setMedicamentos(prevState =>
       prevState.map(medicamento =>
-        medicamento.id === idMedicamento && medicamento.quantidadeAplicada!>0
+        medicamento.id === idMedicamento && medicamento.quantidadeAplicada!>1
         ? {...medicamento, quantidadeAplicada:medicamento.quantidadeAplicada!-1}
         : medicamento
         )
@@ -97,6 +96,11 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
       )
   }
 
+  const handleExcludeAplicacao = (idMedicamento:string) => {
+    setMedicamentos(prevState =>
+      prevState.filter(medicamento =>medicamento.id !== idMedicamento));
+  }
+
   const loadOptions = async (search: string) => {
     const response = await returnMedicamentosByNome(search);
       const formattedOptions:SelectOptions[] = response.map(medicamento => ({
@@ -109,15 +113,24 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
   }
 
   const handleChange1 = (seletcOption: any) => {
-      console.log('SelectedOption: ', seletcOption);
-      console.log("Value", seletcOption.value);
       setMedicamentoId(seletcOption.value);
+  }
+
+  const hanldeCriarAplicacao = async () =>{
+    await createAplicacao({medicamentos: medicamentos, idTratamento: tratamento.id});
+
   }
 
   const handleButtonClick = async () => {
       const response = await findMedicamentoById(medicamentoId);
-      response.quantidadeAplicada=0;
+      response.quantidadeAplicada=1;
+      const existeMedicamento = medicamentos.find(medicamento => medicamento.id === response.id);
+
+      if(existeMedicamento){
+        toast.warning("Esse medicamento já foi selecionado!");;
+      }else{
       setMedicamentos(prevState => [...prevState, response]);
+      }
   }
 
   let colorBg = "text-yellow-400";
@@ -201,20 +214,23 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
                           loadingMessage={() => "Procurando..."}
                         />
 
-                        <Button className="bg-emerald-500 text-white" onClick={handleButtonClick}><PlusCircleIcon/></Button>
+                        <Button className="bg-emerald-500 text-white hover:bg-emerald-600" onClick={handleButtonClick}><PlusCircleIcon/></Button>
                         </div>
 
                       </DialogDescription>
 
-                      { medicamentos.map(medicamento => (
-                      <div key={medicamento.id} className="w-full rounded-xl p-3 mt-3 border-emerald-100 border shadow items-center flex flex-row">
-                        <div className="w-11/12 flex flex-col">
-                          <p className="text-base font-semibold  text-left">{medicamento.nome} {medicamento.peso}mg</p>
+                      { medicamentos.slice().reverse().map(medicamento => (
+                      <div key={medicamento.id} className="w-full rounded-xl p-3 mt-3 border-emerald-100 border justify-between shadow items-center flex flex-wrap">
+                        <div className="w-full flex justify-between">
+                        <p className="text-base font-semibold  text-left">{medicamento.nome} {medicamento.peso}mg</p>
+                          <Trash2Icon size={16} onClick={() => handleExcludeAplicacao(medicamento.id)} className="text-red-500 hover:cursor-pointer hover:text-red-600 hover:scale-105 transition-transform"/>
+                        </div>
+                        <div className="w-3/5 flex flex-col">
                           <p className="text-muted-foreground text-sm text-left">{medicamento.tipo}</p>
                           <p className="text-muted-foreground text-sm text-left">Preço unitário: {medicamento.valor_unitario}</p>
                           <p className="text-sm font-semibold text-left">Qtd disponível: {medicamento.quantidade}</p>
                         </div>
-                        <div className="w-1/3 flex flex-row bg-slate-100 rounded-md h-6 items-center gap-2">
+                        <div className="w-1/3 flex flex-row bg-slate-100 rounded-md h-6 items-center justify-center gap-2 mb-3">
 
                             <Minus size={20} className="hover:cursor-pointer" onClick={() => handleDiminuirAplicacao(medicamento.id)}/>
 
@@ -236,7 +252,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
                       <DialogClose asChild>
                         <Button className="border-none bg-white text-black hover:bg-gray-100">Cancelar</Button>
                       </DialogClose>
-                      <Button className="bg-yellow-400 hover:bg-yellow-500">+Aplicar</Button>
+                      <Button className="bg-yellow-400 hover:bg-yellow-500" onClick={hanldeCriarAplicacao}>+Aplicar</Button>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
@@ -309,7 +325,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
                   {tratamento.aplicacoes_medicamentos!?.length > 0 ? (
                     tratamento.aplicacoes_medicamentos?.map((aplicacao) => (
                       <div className="flex justify-around" key={aplicacao.id}>
-                        <p>{aplicacao.medicamento.nome}</p>
+                        <p>{aplicacao.medicamento?.nome}</p>
                         <p>{aplicacao.quantidade_aplicada} uni</p>
                         <p>{new Date(aplicacao.hora_aplicacao).toLocaleTimeString()}</p>
                         <p>{new Date(aplicacao.hora_aplicacao).toLocaleDateString()}</p>

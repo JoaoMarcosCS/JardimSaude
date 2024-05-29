@@ -29,9 +29,7 @@ export default function RootLayout({
             <body className={`${inter.className}`}>
               <SideBar />
               <MainContentProvider>
-                <Toaster expand={true} closeButton icons={{
-                  error: <CircleAlert color="#d10816" size={20} />
-                }} />
+                <Toaster expand={true} closeButton/>
                 <ThemeProvider
                   attribute="class"
                   defaultTheme="light"
