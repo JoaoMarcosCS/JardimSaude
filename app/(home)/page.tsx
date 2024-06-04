@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/root-reducer";
 import HomeMedico from "./components/homeMedico";
 import HomeSecretaria from "./components/homeSecretaria";
+import Loading from "../laoding";
 
 export default function Home() {
 
@@ -16,7 +17,7 @@ export default function Home() {
       ) : nivel === 2 ? (
         <HomeMedico />
       ) : (
-        "use client"
+        <Loading/>
       )}
     </>
   );

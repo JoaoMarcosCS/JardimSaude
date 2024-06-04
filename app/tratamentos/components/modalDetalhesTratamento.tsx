@@ -38,8 +38,7 @@ import makeAnimated from "react-select/animated"
 import { toast } from "sonner";
 import findMedicamentoById from "@/app/medicamentos/services/findMedicamentoById";
 import createAplicacao from "@/app/aplicacoes_medicamentos/services/createAplicacao";
-
-
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 interface ModalDetalhesTratamentoProps {
   tratamento: Tratamento;
@@ -50,8 +49,6 @@ interface SelectOptions {
   label: string;
 }
 
-
-
 const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) => {
 
   const { nivel } = useSelector((state: RootState) => state.usuarioReducer);
@@ -60,8 +57,8 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
   const [medicamentoId, setMedicamentoId] = useState(0);
   const [medicamentos, setMedicamentos] = useState<Medicamento[]>([]);
 
-  const teste = JSON.stringify(tratamento)
-  console.log("Tratamento:" + teste);
+  const tratamentoJSON = JSON.stringify(tratamento);
+  console.log(`Tratamento convertido: ${tratamentoJSON}`);
 
   const handleFinalizarTratamento = () => {
     mutate({ id: tratamento.id, action: "finalizar" })
@@ -123,8 +120,10 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
 
   const handleButtonClick = async () => {
       const response = await findMedicamentoById(medicamentoId);
-      response.quantidadeAplicada=1;
+
       const existeMedicamento = medicamentos.find(medicamento => medicamento.id === response.id);
+
+      response.quantidadeAplicada=1;
 
       if(existeMedicamento){
         toast.warning("Esse medicamento já foi selecionado!");;
@@ -323,14 +322,27 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
                 <AccordionTrigger>Medicamentos aplicados</AccordionTrigger>
                 <AccordionContent className="border-2 rounded border-slate-200 p-2">
                   {tratamento.aplicacoes_medicamentos!?.length > 0 ? (
-                    tratamento.aplicacoes_medicamentos?.map((aplicacao) => (
-                      <div className="flex justify-around" key={aplicacao.id}>
-                        <p>{aplicacao.medicamento?.nome}</p>
-                        <p>{aplicacao.quantidade_aplicada} uni</p>
-                        <p>{new Date(aplicacao.hora_aplicacao).toLocaleTimeString()}</p>
-                        <p>{new Date(aplicacao.hora_aplicacao).toLocaleDateString()}</p>
-                      </div>
-                    ))
+                    <Table className="w-full">
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Medicamento</TableHead>
+                        <TableHead>Quantidade</TableHead>
+                        <TableHead>Horário</TableHead>
+                        <TableHead>Dia</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {tratamento.aplicacoes_medicamentos.map((aplicacao) => (
+                        <TableRow key={aplicacao.id}>
+                          <TableCell className="font-medium">{aplicacao.medicamento?.nome}</TableCell>
+                          <TableCell>{aplicacao.quantidade_aplicada}</TableCell>
+                          <TableCell>{new Date(aplicacao.hora_aplicacao).toLocaleTimeString()}</TableCell>
+                          <TableCell className="text-right">{new Date(aplicacao.hora_aplicacao).toLocaleDateString()}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+
+                  </Table>
                   ) : (
                     <p>Nenhum medicamento aplicado.</p>
                   )}

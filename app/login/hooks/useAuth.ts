@@ -27,7 +27,7 @@ export const useAuth = () => {
 
       dispatch(loginSuccess({ name, id, email, nivel }))
 
-      toast.loading("Caso demore, recarregue a página.");
+      toast.loading("Redirecionando para home.");
 
       push("/");
 

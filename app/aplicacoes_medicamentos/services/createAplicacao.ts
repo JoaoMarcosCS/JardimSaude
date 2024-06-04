@@ -5,6 +5,9 @@ import Error from "next/error";
 import { Medicamento } from "@/app/medicamentos/interfaces/medicamentoInterface";
 import { promises } from "dns";
 import { toast } from "sonner";
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
+
 
 interface CreateAplicacaoProps{
   idTratamento:string,
@@ -16,13 +19,14 @@ const createAplicacao = async ({idTratamento, medicamentos}: CreateAplicacaoProp
     const requests = medicamentos.map(medicamento => {
       return api.put(`${MEDICAMENTOS}/${medicamento.id}`,{
         isAplication: true,
-        quantidade: medicamento.quantidade,
+        quantidade: medicamento.quantidadeAplicada,
         id_tratamento: idTratamento
       })
     });
 
     await Promise.all(requests);
     toast.success("Medicamentos aplicados!");
+
 
   }catch(error: any){
     toast.error(error)

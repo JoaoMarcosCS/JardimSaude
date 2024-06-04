@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { useMedicoTratamentoData } from "./hooks/useMedicoTratamentoData";
 import TratamentoSecretaria from "./components/screens/tratamentoSecretaria";
 import TratamentoMedico from "./components/screens/tratamentoMedico";
+import Loading from "../laoding";
 
 const Tratamentos = () => {
 
@@ -43,7 +44,7 @@ const Tratamentos = () => {
       ) : nivel === 2 ? (
         <TratamentoMedico />
       ) : (
-        "use client"
+        <Loading/>
       )}
 
     </section>
