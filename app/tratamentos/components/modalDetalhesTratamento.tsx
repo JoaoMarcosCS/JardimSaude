@@ -1,7 +1,7 @@
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Tratamento } from "../interfaces/tratamentoInterface";
 import { Button } from "@/components/ui/button";
-import { Minus, MoreHorizontal, Plus, PlusCircleIcon, Trash2Icon } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ptBR } from "date-fns/locale";
 import {
@@ -16,9 +16,6 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import AsyncSelect from "react-select/async";
 
 import {
   Accordion,
@@ -28,19 +25,16 @@ import {
 } from "@/components/ui/accordion"
 
 import { format } from "date-fns";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useActionTratamentoMutate } from "../hooks/useActionTratamentoMutate";
 import { RootState } from "@/app/store/root-reducer";
 import { useSelector } from "react-redux";
-import returnMedicamentosByNome, { PesquisaMedicamento } from "../services/returnMedicamentosByNome";
-import { Medicamento } from "@/app/medicamentos/interfaces/medicamentoInterface";
-import makeAnimated from "react-select/animated"
-import { toast } from "sonner";
-import findMedicamentoById from "@/app/medicamentos/services/findMedicamentoById";
-import createAplicacao from "@/app/aplicacoes_medicamentos/services/createAplicacao";
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import setStatusColor from "../utils/setStatusColor";
 import ModalFormAplicarMedicamento from "./modals/modalFormAplicarMedicamento";
+import ModalCancelarTratamento from "./modals/modalCancelarTratamento";
+import ModalFinalizarTratamento from "./modals/modalFinalizarTratamento";
+import ModalMedicamentosAplicados from "./modals/modalMedicamentosAplicados";
 
 interface ModalDetalhesTratamentoProps {
   tratamento: Tratamento;
@@ -50,18 +44,8 @@ interface ModalDetalhesTratamentoProps {
 const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) => {
 
   const { nivel } = useSelector((state: RootState) => state.usuarioReducer);
-  const { mutate } = useActionTratamentoMutate()
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleFinalizarTratamento = () => {
-    mutate({ id: tratamento.id, action: "finalizar" })
-    setIsOpen(false);
-  }
-
-  const handleCancelarTratamento = () => {
-    mutate({ id: tratamento.id, action: "cancelar" })
-    setIsOpen(false);
-  }
   const openDialog = () => {
     setIsOpen(true);
   };
@@ -81,108 +65,9 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
             {
               (nivel === 2 && tratamento.status === "Em andamento") &&
               <div className="w-full flex justify-center gap-3 mt-2 items-center">
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button variant={"destructive"}>Cancelar</Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>Você tem certeza?</AlertDialogTitle>
-                      <AlertDialogDescription>
-                        Essa ação não pode ser revertida. Caso tenha cometido um erro ao cancelar esse tratamento,
-                        você terá que pedir para uma secretária(o) criar um novo para você com o mesmo paciente.
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel className="border-none">Voltar</AlertDialogCancel>
-                      <AlertDialogAction className="bg-destructive" onClick={handleCancelarTratamento}>Cancler</AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
-
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button className="bg-emerald-700 hover:bg-emerald-800">Finalizar</Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>Você tem certeza?</AlertDialogTitle>
-                      <AlertDialogDescription>
-                        Essa ação não pode ser revertida. Caso tenha cometido um erro ao finalizar esse tratamento,
-                        você terá que pedir para uma secretária(o) criar um novo para você com o mesmo paciente.
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel className="border-none">Voltar</AlertDialogCancel>
-                      <AlertDialogAction className="bg-emerald-700 hover:bg-emerald-800" onClick={handleFinalizarTratamento}>Finalizar</AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
-
-                {/* <Dialog>
-                  <DialogTrigger asChild>
-                    <Button className="bg-yellow-400 hover:bg-yellow-500">+Aplicar</Button>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-[425px] max-h-[450px] overflow-y-scroll overflow-x-hidden">
-                    <DialogHeader>
-                      <DialogTitle>Aplicar medicação em {tratamento.paciente.nome}</DialogTitle>
-                      <DialogDescription >
-                        Digite o nome do medicamento e selecione a dosagem.
-                        <br />
-                        <br />
-                        <div className="flex flex-row gap-1 w-full">
-                        <AsyncSelect
-                          className="w-11/12"
-                          loadOptions={loadOptions}
-                          placeholder={"Dopamina, Adrenalina..."}
-                          onChange={handleChange1}
-                          noOptionsMessage={() => "Nenhum medicamento encontrado"}
-                          loadingMessage={() => "Procurando..."}
-                        />
-
-                        <Button className="bg-emerald-500 text-white hover:bg-emerald-600" onClick={handleButtonClick}><PlusCircleIcon/></Button>
-                        </div>
-
-                      </DialogDescription>
-
-                      { medicamentos.slice().reverse().map(medicamento => (
-                      <div key={medicamento.id} className="w-full rounded-xl p-3 mt-3 border-emerald-100 border justify-between shadow items-center flex flex-wrap">
-                        <div className="w-full flex justify-between">
-                        <p className="text-base font-semibold  text-left">{medicamento.nome} {medicamento.peso}mg</p>
-                          <Trash2Icon size={16} onClick={() => handleExcludeAplicacao(medicamento.id)} className="text-red-500 hover:cursor-pointer hover:text-red-600 hover:scale-105 transition-transform"/>
-                        </div>
-                        <div className="w-3/5 flex flex-col">
-                          <p className="text-muted-foreground text-sm text-left">{medicamento.tipo}</p>
-                          <p className="text-muted-foreground text-sm text-left">Preço unitário: {medicamento.valor_unitario}</p>
-                          <p className="text-sm font-semibold text-left">Qtd disponível: {medicamento.quantidade}</p>
-                        </div>
-                        <div className="w-1/3 flex flex-row bg-slate-100 rounded-md h-6 items-center justify-center gap-2 mb-3">
-
-                            <Minus size={20} className="hover:cursor-pointer" onClick={() => handleDiminuirAplicacao(medicamento.id)}/>
-
-                            <p className="text-emerald-400">{medicamento.quantidadeAplicada}</p>
-
-                            <Plus size={20} className="hover:cursor-pointer" onClick={() => handleAumentarAplicacao(medicamento.id)}/>
-
-                        </div>
-                      </div>
-
-                      ))
-                      }
-
-                    </DialogHeader>
-                    <div className="grid gap-4 py-4">
-
-                    </div>
-                    <DialogFooter>
-                      <DialogClose asChild>
-                        <Button className="border-none bg-white text-black hover:bg-gray-100">Cancelar</Button>
-                      </DialogClose>
-                      <Button className="bg-yellow-400 hover:bg-yellow-500" onClick={hanldeCriarAplicacao}>+Aplicar</Button>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog> */}
-                <ModalFormAplicarMedicamento tratamento={tratamento}/>
+                <ModalCancelarTratamento tratamentoId={tratamento.id} modalController={setIsOpen} />
+                <ModalFinalizarTratamento tratamentoId={tratamento.id} modalController={setIsOpen} />
+                <ModalFormAplicarMedicamento tratamento={tratamento} />
               </div>
             }
           </DialogTitle>
@@ -244,39 +129,16 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
           </div>
           <hr />
           <div className="flex w-full justify-between px-2 items-center">
-            <Accordion type="single" collapsible className="w-full ">
-              <AccordionItem value="item-1" className="">
-                <AccordionTrigger>Medicamentos aplicados</AccordionTrigger>
-                <AccordionContent className="border-2 rounded border-slate-200 p-2 container">
-                  {tratamento.aplicacoes_medicamentos!?.length > 0 ? (
-                    <Table className="w-full">
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead>Medicamento</TableHead>
-                        <TableHead>Quantidade</TableHead>
-                        <TableHead>Horário</TableHead>
-                        <TableHead>Dia</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {tratamento.aplicacoes_medicamentos.map((aplicacao) => (
-                        <TableRow key={aplicacao.id}>
-                          <TableCell className="font-medium">{aplicacao.medicamento?.nome}</TableCell>
-                          <TableCell>{aplicacao.quantidade_aplicada}</TableCell>
-                          <TableCell>{new Date(aplicacao.hora_aplicacao).toLocaleTimeString()}</TableCell>
-                          <TableCell className="text-right">{new Date(aplicacao.hora_aplicacao).toLocaleDateString()}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-
-                  </Table>
-                  ) : (
-                    <p>Nenhum medicamento aplicado.</p>
-                  )}
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+            {tratamento.aplicacoes_medicamentos!?.length > 0 ? (
+              <>
+                <h2>Medicamentos aplicados:</h2>
+                <ModalMedicamentosAplicados aplicacoes={tratamento.aplicacoes_medicamentos} />
+              </>
+            ) : (
+              <p>Nenhum medicamento aplicado.</p>
+            )}
           </div>
+          <hr />
           <div className="flex w-full justify-between px-2 items-center">
             <Accordion type="single" collapsible className="w-full ">
               <AccordionItem value="item-1" className="">

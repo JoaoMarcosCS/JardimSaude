@@ -10,7 +10,7 @@ const useAplicacaoHandlers = () => {
 
   const [medicamentoId, setMedicamentoId] = useState(0);
   const [medicamentos, setMedicamentos] = useState<Medicamento[]>([]);
-  const { mutate } = useCriarAplicacaoMutate();
+  const { mutate,  } = useCriarAplicacaoMutate();
   const [isOpen, setIsOpen] = useState(false);
 
   const openDialog = () => {
