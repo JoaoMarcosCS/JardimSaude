@@ -29,7 +29,7 @@ export default function RootLayout({
             <body className={`${inter.className}`}>
               <SideBar />
               <MainContentProvider>
-                <Toaster expand={true} closeButton/>
+                <Toaster expand={true}/>
                 <ThemeProvider
                   attribute="class"
                   defaultTheme="light"

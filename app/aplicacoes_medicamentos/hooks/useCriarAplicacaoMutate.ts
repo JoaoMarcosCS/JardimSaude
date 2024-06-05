@@ -9,4 +9,6 @@ export function useCriarAplicacaoMutate(){
       queryClient.invalidateQueries({queryKey:['tratamento-medico-data']})
     }
   })
+
+  return mutate;
 }

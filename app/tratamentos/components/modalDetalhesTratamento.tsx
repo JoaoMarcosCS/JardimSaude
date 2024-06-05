@@ -39,26 +39,19 @@ import { toast } from "sonner";
 import findMedicamentoById from "@/app/medicamentos/services/findMedicamentoById";
 import createAplicacao from "@/app/aplicacoes_medicamentos/services/createAplicacao";
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import setStatusColor from "../utils/setStatusColor";
+import ModalFormAplicarMedicamento from "./modals/modalFormAplicarMedicamento";
 
 interface ModalDetalhesTratamentoProps {
   tratamento: Tratamento;
 }
 
-interface SelectOptions {
-  value: number;
-  label: string;
-}
 
 const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) => {
 
   const { nivel } = useSelector((state: RootState) => state.usuarioReducer);
   const { mutate } = useActionTratamentoMutate()
   const [isOpen, setIsOpen] = useState(false);
-  const [medicamentoId, setMedicamentoId] = useState(0);
-  const [medicamentos, setMedicamentos] = useState<Medicamento[]>([]);
-
-  const tratamentoJSON = JSON.stringify(tratamento);
-  console.log(`Tratamento convertido: ${tratamentoJSON}`);
 
   const handleFinalizarTratamento = () => {
     mutate({ id: tratamento.id, action: "finalizar" })
@@ -73,73 +66,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
     setIsOpen(true);
   };
 
-  const handleDiminuirAplicacao = (idMedicamento:string)=>{
-    setMedicamentos(prevState =>
-      prevState.map(medicamento =>
-        medicamento.id === idMedicamento && medicamento.quantidadeAplicada!>1
-        ? {...medicamento, quantidadeAplicada:medicamento.quantidadeAplicada!-1}
-        : medicamento
-        )
-      )
-  }
-
-  const handleAumentarAplicacao = (idMedicamento:string)=>{
-    setMedicamentos(prevState =>
-      prevState.map(medicamento =>
-        medicamento.id === idMedicamento && medicamento.quantidade>medicamento.quantidadeAplicada!
-        ? {...medicamento, quantidadeAplicada:medicamento.quantidadeAplicada!+1}
-        : medicamento
-        )
-      )
-  }
-
-  const handleExcludeAplicacao = (idMedicamento:string) => {
-    setMedicamentos(prevState =>
-      prevState.filter(medicamento =>medicamento.id !== idMedicamento));
-  }
-
-  const loadOptions = async (search: string) => {
-    const response = await returnMedicamentosByNome(search);
-      const formattedOptions:SelectOptions[] = response.map(medicamento => ({
-        value:medicamento.id,
-        label: `${medicamento.nome} ${medicamento.peso}mg`
-      }))
-
-      console.log('Search:', search);
-      return formattedOptions;
-  }
-
-  const handleChange1 = (seletcOption: any) => {
-      setMedicamentoId(seletcOption.value);
-  }
-
-  const hanldeCriarAplicacao = async () =>{
-    await createAplicacao({medicamentos: medicamentos, idTratamento: tratamento.id});
-
-  }
-
-  const handleButtonClick = async () => {
-      const response = await findMedicamentoById(medicamentoId);
-
-      const existeMedicamento = medicamentos.find(medicamento => medicamento.id === response.id);
-
-      response.quantidadeAplicada=1;
-
-      if(existeMedicamento){
-        toast.warning("Esse medicamento já foi selecionado!");;
-      }else{
-      setMedicamentos(prevState => [...prevState, response]);
-      }
-  }
-
-  let colorBg = "text-yellow-400";
-  if (tratamento.status === "Em andamento") {
-    colorBg = "text-yellow-400";
-  } else if (tratamento.status === "Finalizado") {
-    colorBg = "text-green-400"
-  } else if (tratamento.status === "Cancelado") {
-    colorBg = "text-red-400";
-  }
+  const colorBg = setStatusColor(tratamento.status);
 
 
   return (
@@ -192,7 +119,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
                   </AlertDialogContent>
                 </AlertDialog>
 
-                <Dialog>
+                {/* <Dialog>
                   <DialogTrigger asChild>
                     <Button className="bg-yellow-400 hover:bg-yellow-500">+Aplicar</Button>
                   </DialogTrigger>
@@ -254,8 +181,8 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
                       <Button className="bg-yellow-400 hover:bg-yellow-500" onClick={hanldeCriarAplicacao}>+Aplicar</Button>
                     </DialogFooter>
                   </DialogContent>
-                </Dialog>
-
+                </Dialog> */}
+                <ModalFormAplicarMedicamento tratamento={tratamento}/>
               </div>
             }
           </DialogTitle>
@@ -320,7 +247,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
             <Accordion type="single" collapsible className="w-full ">
               <AccordionItem value="item-1" className="">
                 <AccordionTrigger>Medicamentos aplicados</AccordionTrigger>
-                <AccordionContent className="border-2 rounded border-slate-200 p-2">
+                <AccordionContent className="border-2 rounded border-slate-200 p-2 container">
                   {tratamento.aplicacoes_medicamentos!?.length > 0 ? (
                     <Table className="w-full">
                     <TableHeader>
