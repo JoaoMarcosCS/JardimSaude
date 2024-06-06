@@ -16,7 +16,7 @@ const CardTotalTratamentosFinalizados = () => {
           title="Tratamentos finalizados"
           tooltipTextHelp={"Representa o total de tratamentos que você foram bem-sucedidos e você os finalizou."}
           color={" text-green-500"}
-          description={"Tratamentos finalizados de forma bem-sucedida"}
+          description={"Finalizados de forma bem-sucedida"}
           dataToDisplay={data}
         >
         </CardDashboard>
