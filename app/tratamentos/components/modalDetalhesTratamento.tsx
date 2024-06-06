@@ -29,7 +29,6 @@ import { useState } from "react";
 import { useActionTratamentoMutate } from "../hooks/useActionTratamentoMutate";
 import { RootState } from "@/app/store/root-reducer";
 import { useSelector } from "react-redux";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import setStatusColor from "../utils/setStatusColor";
 import ModalFormAplicarMedicamento from "./modals/modalFormAplicarMedicamento";
 import ModalCancelarTratamento from "./modals/modalCancelarTratamento";

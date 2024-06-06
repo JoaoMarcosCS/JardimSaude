@@ -10,7 +10,7 @@ export interface PesquisaMedicamento {
   peso: number
 }
 
-const returnMedicamentosByNome = async (nomeMedicamento: string): Promise<PesquisaMedicamento[] | []> => {
+const findMedicamentosByNome = async (nomeMedicamento: string): Promise<PesquisaMedicamento[] | []> => {
   if (nomeMedicamento) {
     const response = await api.get(`${RETURNMEDICAMENTOSBYNOME}/${nomeMedicamento}`);
     return response.data;
@@ -18,4 +18,4 @@ const returnMedicamentosByNome = async (nomeMedicamento: string): Promise<Pesqui
   return []
 }
 
-export default returnMedicamentosByNome
+export default findMedicamentosByNome

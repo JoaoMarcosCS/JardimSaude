@@ -1,10 +1,10 @@
 import { Medicamento } from "@/app/medicamentos/interfaces/medicamentoInterface";
 import findMedicamentoById from "@/app/medicamentos/services/findMedicamentoById";
-import returnMedicamentosByNome from "@/app/tratamentos/services/returnMedicamentosByNome";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useCriarAplicacaoMutate } from "./useCriarAplicacaoMutate";
 import { SelectOptions } from "@/app/tratamentos/components/modals/modalFormAplicarMedicamento";
+import findMedicamentosByNome from "@/app/tratamentos/services/findMedicamentosByNome";
 
 const useAplicacaoHandlers = () => {
 
@@ -43,7 +43,7 @@ const useAplicacaoHandlers = () => {
   }
 
   const loadOptions = async (search: string) => {
-    const response = await returnMedicamentosByNome(search);
+    const response = await findMedicamentosByNome(search);
     const formattedOptions: SelectOptions[] = response.map(medicamento => ({
       value: medicamento.id,
       label: `${medicamento.nome} ${medicamento.peso}mg`
