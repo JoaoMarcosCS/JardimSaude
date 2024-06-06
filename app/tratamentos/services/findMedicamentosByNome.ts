@@ -1,4 +1,4 @@
-import { RETURNMEDICAMENTOSBYNOME, TRATAMENTOS } from "@/app/constants/apiEndPoints";
+import { RETURN_MEDICAMENTOS_BY_NOME, TRATAMENTOS } from "@/app/constants/apiEndPoints";
 import api from "@/app/services/axios";
 import { Tratamento } from "../interfaces/tratamentoInterface";
 import { AplicacaoMedicamento } from "@/app/aplicacoes_medicamentos/interfaces/aplicacaoMedicamentoInterface";
@@ -12,7 +12,7 @@ export interface PesquisaMedicamento {
 
 const findMedicamentosByNome = async (nomeMedicamento: string): Promise<PesquisaMedicamento[] | []> => {
   if (nomeMedicamento) {
-    const response = await api.get(`${RETURNMEDICAMENTOSBYNOME}/${nomeMedicamento}`);
+    const response = await api.get(`${RETURN_MEDICAMENTOS_BY_NOME}/${nomeMedicamento}`);
     return response.data;
   }
   return []

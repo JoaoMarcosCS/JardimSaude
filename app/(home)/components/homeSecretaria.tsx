@@ -1,8 +1,8 @@
-import FuncionariosCard from "./cards/FuncionariosCard";
-import MedicamentosCard from "./cards/MedicamentosCard";
-import OrcamentoCard from "./cards/OrcamentoCard";
-import PacientesCard from "./cards/PacientesCard";
-import TratamentosCard from "./cards/TratamentosCard";
+import FuncionariosCard from "./cardsSecretaria/FuncionariosCard";
+import MedicamentosCard from "./cardsSecretaria/MedicamentosCard";
+import OrcamentoCard from "./cardsSecretaria/OrcamentoCard";
+import PacientesCard from "./cardsSecretaria/PacientesCard";
+import TratamentosCard from "./cardsSecretaria/TratamentosCard";
 import TratamentoTable from "../../tratamentos/components/TratamentoTable"
 import { useTratamentosData } from "@/app/tratamentos/hooks/useTratamentosData";
 
