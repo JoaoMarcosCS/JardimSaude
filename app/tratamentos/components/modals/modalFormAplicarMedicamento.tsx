@@ -7,7 +7,6 @@ import { Medicamento } from "@/app/medicamentos/interfaces/medicamentoInterface"
 import { toast } from "sonner";
 import findMedicamentoById from "@/app/medicamentos/services/findMedicamentoById";
 import { Tratamento } from "../../interfaces/tratamentoInterface";
-import returnMedicamentosByNome from "../../services/returnMedicamentosByNome";
 import { useCriarAplicacaoMutate } from "@/app/aplicacoes_medicamentos/hooks/useCriarAplicacaoMutate";
 import useAplicacaoHandlers from "@/app/aplicacoes_medicamentos/hooks/useAplicacaoHandlers";
 
