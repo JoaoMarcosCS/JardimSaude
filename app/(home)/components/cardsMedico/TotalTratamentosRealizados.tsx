@@ -1,6 +1,7 @@
 import CardSkeleton from "@/app/skeletons/cardSkeleton";
 import { useTotalTratamentosByMedicoId } from "@/app/tratamentos/hooks/useTotalTratamentosByMedicoId";
 import CardDashboard from "../cardsSecretaria/CardDashboard";
+import { ClipboardList } from "lucide-react";
 
 const CardTotalTratamentosRealizados = () => {
 
@@ -18,6 +19,7 @@ const CardTotalTratamentosRealizados = () => {
           color={" text-emerald-500"}
           description={"Tratamentos cancelados e finalizados"}
           dataToDisplay={data}
+          icon={<><ClipboardList size={35}/></>}
         >
         </CardDashboard>
       )}

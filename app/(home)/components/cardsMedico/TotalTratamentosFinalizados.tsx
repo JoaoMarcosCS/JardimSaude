@@ -1,6 +1,7 @@
 import CardSkeleton from "@/app/skeletons/cardSkeleton";
 import { useTotalTratamentosFinalizadosByMedicoId } from "@/app/tratamentos/hooks/useTotalTratamentosFinalizadosByMedicoId";
 import CardDashboard from "../cardsSecretaria/CardDashboard";
+import { CircleCheck } from "lucide-react";
 
 const CardTotalTratamentosFinalizados = () => {
 
@@ -18,6 +19,7 @@ const CardTotalTratamentosFinalizados = () => {
           color={" text-green-500"}
           description={"Finalizados de forma bem-sucedida"}
           dataToDisplay={data}
+          icon={<><CircleCheck size={35}/></>}
         >
         </CardDashboard>
       )}

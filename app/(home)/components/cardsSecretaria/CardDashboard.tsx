@@ -27,7 +27,7 @@ import CardDashboardProps from "../../interface/CardDashboardProps";
 const CardDashboard = ({ title, tooltipTextHelp, dataToDisplay, icon, color, children, description }: CardDashboardProps) => {
   return (
     <Card className=" shadow min-w-[330px] max-sm:w-[330px]">
-      <CardHeader className="pb-2">
+      <CardHeader className="pb-2"> 
         <CardDescription className="font-medium text-base gap-1 justify-between px-1 flex items-center">
           <p className="flex flex-row items-center gap-1">{title}
             <TooltipProvider delayDuration={200}>

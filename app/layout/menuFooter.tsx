@@ -1,6 +1,6 @@
 "use client";
 
-import { ClipboardPlus, Home, SquareUser, Stethoscope } from "lucide-react";
+import { ClipboardPlus, Home, Phone, SquareUser, Stethoscope } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import ActiveLink from "./activeLink";
@@ -24,6 +24,7 @@ const MenuFooter = () => {
         <ActiveLink href="/" directionTooltip="top" tooltipText="Home"><Home /> Home</ActiveLink>
         <ActiveLink href="/tratamentos" directionTooltip="top" tooltipText="Tratamentos"><Stethoscope /> Tratamentos</ActiveLink>
         <ActiveLink href="/pacientes" directionTooltip="top" tooltipText="Pacientes"><SquareUser /> Pacientes</ActiveLink>
+        <ActiveLink directionTooltip="right" href="/contato" tooltipText="Contato do desenvolvedor"><Phone/> Contato</ActiveLink>
       </ul>
     </nav>}
   </>

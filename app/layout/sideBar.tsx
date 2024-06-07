@@ -1,6 +1,6 @@
 "use client";
 
-import { Boxes, ClipboardPlus, Home, LineChart, SquareUser, Stethoscope, Store, User, Users } from "lucide-react";
+import { Boxes, ClipboardPlus, Home, LineChart, Phone, SquareUser, Stethoscope, Store, User, Users } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import ActiveLink from "./activeLink";
@@ -39,6 +39,7 @@ const SideBar = () => {
             {(nivel == 1) && <ActiveLink directionTooltip="right" href="/estoque" tooltipText="Estoque"> <Boxes /> Estoque</ActiveLink>}
             {(nivel == 1) && <ActiveLink directionTooltip="right" href="/financeiro" tooltipText="Financeiro"> <LineChart /> Financeiro</ActiveLink>}
             {(nivel == 1) && <ActiveLink directionTooltip="right" href="/shopping" tooltipText="Shopping"><Store /> Shopping</ActiveLink>}
+            <ActiveLink directionTooltip="right" href="/contato" tooltipText="Contato do desenvolvedor"><Phone/> Contato</ActiveLink>
           </ul>
 
         </nav>

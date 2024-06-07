@@ -1,6 +1,7 @@
 import CardSkeleton from "@/app/skeletons/cardSkeleton";
 import { useTotalTratamentosCanceladosByMedicoId } from "@/app/tratamentos/hooks/useTotalTratamentosCanceladosByMedicoId";
 import CardDashboard from "../cardsSecretaria/CardDashboard";
+import { CircleX } from "lucide-react";
 
 const CardTotalTratamentosCancelados = () => {
 
@@ -18,6 +19,7 @@ const CardTotalTratamentosCancelados = () => {
           color={" text-red-400"}
           description={"Cancelados a pedido do paciente ou por você"}
           dataToDisplay={data}
+          icon={<><CircleX size={35}/></>}
         >
         </CardDashboard>
       )}
