@@ -36,7 +36,7 @@ const TratamentoForm = () => {
         </div>
       ) : (
         <section className=" mx-3 pt-3 mt-2 items-center pb-5 max-sm:w-full justify-start flex-col flex">
-          <form action="" onSubmit={handleSubmit(handleTratamentoSubmit)} className="shadow-lg rounded p-5 max-sm:w-full w-[600px]">
+          <form action="" onSubmit={handleSubmit(handleTratamentoSubmit)} className=" rounded p-5 max-sm:w-full w-[600px]">
             <h1 className="text-2xl text-start font-semibold text-emerald-500 w-full">Iniciar tratamento</h1>
             <div className="py-1">
               <Breadcrumb>
