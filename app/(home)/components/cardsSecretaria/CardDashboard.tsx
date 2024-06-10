@@ -1,3 +1,5 @@
+"use client";
+
 import { Card, CardHeader, CardDescription, CardTitle, CardFooter } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Info, MoreHorizontal } from "lucide-react";
@@ -10,9 +12,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import React from "react";
+import React, { useEffect } from "react";
 import CardDashboardProps from "../../interface/CardDashboardProps";
-
+import AOS from "aos"
+import "aos/dist/aos.css"
 
 /**
  * @param title - Título do card
@@ -25,9 +28,13 @@ import CardDashboardProps from "../../interface/CardDashboardProps";
  *
  */
 const CardDashboard = ({ title, tooltipTextHelp, dataToDisplay, icon, color, children, description }: CardDashboardProps) => {
+  useEffect(() => {
+    AOS.init({});
+  }, [])
+
   return (
-    <Card className=" shadow min-w-[330px] max-sm:w-[330px]">
-      <CardHeader className="pb-2"> 
+    <Card className=" shadow min-w-[330px] max-sm:w-[330px]" data-aos="fade-up">
+      <CardHeader className="pb-2">
         <CardDescription className="font-medium text-base gap-1 justify-between px-1 flex items-center">
           <p className="flex flex-row items-center gap-1">{title}
             <TooltipProvider delayDuration={200}>
