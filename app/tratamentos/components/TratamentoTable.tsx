@@ -19,7 +19,7 @@ const TratamentoTable = ({hookFetchData}: TratamentoTableProps) => {
     {isLoading ? (
       <TableSkeleton/>
     ) : (
-      <section className="w-full">
+      <section className="w-full" data-aos="fade-up">
         <DataTable columns={columns} data={tratamentoData} />
     </section>
     )}
