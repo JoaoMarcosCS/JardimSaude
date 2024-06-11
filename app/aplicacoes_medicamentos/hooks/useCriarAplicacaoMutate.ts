@@ -6,7 +6,7 @@ export function useCriarAplicacaoMutate(){
   const mutate = useMutation({
     mutationFn:createAplicacao,
     onSuccess: () => {
-      queryClient.invalidateQueries({queryKey:['tratamento-medico-data', "tratamentos-finalizados-data-medicoId", "tratamentos-cancelados-data-medicoId", "tratamentos-EmAndamento-data-medicoId"]})
+      queryClient.invalidateQueries()
     }
   })
 
