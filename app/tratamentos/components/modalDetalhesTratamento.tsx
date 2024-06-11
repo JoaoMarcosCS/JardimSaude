@@ -34,6 +34,7 @@ import ModalFormAplicarMedicamento from "./modals/modalFormAplicarMedicamento";
 import ModalCancelarTratamento from "./modals/modalCancelarTratamento";
 import ModalFinalizarTratamento from "./modals/modalFinalizarTratamento";
 import ModalMedicamentosAplicados from "./modals/modalMedicamentosAplicados";
+import formatCurrency from "@/app/utils/formatCurrency";
 
 interface ModalDetalhesTratamentoProps {
   tratamento: Tratamento;
@@ -121,10 +122,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
           <hr />
           <div className="flex w-full justify-between px-2 items-center">
             <h2>Valor: </h2>
-            <h1>{Intl.NumberFormat('pt-BR', {
-              style: "currency",
-              currency: 'BRL'
-            }).format(Number(tratamento.valor))}</h1>
+            <h1>{formatCurrency(tratamento.valor)}</h1>
           </div>
           <hr />
           <div className="flex w-full justify-between px-2 items-center">

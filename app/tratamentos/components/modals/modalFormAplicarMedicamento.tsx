@@ -1,12 +1,13 @@
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Minus, Plus, PlusCircleIcon, Trash2Icon } from "lucide-react";
+import { Loader2, Minus, Plus, PlusCircleIcon, Trash2Icon } from "lucide-react";
 import AsyncSelect from "react-select/async";
 import { Tratamento } from "../../interfaces/tratamentoInterface";
 import useAplicacaoHandlers from "@/app/aplicacoes_medicamentos/hooks/useAplicacaoHandlers";
 import AOS from "aos"
 import "aos/dist/aos.css"
 import { useEffect } from "react";
+import formatCurrency from "@/app/utils/formatCurrency";
 
 export interface ModalFormAplicarMedicamentoProps {
   tratamento: Tratamento;
@@ -31,7 +32,8 @@ const ModalFormAplicarMedicamento = ({ tratamento }: ModalFormAplicarMedicamento
     handleExcludeAplicacao,
     loadOptions,
     hanldeCriarAplicacao,
-    medicamentos
+    medicamentos,
+    isPending
   } = useAplicacaoHandlers()
 
   useEffect(() => {
@@ -73,7 +75,7 @@ const ModalFormAplicarMedicamento = ({ tratamento }: ModalFormAplicarMedicamento
               </div>
               <div className="w-3/5 flex flex-col">
                 <p className="text-muted-foreground text-sm text-left">{medicamento.tipo}</p>
-                <p className="text-muted-foreground text-sm text-left">Preço unitário: {medicamento.valor_unitario}</p>
+                <p className="text-muted-foreground text-sm text-left">Preço unitário: {formatCurrency(medicamento.valor_unitario)}</p>
                 <p className="text-sm font-semibold text-left">Qtd disponível: {medicamento.quantidade}</p>
               </div>
               <div className="w-1/3 flex flex-row bg-slate-100 rounded-md h-6 items-center justify-center gap-2 mb-3">
@@ -98,7 +100,11 @@ const ModalFormAplicarMedicamento = ({ tratamento }: ModalFormAplicarMedicamento
           <DialogClose asChild>
             <Button className="border-none bg-white text-black hover:bg-gray-100">Cancelar</Button>
           </DialogClose>
-          <Button className="bg-yellow-400 hover:bg-yellow-500" onClick={() => hanldeCriarAplicacao(tratamento.id)}>+Aplicar</Button>
+          <Button className="bg-yellow-400 hover:bg-yellow-500" onClick={() => hanldeCriarAplicacao(tratamento.id)}>
+          {isPending ? (
+            <Loader2 className="animate-spin mr-2 h-4 w-4" />
+          ) : ("+Aplicar")}
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

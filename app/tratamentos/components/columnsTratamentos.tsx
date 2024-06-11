@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Tratamento } from "../interfaces/tratamentoInterface"
 import { Badge } from "@/components/ui/badge"
 import ModalDetalhesTratamento from "./modalDetalhesTratamento"
+import formatCurrency from "@/app/utils/formatCurrency"
 
 export const columns: ColumnDef<Tratamento>[] = [
   {
@@ -37,10 +38,7 @@ export const columns: ColumnDef<Tratamento>[] = [
     },
     cell: ({ row }) => {
       const valor = row.getValue("valor")
-      const valorFormatado = Intl.NumberFormat('pt-BR', {
-        style: "currency",
-        currency: 'BRL'
-      }).format(Number(valor))
+      const valorFormatado = formatCurrency(valor as number);
 
       return <div className="font-medium">{valorFormatado}</div>
     },
@@ -94,7 +92,17 @@ export const columns: ColumnDef<Tratamento>[] = [
   },
   {
     accessorKey: "status",
-    header: "Status",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Status
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
     cell: ({ row }) => {
       let colorBg = "text-yellow-400";
       const status:any = row.getValue("status");
@@ -108,7 +116,8 @@ export const columns: ColumnDef<Tratamento>[] = [
       }
 
       return <Badge  className={`${colorBg} bg-slate-100 font-bold`}>{status}</Badge>
-    }
+    },
+
   },
   {
     id: "actions",

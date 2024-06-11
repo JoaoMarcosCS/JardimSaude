@@ -2,14 +2,12 @@ import { useHospitalData } from "@/app/(home)/hooks/useHospitalData"
 import Link from "next/link";
 import CardDashboard from "./CardDashboard";
 import CardSkeleton from "@/app/skeletons/cardSkeleton";
+import formatCurrency from "@/app/utils/formatCurrency";
 
 const OrcamentoCard = () => {
 
   const { data, isLoading } = useHospitalData();
-  const orcamento = Intl.NumberFormat('pt-BR', {
-    style: "currency",
-    currency: 'BRL'
-  }).format(Number(data))
+  const orcamento = formatCurrency(data!);
 
   return (
     <>

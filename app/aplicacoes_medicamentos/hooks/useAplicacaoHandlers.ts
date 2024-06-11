@@ -10,7 +10,7 @@ const useAplicacaoHandlers = () => {
 
   const [medicamentoId, setMedicamentoId] = useState(0);
   const [medicamentos, setMedicamentos] = useState<Medicamento[]>([]);
-  const { mutate, } = useCriarAplicacaoMutate();
+  const { mutate, isPending } = useCriarAplicacaoMutate();
   const [isOpen, setIsOpen] = useState(false);
 
   const openDialog = () => {
@@ -61,6 +61,7 @@ const useAplicacaoHandlers = () => {
     setIsOpen(false);
     setMedicamentos([]);
     setMedicamentoId(0);
+
   }
 
   const handleConfirmMedicamento = async () => {
@@ -76,7 +77,7 @@ const useAplicacaoHandlers = () => {
       } else {
         setMedicamentos(prevState => [...prevState, response]);
       }
-    }else{
+    } else {
       toast.warning("Nenhum medicamento pesquisado")
     }
   }
@@ -91,6 +92,7 @@ const useAplicacaoHandlers = () => {
     loadOptions,
     handleExcludeAplicacao,
     isOpen,
+    isPending,
     medicamentos,
     setIsOpen
   }

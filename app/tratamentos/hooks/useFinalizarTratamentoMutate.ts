@@ -7,7 +7,7 @@ export function useFinalizarTratamentoMutate(){
   const mutate = useMutation({
     mutationFn: finalizarTratamento,
     onSuccess: () => {
-      queryClient.invalidateQueries({queryKey:['tratamento-medico-data']})
+      queryClient.invalidateQueries({queryKey:['tratamento-medico-data', "tratamentos-finalizados-data-medicoId", "tratamentos-cancelados-data-medicoId", "tratamentos-EmAndamento-data-medicoId"]})
     }
   })
 
