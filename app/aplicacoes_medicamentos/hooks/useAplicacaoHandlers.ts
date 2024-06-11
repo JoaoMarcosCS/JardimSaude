@@ -10,7 +10,7 @@ const useAplicacaoHandlers = () => {
 
   const [medicamentoId, setMedicamentoId] = useState(0);
   const [medicamentos, setMedicamentos] = useState<Medicamento[]>([]);
-  const { mutate,  } = useCriarAplicacaoMutate();
+  const { mutate, } = useCriarAplicacaoMutate();
   const [isOpen, setIsOpen] = useState(false);
 
   const openDialog = () => {
@@ -64,16 +64,20 @@ const useAplicacaoHandlers = () => {
   }
 
   const handleConfirmMedicamento = async () => {
-    const response = await findMedicamentoById(medicamentoId);
+    if (medicamentoId) {
+      const response = await findMedicamentoById(medicamentoId);
 
-    const existeMedicamento = medicamentos.find(medicamento => medicamento.id === response.id);
+      const existeMedicamento = medicamentos.find(medicamento => medicamento.id === response.id);
 
-    response.quantidadeAplicada = 1;
+      response.quantidadeAplicada = 1;
 
-    if (existeMedicamento) {
-      toast.warning("Esse medicamento já foi selecionado!");;
-    } else {
-      setMedicamentos(prevState => [...prevState, response]);
+      if (existeMedicamento) {
+        toast.warning("Esse medicamento já foi selecionado!");;
+      } else {
+        setMedicamentos(prevState => [...prevState, response]);
+      }
+    }else{
+      toast.warning("Nenhum medicamento pesquisado")
     }
   }
 

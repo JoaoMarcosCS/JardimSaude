@@ -2,13 +2,11 @@ import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, Di
 import { Button } from "@/components/ui/button";
 import { Minus, Plus, PlusCircleIcon, Trash2Icon } from "lucide-react";
 import AsyncSelect from "react-select/async";
-import { useState } from "react";
-import { Medicamento } from "@/app/medicamentos/interfaces/medicamentoInterface";
-import { toast } from "sonner";
-import findMedicamentoById from "@/app/medicamentos/services/findMedicamentoById";
 import { Tratamento } from "../../interfaces/tratamentoInterface";
-import { useCriarAplicacaoMutate } from "@/app/aplicacoes_medicamentos/hooks/useCriarAplicacaoMutate";
 import useAplicacaoHandlers from "@/app/aplicacoes_medicamentos/hooks/useAplicacaoHandlers";
+import AOS from "aos"
+import "aos/dist/aos.css"
+import { useEffect } from "react";
 
 export interface ModalFormAplicarMedicamentoProps {
   tratamento: Tratamento;
@@ -36,8 +34,12 @@ const ModalFormAplicarMedicamento = ({ tratamento }: ModalFormAplicarMedicamento
     medicamentos
   } = useAplicacaoHandlers()
 
+  useEffect(() => {
+    AOS.init({});
+  }, [])
+
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isOpen} onOpenChange={setIsOpen} >
       <DialogTrigger asChild onClick={openDialog}>
         <Button className="bg-yellow-400 hover:bg-yellow-500">+Aplicar</Button>
       </DialogTrigger>
@@ -64,7 +66,7 @@ const ModalFormAplicarMedicamento = ({ tratamento }: ModalFormAplicarMedicamento
           </DialogDescription>
 
           {medicamentos.slice().reverse().map(medicamento => (
-            <div key={medicamento.id} className="w-full rounded-xl p-3 mt-3 border-emerald-100 border justify-between shadow items-center flex flex-wrap">
+            <div key={medicamento.id} data-aos="fade-up" className="w-full rounded-xl p-3 mt-3 border-emerald-100 border justify-between shadow items-center flex flex-wrap">
               <div className="w-full flex justify-between">
                 <p className="text-base font-semibold  text-left">{medicamento.nome} {medicamento.peso}mg</p>
                 <Trash2Icon size={16} onClick={() => handleExcludeAplicacao(medicamento.id)} className="text-red-500 hover:cursor-pointer hover:text-red-600 hover:scale-105 transition-transform" />
