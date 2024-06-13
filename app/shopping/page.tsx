@@ -21,7 +21,7 @@ const Shopping = () => {
       {data && (
         <div>
           {data.map((medicamento) => (
-            <div data-aos="fade-up">
+            <div data-aos="fade-up" key={medicamento.id}>
             <p>{medicamento.nome}</p>
             <p>Preço: {medicamento.valor_unitario}</p>
             <Accordion type="single" collapsible className="w-full ">
