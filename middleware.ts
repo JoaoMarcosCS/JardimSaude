@@ -18,11 +18,16 @@ export default function middleware(request: NextRequest) {
     return NextResponse.redirect(tratamentosPath);
   }
 
+  if(request.nextUrl.pathname === "/shopping" && nivel != "1"){
+    const homePath = new URL("/", request.url);
+    return NextResponse.redirect(homePath);
+  }
+
 
   return NextResponse.next();
 
 }
 
 export const config = {
-  matcher: ["/","/tratamentos", "/tratamentos/novo"]
+  matcher: ["/","/tratamentos", "/tratamentos/novo", "/shopping"]
 }
