@@ -6,6 +6,7 @@ import { useEffect } from "react"
 import formatCurrency from "@/app/utils/formatCurrency";
 import Link from "next/link";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
 
 interface CardShoppingProps {
   medicamento: Medicamento
@@ -19,7 +20,7 @@ const CardShopping = ({ medicamento }: CardShoppingProps) => {
 
   return (
     <TooltipProvider delayDuration={200}>
-      <div data-aos="fade-up" key={medicamento.id} className="flex pt-2 pb-3 transition-all hover:bg-slate-50 bg-white rounded-md shadow min-w-[340px] max-sm:w-[340px]">
+      <div data-aos="fade-up" key={medicamento.id} className="flex border border-emerald-100 pt-2 pb-3 transition-all hover:bg-slate-50 bg-white rounded-md shadow min-w-[340px] max-sm:w-[340px]">
         <div className="w-1/3 flex justify-center items-center">
           <div className="rounded-full shadow p-2 border border-red-200">
             <Pill className="text-red-600" size={30} />
@@ -39,9 +40,9 @@ const CardShopping = ({ medicamento }: CardShoppingProps) => {
             </Tooltip>
           </p>
           <p className="text-base">{formatCurrency(medicamento.valor_unitario)}</p>
-          <p className="text-sm gap-1 font-semibold hover:cursor-pointer hover:font-medium transition-all pt-1 items-center flex">
-            <ShoppingCart size={15} />Adicionar ao carrinho
-          </p>
+          <Button size={"sm"} className="mt-1 bg-emerald-400 py-0 gap-1 flex items-center">
+              <ShoppingCart size={17} />Adicionar
+          </Button>
         </div>
       </div>
     </TooltipProvider>
