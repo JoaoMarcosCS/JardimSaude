@@ -33,16 +33,16 @@ const CardDashboard = ({ title, tooltipTextHelp, dataToDisplay, icon, color, chi
   }, [])
 
   return (
-    <Card className=" shadow min-w-[330px] max-sm:w-[330px]" data-aos="fade-up">
+    <Card className=" shadow min-w-[330px] max-sm:w-[330px] z-10" data-aos="fade-up">
       <CardHeader className="pb-2">
         <CardDescription className="font-medium text-base gap-1 justify-between px-1 flex items-center">
           <p className="flex flex-row items-center gap-1">{title}
             <TooltipProvider delayDuration={200}>
               <Tooltip>
-                <TooltipTrigger asChild>
+                <TooltipTrigger asChild >
                   <Info size={15} />
                 </TooltipTrigger>
-                <TooltipContent side={"right"} className="text-xs text-neutral-700 text-left w-80 text-wrap">
+                <TooltipContent side={"left"} className="text-xs text-neutral-700 text-left w-80 text-wrap">
                   {tooltipTextHelp}
                 </TooltipContent>
               </Tooltip>

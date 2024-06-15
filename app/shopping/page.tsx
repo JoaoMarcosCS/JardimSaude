@@ -1,10 +1,12 @@
 "use client"
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+
 import { useShoppingData } from "./hooks/useShoppingData"
 import AOS from "aos"
 import "aos/dist/aos.css"
 import { useEffect } from "react"
+import CardShopping from "./components/cards/CardShopping"
+import { Loader2 } from "lucide-react"
 
 const Shopping = () => {
   const {data, isLoading} = useShoppingData()
@@ -14,25 +16,18 @@ const Shopping = () => {
   }, [])
 
   return(
-    <section>
+    <section className="">
+      <h1 className="font-bold text-2xl text-green-500 w-full text-center">Shopping</h1>
       {isLoading && (
-        <h1>Carregando medicamentos</h1>
+        <div className="font-bold mt-2 text-lg text-green-500 w-full flex justify-center items-center flex-col">
+          <Loader2 className="animate-spin"/>
+          <h1>Carregando medicamentos...</h1>
+        </div>
       )}
       {data && (
-        <div>
+        <div className="flex w-full justify-center flex-wrap items-center gap-4 px-4 mt-4">
           {data.map((medicamento) => (
-            <div data-aos="fade-up" key={medicamento.id}>
-            <p>{medicamento.nome}</p>
-            <p>Preço: {medicamento.valor_unitario}</p>
-            <Accordion type="single" collapsible className="w-full ">
-              <AccordionItem value="item-1" className="">
-                <AccordionTrigger>Descrição</AccordionTrigger>
-                <AccordionContent className="border-2 rounded border-slate-200 p-2">
-                  {medicamento.descricao}
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-            </div>
+            <CardShopping medicamento={medicamento}/>
           ))}
         </div>
       )}

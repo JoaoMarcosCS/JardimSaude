@@ -90,7 +90,7 @@ const SheetContentMenu = () => {
             <Phone />
           </ActiveLink>
           <ActiveLink directionTooltip="right" href="/contato" tooltipText="Contato do desenvolvedor">
-            <p className="text-base tracking-wide font-medium">Shopping</p>
+            <p className="text-base tracking-wide font-medium">Contato</p>
           </ActiveLink>
 
         </li>
