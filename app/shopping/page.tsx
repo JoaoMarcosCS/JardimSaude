@@ -27,7 +27,7 @@ const Shopping = () => {
       {data && (
         <div className="flex w-full justify-center flex-wrap items-center gap-4 px-4 mt-4">
           {data.map((medicamento) => (
-            <CardShopping medicamento={medicamento}/>
+            <CardShopping medicamento={medicamento} key={medicamento.id}/>
           ))}
         </div>
       )}
