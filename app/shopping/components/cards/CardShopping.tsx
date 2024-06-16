@@ -22,8 +22,8 @@ const CardShopping = ({ medicamento }: CardShoppingProps) => {
     <TooltipProvider delayDuration={200}>
       <div data-aos="fade-up" key={medicamento.id} className="flex border border-emerald-100 pt-2 pb-3 transition-all hover:bg-slate-50 bg-white rounded-md shadow min-w-[340px] max-sm:w-[340px]">
         <div className="w-1/3 flex justify-center items-center">
-          <div className="rounded-full shadow p-3 border border-red-200">
-            <Pill className="text-red-600" size={40} />
+          <div className="rounded-full shadow p-2 border border-red-200">
+            <Pill className="text-red-600" size={35} />
           </div>
         </div>
         <div className="w-2/3">
