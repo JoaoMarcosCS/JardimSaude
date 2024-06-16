@@ -28,10 +28,10 @@ import "aos/dist/aos.css"
  *
  */
 const CardDashboard = ({ title, tooltipTextHelp, dataToDisplay, icon, color, children, description }: CardDashboardProps) => {
-  useEffect(() => {
+  /**useEffect(() => {
     AOS.init({});
   }, [])
-
+  */
   return (
     <Card className=" shadow min-w-[330px] max-sm:w-[330px] z-50 " data-aos="zoom-in-up">
       <CardHeader className="pb-2">
