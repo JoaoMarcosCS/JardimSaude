@@ -27,7 +27,7 @@ const CardShopping = ({ medicamento }: CardShoppingProps) => {
           </div>
         </div>
         <div className="w-2/3">
-          <p className="text-sm text-muted-foreground">{medicamento.tipo}</p>
+          <p className="text-sm text-muted-foreground italic">{medicamento.tipo}</p>
           <p className="text-lg flex items-center">
             {medicamento.nome} {medicamento.peso}mg
             <Tooltip defaultOpen={false} >
