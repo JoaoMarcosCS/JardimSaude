@@ -33,7 +33,7 @@ const CardDashboard = ({ title, tooltipTextHelp, dataToDisplay, icon, color, chi
   }, [])
   */
   return (
-    <Card className=" shadow min-w-[330px] max-sm:w-[330px] z-50 " data-aos="zoom-in-up">
+    <Card className=" shadow min-w-[330px] max-sm:w-[330px] z-50 ">
       <CardHeader className="pb-2">
         <CardDescription className="font-medium text-base gap-1 justify-between px-1 flex items-center">
           <p className="flex flex-row items-center gap-1">{title}
