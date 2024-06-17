@@ -1,20 +1,36 @@
 import { Medicamento } from "@/app/medicamentos/interfaces/medicamentoInterface";
 import findMedicamentoById from "@/app/medicamentos/services/findMedicamentoById";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { useCriarAplicacaoMutate } from "./useCriarAplicacaoMutate";
 import { SelectOptions } from "@/app/tratamentos/components/modals/modalFormAplicarMedicamento";
-import findMedicamentosByNome from "@/app/tratamentos/services/findMedicamentosByNome";
+import findMedicamentosByNome, { PesquisaMedicamento } from "@/app/tratamentos/services/findMedicamentosByNome";
+import api from "@/app/services/axios";
+import { DEFAULT_MEDICAMENTOS } from "@/app/constants/apiEndPoints";
+import { formatterOptionsSelect } from "../utils/formatterOptionsSelect";
 
 const useAplicacaoHandlers = () => {
 
   const [medicamentoId, setMedicamentoId] = useState(0);
   const [medicamentos, setMedicamentos] = useState<Medicamento[]>([]);
   const { mutate, isPending } = useCriarAplicacaoMutate();
+  const [defaultOptions, setDefaultOptions] = useState<SelectOptions[]>()
   const [isOpen, setIsOpen] = useState(false);
 
   const openDialog = () => {
     setIsOpen(true);
+  }
+
+  useEffect(() => {
+    defaultMedicamentos();
+  },[])
+
+  const defaultMedicamentos = async () => {
+    const response = await api.get<PesquisaMedicamento[]>(DEFAULT_MEDICAMENTOS);
+
+    const formattedOptions = formatterOptionsSelect(response.data);
+
+    setDefaultOptions(formattedOptions);
   }
 
   const handleDiminuirAplicacao = (idMedicamento: string) => {
@@ -94,7 +110,8 @@ const useAplicacaoHandlers = () => {
     isOpen,
     isPending,
     medicamentos,
-    setIsOpen
+    setIsOpen,
+    defaultOptions
   }
 }
 

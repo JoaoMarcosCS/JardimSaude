@@ -15,4 +15,5 @@ export const FETCH_TRATAMENTOS_EM_ANDAMENTO_BY_MEDICO_ID = "/tratamentos/emAndam
 export const FETCH_TRATAMENTOS_CANCELADOS_BY_MEDICO_ID = "/tratamentos/cancelados"
 export const FETCH_TRATAMENTOS_FINALIZADOS_BY_MEDICO_ID = "/tratamentos/finalizados"
 export const SHOPPING = "/shopping"
+export const DEFAULT_MEDICAMENTOS = "/returnDefaultMedicamentos"
 

@@ -33,8 +33,10 @@ const ModalFormAplicarMedicamento = ({ tratamento }: ModalFormAplicarMedicamento
     loadOptions,
     hanldeCriarAplicacao,
     medicamentos,
-    isPending
+    isPending,
+    defaultOptions
   } = useAplicacaoHandlers()
+
 
   useEffect(() => {
     AOS.init({});
@@ -60,6 +62,7 @@ const ModalFormAplicarMedicamento = ({ tratamento }: ModalFormAplicarMedicamento
                 onChange={handleChangeSelectOption}
                 noOptionsMessage={() => "Nenhum medicamento encontrado"}
                 loadingMessage={() => "Procurando..."}
+                defaultOptions={defaultOptions}
               />
 
               <Button className="bg-emerald-500 text-white hover:bg-emerald-600" onClick={handleConfirmMedicamento}><PlusCircleIcon /></Button>
