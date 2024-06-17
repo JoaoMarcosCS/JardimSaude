@@ -16,6 +16,10 @@ const TratamentoTable = ({hookFetchData}: TratamentoTableProps) => {
 
   const tratamentoData = data || [];
 
+  useEffect(() => {
+    AOS.init({});
+  }, [])
+
   return(
     <>
     {isLoading ? (
