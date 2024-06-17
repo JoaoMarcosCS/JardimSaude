@@ -14,7 +14,7 @@ const SheetContentMenu = () => {
   const userName = nome ? takeInitialLetters(nome) : "US";
 
   return (
-    <nav className="">
+    <nav className="z-50">
       <div className="flex flex-row items-center gap-1">
         <Avatar >
           <AvatarFallback>{userName}</AvatarFallback>
