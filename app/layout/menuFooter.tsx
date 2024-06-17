@@ -1,4 +1,4 @@
-Ju"use client";
+"use client";
 
 import { ClipboardPlus, Home, Phone, SquareUser, Stethoscope } from "lucide-react";
 import { usePathname } from "next/navigation";
