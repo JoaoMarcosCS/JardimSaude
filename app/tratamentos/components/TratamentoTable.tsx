@@ -6,6 +6,7 @@ import {Tratamento} from "../interfaces/tratamentoInterface"
 import { UseQueryResult } from "@tanstack/react-query";
 import "aos/dist/aos.css"
 import AOS from "aos"
+import React, { useEffect } from "react";
 
 interface TratamentoTableProps {
   hookFetchData: UseQueryResult<Tratamento[]>
