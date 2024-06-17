@@ -15,6 +15,7 @@ import {
 import React, { useEffect } from "react";
 import CardDashboardProps from "../../interface/CardDashboardProps";
 import AOS from "aos"
+import "aos/dist/aos.css"
 
 /**
  * @param title - Título do card
