@@ -4,6 +4,8 @@ import { columns } from "./columnsTratamentos";
 import { DataTable } from "./data-table";
 import {Tratamento} from "../interfaces/tratamentoInterface"
 import { UseQueryResult } from "@tanstack/react-query";
+import "aos/dist/aos.css"
+import AOS from "aos"
 
 interface TratamentoTableProps {
   hookFetchData: UseQueryResult<Tratamento[]>
