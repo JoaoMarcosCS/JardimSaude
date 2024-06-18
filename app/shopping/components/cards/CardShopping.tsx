@@ -52,8 +52,8 @@ const CardShopping = ({ medicamento }: CardShoppingProps) => {
 
         </div>
         <div className="flex w-full justify-between  items-center mt-3">
-          <div className="flex justify-start items-center ">
-            <p className=" w-36 h-24 text-xs text-ellipsis overflow-hidden text-start">
+          <div className="flex justify-start items-center">
+            <p className=" w-36  h-24 text-xs text-ellipsis overflow-hidden text-start">
             &ldquo;{medicamento.descricao}&rdquo;
               </p>
           </div>
