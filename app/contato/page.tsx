@@ -14,11 +14,11 @@ const Contato = () => {
 
   return (
     <section className="flex px-5 justify-center items-center flex-wrap flex-col">
-      <div className="ms-2 flex flex-col justify-start items-center">
+      <div className=" flex flex-col justify-start items-center">
         <p data-aos="fade-left" className="text-5xl text-black text-start w-full">João Marcos</p>
         <p data-aos="fade-left" data-aos-delay="100" className="text-base text-black text-start font-medium w-full">Desenvolvedor Web</p>
       </div>
-      <div className=" flex ms-2 mt-4 items-start flex-col shadow border border-slate-100 p-4 rounded">
+      <div className=" flex  mt-4 items-start flex-col shadow border border-slate-100 p-4 rounded">
         <h1 className="text-2xl font-medium" data-aos-delay="300" data-aos="fade-left">Contatos</h1>
         <div>
           <p className="flex flex-row justify-start items-center gap-1 mt-6" data-aos="fade-left" data-aos-delay="400">
