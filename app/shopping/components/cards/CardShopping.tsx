@@ -20,8 +20,11 @@ const CardShopping = ({ medicamento }: CardShoppingProps) => {
 
   return (
     <TooltipProvider delayDuration={200}>
-      <div data-aos="fade-up" key={medicamento.id} className="flex flex-col border border-emerald-100 py-3 px-4 transition-all hover:bg-slate-50 bg-white rounded-md shadow min-w-[340px] max-sm:w-[340px]">
-        <div className="flex flex-row items-center justify-between">
+      <div data-aos="zoom-in-up" key={medicamento.id}
+      className="flex flex-col border border-emerald-100 py-3 px-4 transition-all
+       hover:bg-slate-50 bg-white rounded-md shadow min-w-[340px] max-sm:w-[340px]">
+
+        <div className="flex flex-row items-start justify-between">
 
           <div className="flex flex-row items-center gap-2">
             <Pill className="text-emerald-300" />
@@ -33,12 +36,12 @@ const CardShopping = ({ medicamento }: CardShoppingProps) => {
 
           </div>
 
-          <div className="flex">
+          <div className="flex ">
             <Tooltip defaultOpen={false} >
               <TooltipTrigger asChild >
                 <div className="ms-1 text-base flex flex-row items-center  gap-1">
                   <Info size={15} />
-                  <p className="text-sm">Descrição</p>
+                  <p className="text-xs transition-all hover:cursor-pointer hover:text-slate-500">Descrição</p>
                 </div>
               </TooltipTrigger>
               <TooltipContent key={medicamento.id} side={"left"} className="text-sm text-neutral-700 text-left w-80 text-wrap">
@@ -48,7 +51,10 @@ const CardShopping = ({ medicamento }: CardShoppingProps) => {
           </div>
 
         </div>
-        <div className="flex w-full justify-end items-center mt-3">
+        <div className="flex w-full justify-between  items-center mt-3">
+          <div className="flex justify-start items-center ">
+            <p className=" w-36 h-24 text-xs text-ellipsis overflow-hidden text-start">"{medicamento.descricao}"</p>
+          </div>
           <Button size={"sm"} className="mt-1 mb-2 bg-emerald-400 py-0 gap-1 flex items-center">
             <ShoppingCart size={17} />Adicionar
           </Button>

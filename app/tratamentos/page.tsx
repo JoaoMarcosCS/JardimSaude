@@ -26,7 +26,7 @@ const Tratamentos = () => {
           </Button>
         }
       </div>
-      <div className="py-1">
+      <div className="py-1 ">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>

@@ -1,12 +1,13 @@
 "use client"
 
-
 import { useShoppingData } from "./hooks/useShoppingData"
 import AOS from "aos"
 import "aos/dist/aos.css"
 import { useEffect } from "react"
 import CardShopping from "./components/cards/CardShopping"
 import { Loader2 } from "lucide-react"
+import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
+import Link from "next/link"
 
 const Shopping = () => {
   const {data, isLoading} = useShoppingData()
@@ -18,6 +19,19 @@ const Shopping = () => {
   return(
     <section className="">
       <h1 className="font-bold text-2xl text-green-500 w-full text-center">Shopping</h1>
+      <div className="py-1 w-full flex justify-center">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <Link href="/">Home</Link>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <Link href="/shopping">Shopping</Link>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
       {isLoading && (
         <div className="font-bold mt-2 text-lg text-green-500 w-full flex justify-center items-center flex-col">
           <Loader2 className="animate-spin"/>
