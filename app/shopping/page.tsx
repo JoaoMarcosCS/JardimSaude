@@ -8,9 +8,11 @@ import CardShopping from "./components/cards/CardShopping"
 import { Loader2 } from "lucide-react"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
 import Link from "next/link"
+import SelectShopping from "./components/select/SelectShopping"
+import useShoppingHandlers from "./hooks/useShoppingHandlers"
 
 const Shopping = () => {
-  const {data, isLoading} = useShoppingData()
+const { shoppingData, isLoading } = useShoppingHandlers()
 
   useEffect(() => {
     AOS.init({});
@@ -32,15 +34,16 @@ const Shopping = () => {
           </BreadcrumbList>
         </Breadcrumb>
       </div>
+      <SelectShopping/>
       {isLoading && (
         <div className="font-bold mt-2 text-lg text-green-500 w-full flex justify-center items-center flex-col">
           <Loader2 className="animate-spin"/>
           <h1>Carregando medicamentos...</h1>
         </div>
       )}
-      {data && (
+      {shoppingData && (
         <div className="flex w-full justify-center flex-wrap items-center gap-4 px-4 mt-4">
-          {data.map((medicamento) => (
+          {shoppingData.map((medicamento) => (
             <CardShopping medicamento={medicamento} key={medicamento.id}/>
           ))}
         </div>
