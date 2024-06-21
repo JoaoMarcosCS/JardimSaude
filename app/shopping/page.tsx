@@ -5,7 +5,7 @@ import AOS from "aos"
 import "aos/dist/aos.css"
 import { SetStateAction, useEffect, useState } from "react"
 import CardShopping from "./components/cards/CardShopping"
-import { Loader2 } from "lucide-react"
+import { Loader2, PillIcon } from "lucide-react"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
 import Link from "next/link"
 import useShoppingHandlers from "./hooks/useShoppingHandlers"
@@ -48,19 +48,18 @@ const Shopping = () => {
         </Breadcrumb>
       </div>
       <div className="flex w-full justify-center items-center gap-2">
-      <label htmlFor="" className="">Pesquisar medicamento: </label>
       <input
         type="text"
         value={search}
         onChange={handleInputChange}
-        placeholder="Morfina, dopamina...."
-        className="border-b border-r border-emerald-100  px-2 py-2 rounded"
+        placeholder="Pesquisar Morfina, Dopamina...."
+        className="border-b outline-none border-emerald-100  px-2 py-2 rounded"
       />
       </div>
 
       {isLoading && (
         <div className="font-bold mt-2 text-lg text-green-500 w-full flex justify-center items-center flex-col">
-          <Loader2 className="animate-spin" />
+          <PillIcon className="animate-spin" />
           <h1>Carregando medicamentos...</h1>
         </div>
       )}

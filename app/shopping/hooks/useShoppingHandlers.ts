@@ -1,23 +1,14 @@
-import { DEFAULT_SHOPPING } from "@/app/constants/apiEndPoints";
-import api from "@/app/services/axios";
 import { useEffect, useState } from "react";
-import { formatterOptionsSelect } from "../utils/formatterOptionsSelect";
 import { Medicamento } from "@/app/medicamentos/interfaces/medicamentoInterface";
-import findMedicamentoShoppByNome from "../services/findMedicamentoShoppByNome";
 import { toast } from "sonner";
 import fetchShopping from "../services/fetchShopping";
-
-
-interface SelectOptions {
-  value: string;
-  label: string;
-}
-
 
 const useShoppingHandlers = () => {
 
   const [shoppingData, setShoppingData] = useState<Medicamento[]>()
   const [isLoading, setIsLoading] = useState(false);
+  const [shoppingDefaultData, setShoppingDefaultData] = useState<Medicamento[]>();
+
 
   useEffect(() => {
     defaultShopping();
@@ -28,26 +19,26 @@ const useShoppingHandlers = () => {
     setIsLoading(true);
     try {
       const response = await fetchShopping();
+      setShoppingDefaultData(response);
       setShoppingData(response);
     } catch (error) {
 
-    }finally{
+    } finally {
       setIsLoading(false);
     }
 
   }
 
-  const searchMedicamentos = async (nome: string) => {
+  const searchMedicamentos = (nome: string) => {
     setIsLoading(true);
-    try {
-      const response = await findMedicamentoShoppByNome(nome);
+    const response = shoppingData?.filter(medicamento => medicamento.nome.toLocaleLowerCase().includes(nome.toLocaleLowerCase()))
+    if (response) {
       setShoppingData(response);
-    } catch (error) {
-      toast.info("Nenhum medicamento encontrado.")
-    } finally {
-      setIsLoading(false);
+    } else {
+      setShoppingData(shoppingDefaultData);
     }
-  };
+    setIsLoading(false);
+  }
 
   return {
     shoppingData,
