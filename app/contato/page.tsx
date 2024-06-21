@@ -12,7 +12,7 @@ const Contato = () => {
         <p className="text-base text-black text-start font-medium">Desenvolvedor Web</p>
       </div>
       <div className=" flex  mt-4 items-start flex-col shadow border border-slate-100 p-4 rounded">
-        <h1 className="text-2xl font-medium" >Contatos</h1>
+        <h1 className="text-2xl font-medium" >Links de contato</h1>
         <div>
           <p className="flex flex-row justify-start items-center gap-1 mt-6"  >
             <LinkedinIcon color="#36b4f7" />
