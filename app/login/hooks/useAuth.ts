@@ -7,6 +7,7 @@ import getToken  from "../services/getToken";
 import { loginPayloadInterface } from "../interfaces/loginPayload";
 import addAuthorizationHeaderAPI from "@/app/utils/addAuthorizationHeaderAPI";
 import saveCookies from "@/app/utils/saveCookies";
+import { createShoppingCart } from "@/app/cart/cookies/createShoppingCart";
 
 export const useAuth = () => {
 
@@ -22,6 +23,8 @@ export const useAuth = () => {
       const { name, id, email, nivel, token} = await getToken(data);
 
       saveCookies({token, nivel, id, name});
+
+      createShoppingCart(id, []);
 
       addAuthorizationHeaderAPI(token);
 
