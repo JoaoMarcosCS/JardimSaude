@@ -14,6 +14,7 @@ import LogoutDialog from "./logoutDialog";
 import SheetContentMenu from "./SheetContentMenu";
 import { RootState } from "@store/root-reducer"
 import Cookie from "js-cookie";
+import Cart from "../cart/components/Cart";
 
 const Header = () => {
 
@@ -45,7 +46,7 @@ const Header = () => {
               (<p className="text-xl tracking-wide text-green-500 font-semibold hidden max-sm:flex">Jardim Saúde</p>)}
           </div>
           <ul className="flex justify-between items-center md:mr-10 px-4 gap-5">
-            {(nivel === 1) && <ActiveLink directionTooltip="bottom" href="/cart" tooltipText="Seu carrinho"><ShoppingCart />Carrinho</ActiveLink>}
+            {(nivel === 1) && <ActiveLink directionTooltip="bottom" href="" tooltipText="Seu carrinho"><Cart/></ActiveLink>}
             <LogoutDialog />
             <ActiveLink directionTooltip="bottom" href="" tooltipText="Seu perfil"><CircleUserRound /> Perfil</ActiveLink>
           </ul>
