@@ -16,63 +16,44 @@ interface SelectOptions {
 
 const useShoppingHandlers = () => {
 
-  const [defaultOptins, setDefaultOptions] = useState<SelectOptions[]>()
-  const [shoppingId, setShoppingId] = useState<Medicamento>()
   const [shoppingData, setShoppingData] = useState<Medicamento[]>()
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(()=>{
-    setIsLoading(true);
-    defaultShoppingOptions();
+  useEffect(() => {
     defaultShopping();
-    setIsLoading(false);
-  },[])
+  }, [])
 
-  const defaultShoppingOptions = async () => {
-    const {data} = await api.get<Medicamento[]>(`${DEFAULT_SHOPPING}`);
-    const formattedOptions:SelectOptions[] = data.map(medicamento => ({
-      value: `${medicamento.nome} ${medicamento.peso}mg`,
-      label: `${medicamento.nome} ${medicamento.peso}mg`
-    }))
-    setDefaultOptions(formattedOptions);
-  }
 
   const defaultShopping = async () => {
-    const response = await fetchShopping();
-    setShoppingData(response);
-  }
-
-  const loadOptions = async (search: string) => {
-    const response = await findMedicamentoShoppByNome(search);
-    const formattedOptions:SelectOptions[] = response.map(medicamento => ({
-      value: `${medicamento.nome} ${medicamento.peso}mg`,
-      label: `${medicamento.nome} ${medicamento.peso}mg`
-    }))
-    return formattedOptions;
-  }
-
-  const handleChangeSelectOption = (seletcOption: any) => {
-    setShoppingId(seletcOption.value);
-  }
-
-  const handleConfirmShopping = async () => {
-    if (shoppingId) {
-      setIsLoading(true)
-      const response = await findMedicamentoShoppByNome(shoppingId.nome);
+    setIsLoading(true);
+    try {
+      const response = await fetchShopping();
       setShoppingData(response);
+    } catch (error) {
+
+    }finally{
       setIsLoading(false);
-    } else {
-      toast.warning("Nenhum medicamento pesquisado")
     }
+
   }
 
-  return{
-    defaultOptins,
-    loadOptions,
-    handleChangeSelectOption,
+  const searchMedicamentos = async (nome: string) => {
+    setIsLoading(true);
+    try {
+      const response = await findMedicamentoShoppByNome(nome);
+      setShoppingData(response);
+    } catch (error) {
+      toast.info("Nenhum medicamento encontrado.")
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return {
     shoppingData,
-    handleConfirmShopping,
-    isLoading
+    isLoading,
+    searchMedicamentos,
+    defaultShopping,
   }
 }
 
