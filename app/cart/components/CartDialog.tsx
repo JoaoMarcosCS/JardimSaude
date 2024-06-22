@@ -28,7 +28,7 @@ const CartDialog = () => {
             <DialogDescription>
               {
                 cartData?.map( medicamento => (
-                  <p Key=>{medicamento.nome} - {medicamento.quantidade}</p>
+                  <p Key={medicamento.id}>{medicamento.nome} - {medicamento.quantidade}</p>
                 ))
               }
             </DialogDescription>
