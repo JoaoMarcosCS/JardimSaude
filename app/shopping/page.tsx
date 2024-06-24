@@ -70,6 +70,7 @@ const Shopping = () => {
           ))}
         </div>
       )}
+      
     </section>
   )
 }

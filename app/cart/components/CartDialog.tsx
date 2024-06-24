@@ -9,6 +9,7 @@ import {
 import { ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { getCartItems } from "../cookies/getCartItems";
+import CartItem from "./CartItem";
 
 const CartDialog = () => {
   const [open, setOpen] = useState(false);
@@ -25,10 +26,15 @@ const CartDialog = () => {
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Seu carrinho</DialogTitle>
-            <DialogDescription>
+            <DialogDescription >
+              {
+                cartData.length <=0 && (
+                  <p>Seu carrinho está vazio :(</p>
+                )
+              }
               {
                 cartData?.map( medicamento => (
-                  <p key={medicamento.id}>{medicamento.nome} - {medicamento.quantidade}</p>
+                  <CartItem medicamento={medicamento}/>
                 ))
               }
             </DialogDescription>
