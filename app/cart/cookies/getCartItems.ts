@@ -4,8 +4,8 @@ import Cookie from "js-cookie";
 
 export function getCartItems() {
   const {id} = getCookies();
-
-  const cartDataUnformatted = Cookie.get(`Cart${id}`);
+  const idUsuario = id.toString()
+  const cartDataUnformatted = Cookie.get(`Cart${idUsuario}`);
 
   if(cartDataUnformatted){
 

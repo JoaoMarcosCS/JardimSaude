@@ -5,8 +5,9 @@ import { createCartItem } from "./createCartItem";
 
 export function decreaseCartItem(data:Medicamento){
   const { id } = getCookies()
-  const currentCartNoformatted = Cookie.get(`Cart${id}`);
-  
+  const idUsuario = id.toString()
+  const currentCartNoformatted = Cookie.get(`Cart${idUsuario}`);
+
   if(currentCartNoformatted){
     const currentCart:Medicamento[] = JSON.parse(currentCartNoformatted);
 
@@ -18,12 +19,10 @@ export function decreaseCartItem(data:Medicamento){
           currentCart[i].quantidade += 1
         }
       }
-    }else{
-      currentCart.push(data);
     }
 
-    createCartItem(id, currentCart);
+    createCartItem(idUsuario, currentCart);
   }else{
-    createCartItem(id, [data]);
+    createCartItem(idUsuario, [data]);
   }
 }
