@@ -24,8 +24,6 @@ export const useAuth = () => {
 
       saveCookies({token, nivel, id, name});
 
-      createCartItem(id, []);
-
       addAuthorizationHeaderAPI(token);
 
       dispatch(loginSuccess({ name, id, email, nivel }))

@@ -10,10 +10,15 @@ import { ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { getCartItems } from "../cookies/getCartItems";
 import CartItem from "./CartItem";
+import formatCurrency from "@/app/utils/formatCurrency";
 
 const CartDialog = () => {
   const [open, setOpen] = useState(false);
   const cartData = getCartItems();
+
+  const total = cartData.reduce((acc, medicamento) => {
+    return (acc + medicamento.valor_unitario * medicamento.quantidade)
+  },0)
 
   return(
     <Dialog open={open} onOpenChange={setOpen}>
@@ -26,7 +31,7 @@ const CartDialog = () => {
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>Seu carrinho</DialogTitle>
-            <DialogDescription >
+            <DialogDescription  className="overflow-y-scroll max-h-[425px]">
               {
                 cartData.length <=0 && (
                   <p>Seu carrinho está vazio :(</p>
@@ -34,10 +39,11 @@ const CartDialog = () => {
               }
               {
                 cartData?.map( medicamento => (
-                  <CartItem medicamento={medicamento}/>
+                  <CartItem key={medicamento.id} medicamento={medicamento}/>
                 ))
               }
             </DialogDescription>
+            <p>Total: {formatCurrency(total)}</p>
           </DialogHeader>
         </DialogContent>
       </Dialog>

@@ -14,10 +14,14 @@ import { ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import { getCartItems } from "../cookies/getCartItems";
 import CartItem from "./CartItem";
+import formatCurrency from "@/app/utils/formatCurrency";
 
 const CartDrawer = () => {
   const [open, setOpen] = useState(false);
   const cartData = getCartItems();
+  const total = cartData.reduce((acc, medicamento) => {
+    return (acc + medicamento.valor_unitario * medicamento.quantidade)
+  },0)
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
@@ -30,7 +34,7 @@ const CartDrawer = () => {
       <DrawerContent>
         <DrawerHeader className="text-left">
           <DrawerTitle>Seu carrinho</DrawerTitle>
-          <DrawerDescription>
+          <DrawerDescription className="overflow-y-scroll max-h-[425px]">
             {
               cartData.length <= 0 && (
                 <p>Seu carrinho está vazio :(</p>
@@ -38,10 +42,11 @@ const CartDrawer = () => {
             }
             {
                cartData?.map( medicamento => (
-                <CartItem medicamento={medicamento}/>
+                <CartItem key={medicamento.id} medicamento={medicamento}/>
               ))
             }
           </DrawerDescription>
+          <p>Total: {formatCurrency(total)}</p>
         </DrawerHeader>
         <DrawerFooter className="pt-2">
           <Button>Comprar</Button>
