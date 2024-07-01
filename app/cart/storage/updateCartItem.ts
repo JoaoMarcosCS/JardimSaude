@@ -1,6 +1,7 @@
 import { Medicamento } from "@/app/medicamentos/interfaces/medicamentoInterface";
 import getCookies from "@/app/utils/getCookies";
 import { createCartItem } from "./createCartItem";
+import { toast } from "sonner";
 
 export function updateCartItem(data: Medicamento) {
   const { id } = getCookies();
@@ -19,7 +20,7 @@ export function updateCartItem(data: Medicamento) {
         }
       }
     }
-
+    toast.success("Adicionado ao carrinho!");
     createCartItem(idUsuario, currentCart);
   } else {
     createCartItem(idUsuario, [data]);
