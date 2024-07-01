@@ -23,10 +23,15 @@ const CartDrawer = () => {
     return (acc + medicamento.valor_unitario * medicamento.quantidade)
   },0)
 
+  const quantidade = cartData.reduce((acc, medicamento) => {
+    return (acc + medicamento.quantidade)
+  },0)
+
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <div className="flex flex-col items-center justify-center">
+        <div className="relative flex flex-col items-center justify-center">
+        <div className=" absolute -top-1 -left-1 bg-green-400 text-xs font-bold px-1 rounded-full">{quantidade}</div>
           <ShoppingCart />
           Carrinho
         </div>

@@ -19,6 +19,8 @@ export function decreaseCartItem(data:Medicamento){
           currentCart[i].quantidade += 1
         }
       }
+    }else{
+      currentCart.push(data)
     }
 
     createCartItem(idUsuario, currentCart);

@@ -9,20 +9,26 @@ export function updateCartItem(data: Medicamento) {
   const currentCartNoformatted = sessionStorage.getItem(`Cart${idUsuario}`);
 
   if (currentCartNoformatted) {
+
     const currentCart: Medicamento[] = JSON.parse(currentCartNoformatted);
 
-    const existMedicamentoInCart = currentCart.find(itemCart => itemCart.id === data.id);
+    const existMedicamentoInCart = currentCart.find(itemCart => itemCart.codigo === data.codigo);
 
     if (existMedicamentoInCart) {
+      console.log("Existe medicamento")
       for (let i = 0; i < currentCart.length; i++) {
-        if (currentCart[i].id === data.id) {
+        if (currentCart[i].codigo === data.codigo) {
+          console.log("aumentou")
           currentCart[i].quantidade += 1;
         }
       }
+    }else{
+      currentCart.push(data);
     }
-    toast.success("Adicionado ao carrinho!");
+
     createCartItem(idUsuario, currentCart);
   } else {
+
     createCartItem(idUsuario, [data]);
   }
 }

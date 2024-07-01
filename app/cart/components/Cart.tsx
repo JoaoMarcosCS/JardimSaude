@@ -1,4 +1,3 @@
-import { useState } from "react";
 import useMediaQuery from "../hooks/useMediaQuery";
 import CartDrawer from "./CartDrawer";
 import CartDialog from "./CartDialog";
