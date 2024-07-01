@@ -7,6 +7,8 @@ import formatCurrency from "@/app/utils/formatCurrency";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 import { updateCartItem } from "@/app/cart/storage/updateCartItem";
+import { useDispatch } from "react-redux";
+import { adicionarMedicamento } from "@/app/states/cart/cartSlice";
 
 interface CardShoppingProps {
   medicamento: Medicamento
@@ -14,12 +16,15 @@ interface CardShoppingProps {
 
 const CardShopping = ({ medicamento }: CardShoppingProps) => {
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     AOS.init({});
   }, [])
 
   const handleAddToCartClick = () => {
     updateCartItem(medicamento);
+    dispatch(adicionarMedicamento(medicamento));
   }
 
   return (

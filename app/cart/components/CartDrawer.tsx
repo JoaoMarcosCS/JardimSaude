@@ -19,6 +19,7 @@ import formatCurrency from "@/app/utils/formatCurrency";
 const CartDrawer = () => {
   const [open, setOpen] = useState(false);
   const cartData = getCartItems();
+
   const total = cartData.reduce((acc, medicamento) => {
     return (acc + medicamento.valor_unitario * medicamento.quantidade)
   },0)

@@ -12,6 +12,8 @@ import Cookie from "js-cookie";
 import { reloadState } from "../states/usuarios/usuarioSlice";
 import addAuthorizationHeaderAPI from "../utils/addAuthorizationHeaderAPI";
 import getCookies from "../utils/getCookies";
+import {  reloadCartItems } from "../states/cart/cartSlice";
+import { getCartItems } from "../cart/storage/getCartItems";
 
 const MainContentProvider = ({ children }: { children: React.ReactNode }) => {
 
@@ -24,6 +26,7 @@ const MainContentProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(()=>{
     const {id, name, nivel, token} = getCookies()
+    const cartItems = getCartItems();
     if(nivel === null || token === undefined){
       removeCookies();
       removeAuthorizationHeaderAPI();
@@ -32,6 +35,7 @@ const MainContentProvider = ({ children }: { children: React.ReactNode }) => {
     }else{
       addAuthorizationHeaderAPI(token!);
       dispatch(reloadState({nivel, id, name}));
+      dispatch(reloadCartItems(cartItems))
     }
   },[dispatch, nivel, push])
 

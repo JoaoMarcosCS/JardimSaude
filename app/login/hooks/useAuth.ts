@@ -8,6 +8,8 @@ import { loginPayloadInterface } from "../interfaces/loginPayload";
 import addAuthorizationHeaderAPI from "@/app/utils/addAuthorizationHeaderAPI";
 import saveCookies from "@/app/utils/saveCookies";
 import { createCartItem } from "@/app/cart/storage/createCartItem";
+import { reloadCartItems } from "@/app/states/cart/cartSlice";
+import { getCartItems } from "@/app/cart/storage/getCartItems";
 
 export const useAuth = () => {
 
@@ -21,12 +23,15 @@ export const useAuth = () => {
     try {
 
       const { name, id, email, nivel, token} = await getToken(data);
+      const cartItems = getCartItems();
 
       saveCookies({token, nivel, id, name});
 
       addAuthorizationHeaderAPI(token);
 
       dispatch(loginSuccess({ name, id, email, nivel }))
+
+      dispatch(reloadCartItems(cartItems))
 
       toast.loading("Redirecionando para home.");
 
