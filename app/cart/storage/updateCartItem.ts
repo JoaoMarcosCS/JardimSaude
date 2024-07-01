@@ -2,7 +2,7 @@ import { Medicamento } from "@/app/medicamentos/interfaces/medicamentoInterface"
 import getCookies from "@/app/utils/getCookies";
 import { createCartItem } from "./createCartItem";
 
-export function decreaseCartItem(data: Medicamento) {
+export function updateCartItem(data: Medicamento) {
   const { id } = getCookies();
   const idUsuario = id.toString();
   const currentCartNoformatted = sessionStorage.getItem(`Cart${idUsuario}`);
