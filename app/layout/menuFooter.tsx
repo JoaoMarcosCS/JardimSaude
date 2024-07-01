@@ -16,18 +16,18 @@ const MenuFooter = () => {
 
 
   return (
-
     <>
-    {(!isLoginPage && nivel===2) &&
-    <nav className="w-full justify-evenly bg-white fixed bottom-0 items-center rounded-md border-t-2 pb-2 z-50 border-slate-200 max-sm:flex hidden">
-      <ul className="flex justify-between items-center w-full px-2">
-        <ActiveLink href="/" directionTooltip="top" tooltipText="Home"><Home /> Home</ActiveLink>
-        <ActiveLink href="/tratamentos" directionTooltip="top" tooltipText="Tratamentos"><Stethoscope /> Tratamentos</ActiveLink>
-        <ActiveLink href="/pacientes" directionTooltip="top" tooltipText="Pacientes"><SquareUser /> Pacientes</ActiveLink>
-        <ActiveLink directionTooltip="top" href="/contato" tooltipText="Contato do desenvolvedor"><Phone/> Contato</ActiveLink>
-      </ul>
-    </nav>}
-  </>
+      {(!isLoginPage && nivel === 2) &&
+        <nav className="w-full justify-center mb-5 fixed bottom-0 items-center z-50  max-sm:flex hidden">
+          <ul className="flex justify-between items-center w-11/12 py-1 px-3 shadow rounded-full border-t-2 border-slate-200 bg-white">
+            <ActiveLink href="/" directionTooltip="top" tooltipText="Home"><Home /> Home</ActiveLink>
+            <ActiveLink href="/tratamentos" directionTooltip="top" tooltipText="Tratamentos"><Stethoscope /> Tratamentos</ActiveLink>
+            <ActiveLink href="/pacientes" directionTooltip="top" tooltipText="Pacientes"><SquareUser /> Pacientes</ActiveLink>
+            <ActiveLink directionTooltip="top" href="/contato" tooltipText="Contato do desenvolvedor"><Phone /> Contato</ActiveLink>
+          </ul>
+        </nav>
+      }
+    </>
   )
 }
 

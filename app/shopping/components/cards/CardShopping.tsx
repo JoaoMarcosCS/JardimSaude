@@ -6,7 +6,7 @@ import { useEffect } from "react"
 import formatCurrency from "@/app/utils/formatCurrency";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
-import { updateCartItem } from "@/app/cart/cookies/updateCartItem";
+import { updateCartItem } from "@/app/cart/storage/updateCartItem";
 
 interface CardShoppingProps {
   medicamento: Medicamento

@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/drawer"
 import { ShoppingCart } from "lucide-react";
 import { useState } from "react";
-import { getCartItems } from "../cookies/getCartItems";
+import { getCartItems } from "../storage/getCartItems";
 import CartItem from "./CartItem";
 import formatCurrency from "@/app/utils/formatCurrency";
 
