@@ -27,7 +27,7 @@ const CartDrawer = () => {
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <div className="relative flex flex-col items-center justify-center">
-          <div className=" absolute -top-1 -left-1 bg-green-400 text-xs font-bold px-1 rounded-full">
+          <div className=" absolute -top-1 -right-1 bg-green-400 text-xs font-bold px-1 rounded-full">
             {quantidadeTotal}
           </div>
           <ShoppingCart />
