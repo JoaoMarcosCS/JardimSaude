@@ -10,29 +10,26 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
-import { ShoppingCart } from "lucide-react";
+import { PlusCircle, ShoppingCart } from "lucide-react";
 import { useState } from "react";
-import { getCartItems } from "../storage/getCartItems";
 import CartItem from "./CartItem";
 import formatCurrency from "@/app/utils/formatCurrency";
+import { useSelector } from "react-redux";
+import { RootState } from "@/app/store/root-reducer";
+import Link from "next/link";
 
 const CartDrawer = () => {
   const [open, setOpen] = useState(false);
-  const cartData = getCartItems();
 
-  const total = cartData.reduce((acc, medicamento) => {
-    return (acc + medicamento.valor_unitario * medicamento.quantidade)
-  },0)
-
-  const quantidade = cartData.reduce((acc, medicamento) => {
-    return (acc + medicamento.quantidade)
-  },0)
+  const { valorTotal, quantidadeTotal, medicamentos } = useSelector((state: RootState) => state.cartReducer)
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <div className="relative flex flex-col items-center justify-center">
-        <div className=" absolute -top-1 -left-1 bg-green-400 text-xs font-bold px-1 rounded-full">{quantidade}</div>
+          <div className=" absolute -top-1 -left-1 bg-green-400 text-xs font-bold px-1 rounded-full">
+            {quantidadeTotal}
+          </div>
           <ShoppingCart />
           Carrinho
         </div>
@@ -42,23 +39,39 @@ const CartDrawer = () => {
           <DrawerTitle>Seu carrinho</DrawerTitle>
           <DrawerDescription className="overflow-y-scroll max-h-[425px]">
             {
-              cartData.length <= 0 && (
+              medicamentos.length <= 0 && (
                 <p>Seu carrinho está vazio :(</p>
               )
             }
             {
-               cartData?.map( medicamento => (
-                <CartItem key={medicamento.id} medicamento={medicamento}/>
+              medicamentos?.map(medicamento => (
+                <CartItem key={medicamento.id} medicamento={medicamento} />
               ))
             }
           </DrawerDescription>
-          <p>Total: {formatCurrency(total)}</p>
+          <p>Total: {formatCurrency(valorTotal)}</p>
         </DrawerHeader>
         <DrawerFooter className="pt-2">
-          <Button>Comprar</Button>
-          <DrawerClose asChild>
-            <Button className="outline-none bg-white text-black">Limpar carrinho</Button>
-          </DrawerClose>
+          {medicamentos.length > 0 ?
+            (<div className="flex flex-col">
+              <Button>Finalizar compra</Button>
+              <DrawerClose asChild>
+                <Button className="outline-none bg-white text-black">Limpar carrinho</Button>
+              </DrawerClose>
+            </div>
+            ) : (
+              <div className="w-full justify-center flex">
+                <Link href="/shopping">
+                  <DrawerClose>
+                    <Button className="gap-1 bg-emerald-400 text-white text-base">
+                      <PlusCircle /> Comprar medicamentos
+                    </Button>
+                  </DrawerClose>
+                </Link>
+              </div>
+            )
+          }
+
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
