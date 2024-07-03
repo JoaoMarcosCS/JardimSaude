@@ -6,7 +6,7 @@ import { toast } from "sonner";
 export function updateCartItem(data: Medicamento) {
   const { id } = getCookies();
   const idUsuario = id.toString();
-  const currentCartNoformatted = sessionStorage.getItem(`Cart${idUsuario}`);
+  const currentCartNoformatted = localStorage.getItem(`Cart${idUsuario}`);
 
   if (currentCartNoformatted) {
 

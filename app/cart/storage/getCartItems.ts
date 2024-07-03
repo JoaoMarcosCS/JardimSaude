@@ -4,7 +4,7 @@ import getCookies from "@/app/utils/getCookies";
 export function getCartItems() {
   const { id } = getCookies();
   const idUsuario = id.toString();
-  const cartDataUnformatted = sessionStorage.getItem(`Cart${idUsuario}`);
+  const cartDataUnformatted = localStorage.getItem(`Cart${idUsuario}`);
 
   if (cartDataUnformatted) {
     const cartData: Medicamento[] = JSON.parse(cartDataUnformatted);

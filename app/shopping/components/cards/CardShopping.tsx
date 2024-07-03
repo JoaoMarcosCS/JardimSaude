@@ -23,7 +23,6 @@ const CardShopping = ({ medicamento }: CardShoppingProps) => {
   }, [])
 
   const handleAddToCartClick = () => {
-    updateCartItem(medicamento);
     dispatch(adicionarMedicamento(medicamento));
   }
 

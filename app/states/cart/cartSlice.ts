@@ -73,6 +73,7 @@ const carrinhoSlice = createSlice({
       state.quantidadeTotal = state.medicamentos.reduce((acc, medicamento) => {
         return (acc + medicamento.quantidade)
       }, 0)
+      
       decreaseCartItem(action.payload);
     },
 
