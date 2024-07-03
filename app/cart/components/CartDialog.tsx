@@ -4,17 +4,26 @@ import formatCurrency from "@/app/utils/formatCurrency";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/store/root-reducer";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { PlusCircle, ShoppingCart } from "lucide-react";
+import { Loader, PlusCircle, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { clearCart } from "../storage/clearCart";
 import { limparCarrinho } from "@/app/states/cart/cartSlice";
+import { usePurchaseMedicamento } from "../hooks/usePurchaseMedicamento";
 
 const CartDialog = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const { valorTotal, quantidadeTotal, medicamentos } = useSelector((state: RootState) => state.cartReducer)
+  const {mutate, isPending, isSuccess} = usePurchaseMedicamento()
 
+  const handleComprarMedicamentos = () =>{
+    mutate(medicamentos);
+    if(isSuccess) {
+      dispatch(limparCarrinho())
+      setOpen(false);
+    }
+  }
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -53,18 +62,30 @@ const CartDialog = () => {
                       Limpar carrinho
                     </Button>
                   </DialogClose>
-                  <Button>Finalizar compra</Button>
+                  <Button onClick={handleComprarMedicamentos}>
+                    {isPending && (
+                      <div className="flex justify-center items-center flex-row">
+                      <Loader className="animate-spin" />
+                      <p>Efetuando compra</p>
+                    </div>
+                    )}
+                    {!isPending && (
+                      <p>Finalizar compra</p>
+                    )
+
+                    }
+                  </Button>
                 </div>
               </div>
             ) : (
               <div>
-                <DialogClose>
-                  <Link href="/shopping">
-                    <Button className="gap-1 bg-green-400 text-white text-base">
+                <Link href="/shopping">
+                  <DialogClose>
+                    <Button className="gap-1 bg-green-400 text-white text-base" >
                       <PlusCircle /> Comprar medicamentos
                     </Button>
-                  </Link>
-                </DialogClose>
+                  </DialogClose>
+                </Link>
               </div>
             )
           }

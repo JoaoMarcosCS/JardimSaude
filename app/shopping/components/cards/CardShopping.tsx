@@ -18,9 +18,9 @@ const CardShopping = ({ medicamento }: CardShoppingProps) => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    AOS.init({});
-  }, [])
+  // useEffect(() => {
+  //   AOS.init({});
+  // }, [])
 
   const handleAddToCartClick = () => {
     dispatch(adicionarMedicamento(medicamento));
@@ -28,7 +28,7 @@ const CardShopping = ({ medicamento }: CardShoppingProps) => {
 
   return (
     <TooltipProvider delayDuration={200}>
-      <div data-aos="zoom-in-up" key={medicamento.id}
+      <div  key={medicamento.id}
         className="flex flex-col border border-emerald-100 py-3 px-4 transition-all
        hover:bg-slate-50 bg-white rounded-md shadow min-w-[340px] max-sm:w-[340px]">
 

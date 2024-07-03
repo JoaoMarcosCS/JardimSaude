@@ -5,31 +5,19 @@ import AOS from "aos"
 import "aos/dist/aos.css"
 import { SetStateAction, useEffect, useState } from "react"
 import CardShopping from "./components/cards/CardShopping"
-import { Loader2, PillIcon } from "lucide-react"
+import { Loader2, PillIcon, Siren } from "lucide-react"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
 import Link from "next/link"
 import useShoppingHandlers from "./hooks/useShoppingHandlers"
 
 const Shopping = () => {
-  const { shoppingData, isLoading, searchMedicamentos, defaultShopping } = useShoppingHandlers()
 
-  const [search, setSearch] = useState("");
-
-  useEffect(() => {
-    if (search) {
-      searchMedicamentos(search);
-    } else {
-      defaultShopping();
-    }
-  }, [search]);
+  const { filtredMedicamentos, search, handleSearchChange, isFiltring, isLoading } = useShoppingHandlers();
 
   useEffect(() => {
     AOS.init({});
   }, []);
 
-  const handleInputChange = (event:any) => {
-    setSearch(event.target.value);
-  };
 
   return (
     <section className="">
@@ -48,13 +36,13 @@ const Shopping = () => {
         </Breadcrumb>
       </div>
       <div className="flex w-full justify-center items-center gap-2">
-      <input
-        type="text"
-        value={search}
-        onChange={handleInputChange}
-        placeholder="Pesquisar Morfina, Dopamina...."
-        className="border-b outline-none border-emerald-100  px-2 py-2 rounded"
-      />
+        <input
+          type="text"
+          value={search}
+          onChange={handleSearchChange}
+          placeholder="Pesquisar Morfina, Dopamina...."
+          className="border-b outline-none border-emerald-100  px-2 py-2 rounded"
+        />
       </div>
 
       {isLoading && (
@@ -63,14 +51,23 @@ const Shopping = () => {
           <h1>Carregando medicamentos...</h1>
         </div>
       )}
-      {!isLoading && shoppingData && (
+
+      {filtredMedicamentos?.length === 0 && !isLoading && (
+        <div className="font-bold mt-4 text-lg text-green-500 w-full flex justify-center items-center flex-col">
+          <Siren />
+          <h1>Nenhum medicamento encontrado com o nome
+            <span className="italic">&ldquo;{search}&rdquo;</span>
+          </h1>
+        </div>
+      )}
+      {!isLoading && (
         <div className="flex w-full justify-center flex-wrap items-center gap-4 px-4 mt-4">
-          {shoppingData.map((medicamento) => (
+          {filtredMedicamentos?.map((medicamento) => (
             <CardShopping medicamento={medicamento} key={medicamento.id} />
           ))}
         </div>
       )}
-      
+
     </section>
   )
 }

@@ -23,7 +23,7 @@ export function updateCartItem(data: Medicamento) {
     }else{
       currentCart.push(data);
     }
-
+    toast.success("Item adicionado ao carrinho!");
     createCartItem(idUsuario, currentCart);
   } else {
 

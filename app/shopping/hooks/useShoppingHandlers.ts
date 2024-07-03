@@ -1,50 +1,36 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { Medicamento } from "@/app/medicamentos/interfaces/medicamentoInterface";
-import { toast } from "sonner";
-import fetchShopping from "../services/fetchShopping";
+import { useShoppingData } from "./useShoppingData";
 
 const useShoppingHandlers = () => {
 
-  const [shoppingData, setShoppingData] = useState<Medicamento[]>()
-  const [isLoading, setIsLoading] = useState(false);
-  const [shoppingDefaultData, setShoppingDefaultData] = useState<Medicamento[]>();
+  const { data, isLoading } = useShoppingData()
+  const [search, setSearch] = useState("");
+  const [isFiltring, setIsFiltring] = useState(false)
 
 
-  useEffect(() => {
-    defaultShopping();
-  }, [])
 
+  const filtredMedicamentos = useMemo<Medicamento[] | undefined>(() => {
+    setIsFiltring(true);
+    const searchLower = search.toLowerCase();
+    const dataFiltred = data?.filter((medicamento) => medicamento.nome.toLowerCase().includes(searchLower))
 
-  const defaultShopping = async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetchShopping();
-      setShoppingDefaultData(response);
-      setShoppingData(response);
-    } catch (error) {
+    setIsFiltring(false);
+    return dataFiltred;
 
-    } finally {
-      setIsLoading(false);
-    }
+  }, [search, isLoading]);
 
-  }
-
-  const searchMedicamentos = (nome: string) => {
-    setIsLoading(true);
-    const response = shoppingData?.filter(medicamento => medicamento.nome.toLocaleLowerCase().includes(nome.toLocaleLowerCase()))
-    if (response) {
-      setShoppingData(response);
-    } else {
-      setShoppingData(shoppingDefaultData);
-    }
-    setIsLoading(false);
+  const handleSearchChange = (event:any) => {
+    setSearch(event.target.value);
   }
 
   return {
-    shoppingData,
     isLoading,
-    searchMedicamentos,
-    defaultShopping,
+    filtredMedicamentos,
+    setSearch,
+    search,
+    isFiltring,
+    handleSearchChange
   }
 }
 
