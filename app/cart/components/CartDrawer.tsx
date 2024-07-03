@@ -14,13 +14,14 @@ import { PlusCircle, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import CartItem from "./CartItem";
 import formatCurrency from "@/app/utils/formatCurrency";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/store/root-reducer";
 import Link from "next/link";
+import { limparCarrinho } from "@/app/states/cart/cartSlice";
 
 const CartDrawer = () => {
   const [open, setOpen] = useState(false);
-
+  const dispatch = useDispatch();
   const { valorTotal, quantidadeTotal, medicamentos } = useSelector((state: RootState) => state.cartReducer)
 
   return (
@@ -56,7 +57,10 @@ const CartDrawer = () => {
             (<div className="flex flex-col">
               <Button>Finalizar compra</Button>
               <DrawerClose asChild>
-                <Button className="outline-none bg-white text-black">Limpar carrinho</Button>
+                <Button className="outline-none bg-white text-black hover:outline-none hover:bg-transparent hover:text-zinc-800 transition-all"
+                  onClick={() => dispatch(limparCarrinho())}>
+                  Limpar carrinho
+                </Button>
               </DrawerClose>
             </div>
             ) : (

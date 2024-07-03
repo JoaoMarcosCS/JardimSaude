@@ -1,3 +1,4 @@
+import { clearCart } from "@/app/cart/storage/clearCart";
 import { decreaseCartItem } from "@/app/cart/storage/decreaseCartItem";
 import { getCartItems } from "@/app/cart/storage/getCartItems";
 import { updateCartItem } from "@/app/cart/storage/updateCartItem";
@@ -73,25 +74,16 @@ const carrinhoSlice = createSlice({
       state.quantidadeTotal = state.medicamentos.reduce((acc, medicamento) => {
         return (acc + medicamento.quantidade)
       }, 0)
-      
+
       decreaseCartItem(action.payload);
     },
 
     limparCarrinho: (state) => {
       state.medicamentos = [];
+      state.quantidadeTotal=0
+      state.valorTotal=0
+      clearCart();
     },
-
-    // aumentaValorTotal: (state) => {
-    //   state.valorTotal = state.medicamentos.reduce((acc, medicamento) => {
-    //     return (acc + medicamento.valor_unitario * medicamento.quantidade)
-    //   }, 0)
-    // },
-
-    // aumentaQuantidadeTotal: (state) => {
-    //   state.quantidadeTotal = state.medicamentos.reduce((acc, medicamento) => {
-    //     return (acc + medicamento.quantidade)
-    //   }, 0)
-    // },
   },
 });
 

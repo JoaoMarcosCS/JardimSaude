@@ -12,7 +12,7 @@ const initialState: UsuarioState = {
   isLoggedIn: false
 }
 
-const usuarioSlice: any = createSlice({
+const usuarioSlice = createSlice({
   name: "usuario",
   initialState,
   reducers: {

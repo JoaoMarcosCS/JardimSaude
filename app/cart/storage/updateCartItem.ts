@@ -15,10 +15,8 @@ export function updateCartItem(data: Medicamento) {
     const existMedicamentoInCart = currentCart.find(itemCart => itemCart.codigo === data.codigo);
 
     if (existMedicamentoInCart) {
-      console.log("Existe medicamento")
       for (let i = 0; i < currentCart.length; i++) {
         if (currentCart[i].codigo === data.codigo) {
-          console.log("aumentou")
           currentCart[i].quantidade += 1;
         }
       }

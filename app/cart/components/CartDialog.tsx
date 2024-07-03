@@ -1,16 +1,18 @@
 import { useState } from "react";
 import CartItem from "./CartItem";
 import formatCurrency from "@/app/utils/formatCurrency";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/store/root-reducer";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { PlusCircle, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { clearCart } from "../storage/clearCart";
+import { limparCarrinho } from "@/app/states/cart/cartSlice";
 
 const CartDialog = () => {
   const [open, setOpen] = useState(false);
-
+  const dispatch = useDispatch();
   const { valorTotal, quantidadeTotal, medicamentos } = useSelector((state: RootState) => state.cartReducer)
 
 
@@ -18,7 +20,7 @@ const CartDialog = () => {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <div className="flex relative flex-col items-center justify-center">
-          <div className=" absolute -top-1 -left-1 bg-green-400 text-xs font-bold px-1 rounded-full">
+          <div className=" absolute -top-1 -right-1 bg-green-400 text-xs font-bold px-1 rounded-full">
             {quantidadeTotal}
           </div>
           <ShoppingCart />
@@ -46,20 +48,23 @@ const CartDialog = () => {
                 <p>Total: {formatCurrency(valorTotal)}</p>
                 <div className="flex justify-around items-center mt-3 w-full">
                   <DialogClose>
-                    <Button className="outline-none bg-white text-black">Limpar carrinho</Button>
+                    <Button className="outline-none bg-white text-black hover:outline-none hover:bg-transparent hover:text-zinc-800 transition-all"
+                      onClick={() => dispatch(limparCarrinho())}>
+                      Limpar carrinho
+                    </Button>
                   </DialogClose>
                   <Button>Finalizar compra</Button>
                 </div>
               </div>
             ) : (
               <div>
-                <Link href="/shopping">
-                  <DialogClose>
-                    <Button className="gap-1 bg-emerald-400 text-white text-base">
+                <DialogClose>
+                  <Link href="/shopping">
+                    <Button className="gap-1 bg-green-400 text-white text-base">
                       <PlusCircle /> Comprar medicamentos
                     </Button>
-                  </DialogClose>
-                </Link>
+                  </Link>
+                </DialogClose>
               </div>
             )
           }
