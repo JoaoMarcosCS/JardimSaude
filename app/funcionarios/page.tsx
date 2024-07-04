@@ -10,10 +10,10 @@ import { useFuncionariosData } from "./hooks/useFuncionariosData";
 const Funcionarios = () => {
 
   return (
-    <section className="container">
-      <div className="flex flex-wrap items-center gap-4">
+    <section className="w-full ">
+      <div className="flex flex-wrap w-full justify-start items-center gap-4">
 
-        <div>
+        <div className="">
           <h1 className="text-2xl text-green-500 font-bold">Quadro de funcionários</h1>
           <Breadcrumb>
             <BreadcrumbList>
@@ -31,8 +31,9 @@ const Funcionarios = () => {
         <Button className="bg-emerald-600">
           <Link href="/funcionarios/novo">+Contratar</Link>
         </Button>
-
+        
         <FuncionariosCard/>
+
       </div>
       <FuncionariosTable hookFetchData={useFuncionariosData()}/>
     </section>
