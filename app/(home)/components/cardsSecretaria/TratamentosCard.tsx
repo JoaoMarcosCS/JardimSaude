@@ -21,7 +21,8 @@ const TratamentosCard = () => {
           dataToDisplay={data}
           icon={<><Stethoscope size={35} /></>}
         >
-          <Link href={"#"} >Ver tratamentos</Link>
+          <Link href={"/tratamentos"} >Ver tratamentos</Link>
+          <Link href={"/tratamentos/novo"} >Criar tratamento</Link>
         </CardDashboard>
       )}
     </>

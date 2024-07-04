@@ -56,10 +56,10 @@ export function DataTable<TData, TValue>({columns, data,}: DataTableProps<TData,
     <div>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filtrar por tratamento"
-          value={(table.getColumn("nome")?.getFilterValue() as string) ?? ""}
+          placeholder="Filtrar por nome"
+          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("nome")?.setFilterValue(event.target.value)
+            table.getColumn("name")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -90,10 +90,9 @@ export function DataTable<TData, TValue>({columns, data,}: DataTableProps<TData,
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
-
               >
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id} >
+                  <TableCell key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
@@ -102,7 +101,7 @@ export function DataTable<TData, TValue>({columns, data,}: DataTableProps<TData,
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                Nenhum tratamento encontrado :(
+                Nenhum funcionário encontrado :(
               </TableCell>
             </TableRow>
           )}

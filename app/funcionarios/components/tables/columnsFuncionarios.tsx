@@ -3,121 +3,147 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Tratamento } from "../interfaces/tratamentoInterface"
 import { Badge } from "@/components/ui/badge"
-import ModalDetalhesTratamento from "./modalDetalhesTratamento"
 import formatCurrency from "@/app/utils/formatCurrency"
-import setStatusColor from "../utils/setStatusColor"
+import { FuncionarioInterface } from "../../interfaces/funcionarioInterface"
+import { setProfissaoByNivel } from "../../utils/setProfissaoByNivel"
 
-export const columns: ColumnDef<Tratamento>[] = [
+export const columns: ColumnDef<FuncionarioInterface>[] = [
   {
-    accessorKey: "nome",
+    accessorKey: "name",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Tratamento
+          Nome
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
     },
   },
   {
-    accessorKey: "valor",
-    header:({ column }) => {
+    accessorKey: "nascimento",
+    header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Valor
+          Nascimento
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
     },
     cell: ({ row }) => {
-      const valor = row.getValue("valor")
-      const valorFormatado = formatCurrency(valor as number);
-
-      return <div className="font-medium">{valorFormatado}</div>
-    },
-  },
-  {
-    accessorKey: "medico_responsavel.name",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Medico
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-  },
-  {
-    accessorKey: "paciente.nome",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Paciente
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-  },
-  {
-    accessorKey: "inicio",
-    header:  ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Início
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-    cell: ({ row }) => {
-      const inicioDate = new Date(row.getValue("inicio"));
-      const inicioDateFormatted = inicioDate.toLocaleDateString();
-      return <div>{inicioDateFormatted}</div>
+      const dataNaoFormatada = new Date(row.getValue("nascimento"));
+      const dataFormatada = dataNaoFormatada.toLocaleDateString();
+      return <div>{dataFormatada}</div>;
     }
   },
   {
-    accessorKey: "status",
+    accessorKey: "cpf",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Status
+          CPF
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )
     },
-    cell: ({ row }) => {
-      const status:any = row.getValue("status");
-
-      const colorBg = setStatusColor(status);
-
-      return <Badge  className={`${colorBg} bg-slate-100 font-bold`}>{status}</Badge>
+  },
+  {
+    accessorKey: "email",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Email
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
+  },
+  {
+    accessorKey: "nivel",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Cargo
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
     },
 
+    cell: ({ row }) => {
+      const nivel: number = row.getValue("nivel");
+
+      const profissao = setProfissaoByNivel(nivel);
+
+      return <div>{profissao}</div>
+    }
+  },
+  {
+    accessorKey: "crm",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          CRM
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
+  },
+  {
+    accessorKey: "especialidade.nome",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Especialdiade
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
+  },
+  {
+    accessorKey: "salario",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Salário
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
+    cell:({row}) => {
+      const salarioNaoFormatado:number = row.getValue("salario");
+      const salarioFormatado = formatCurrency(salarioNaoFormatado);
+      return <div>{salarioFormatado}</div>
+    }
   },
   {
     id: "actions",
     cell: ({ row }) => {
       return (
-        <ModalDetalhesTratamento tratamento={row.original}/>
+        <>+</>
       )
     },
   }

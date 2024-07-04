@@ -7,7 +7,6 @@ export interface FuncionarioInterface{
   email:string;
   crm?:string;
   cpf:string;
-  senha:string;
   salario:number;
   nivel:number;
   empregado:boolean;

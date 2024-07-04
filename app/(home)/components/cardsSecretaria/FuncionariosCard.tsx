@@ -16,15 +16,14 @@ const FuncionariosCard = () => {
         <CardDashboard
           title="Funcionários"
           tooltipTextHelp={"Essa é a quantidade atual de funcionários trabalhando no Jardim Saúde, contanto com secretários(as) e médicos(as), que estão na folha de pagamento."}
-          color={"text-cyan-500"}
+          color={"text-yellow-500"}
           description={"Funcionários na folha de pagamento"}
           dataToDisplay={data}
           icon={<><Users size={35} /></>}
         >
           <Link href={"#"} >Histórico de pagamentos</Link>
-          <Link href={"#"} >Ver funcionários</Link>
-          <Link href={"#"} >Contratar</Link>
-          <Link href={"#"} >Demitir</Link>
+          <Link href={"/funcionarios"} >Ver funcionários</Link>
+          <Link href={"/funcionarios/novo"} >Contratar</Link>
         </CardDashboard>
       )}
     </>
