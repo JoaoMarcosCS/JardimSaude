@@ -28,6 +28,10 @@ export default function middleware(request: NextRequest) {
     return NextResponse.redirect(homePath);
   }
 
+  if(request.nextUrl.pathname === "/estoque" && nivel != "1"){
+    const homePath = new URL("/", request.url);
+    return NextResponse.redirect(homePath);
+  }
 
   return NextResponse.next();
 
