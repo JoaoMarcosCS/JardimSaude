@@ -10,7 +10,7 @@ import { useFuncionariosData } from "./hooks/useFuncionariosData";
 const Funcionarios = () => {
 
   return (
-    <section className="w-full ">
+    <section className="container ">
       <div className="flex flex-wrap w-full justify-start items-center gap-4">
 
         <div className="">
@@ -31,7 +31,7 @@ const Funcionarios = () => {
         <Button className="bg-emerald-600">
           <Link href="/funcionarios/novo">+Contratar</Link>
         </Button>
-        
+
         <FuncionariosCard/>
 
       </div>
