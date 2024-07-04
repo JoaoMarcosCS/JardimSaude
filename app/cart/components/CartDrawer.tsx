@@ -10,7 +10,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
-import { PlusCircle, ShoppingCart } from "lucide-react";
+import { Loader, PlusCircle, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import CartItem from "./CartItem";
 import formatCurrency from "@/app/utils/formatCurrency";
@@ -18,11 +18,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/store/root-reducer";
 import Link from "next/link";
 import { limparCarrinho } from "@/app/states/cart/cartSlice";
+import { usePurchaseMedicamento } from "../hooks/usePurchaseMedicamento";
 
 const CartDrawer = () => {
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const { valorTotal, quantidadeTotal, medicamentos } = useSelector((state: RootState) => state.cartReducer)
+  const { mutate, isPending, isSuccess } = usePurchaseMedicamento()
+
+  const handleComprarMedicamentos = () => {
+    mutate(medicamentos);
+    if (isSuccess) {
+      dispatch(limparCarrinho())
+      setOpen(false);
+    }
+  }
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
@@ -55,7 +65,19 @@ const CartDrawer = () => {
         <DrawerFooter className="pt-2">
           {medicamentos.length > 0 ?
             (<div className="flex flex-col">
-              <Button>Finalizar compra</Button>
+              <Button onClick={handleComprarMedicamentos}>
+                {isPending && (
+                  <div className="flex gap-1 justify-center items-center flex-row">
+                    <Loader className="animate-spin" />
+                    <p>Efetuando compra</p>
+                  </div>
+                )}
+                {!isPending && (
+                  <p>Finalizar compra</p>
+                )
+
+                }
+              </Button>
               <DrawerClose asChild>
                 <Button className="outline-none bg-white text-black hover:outline-none hover:bg-transparent hover:text-zinc-800 transition-all"
                   onClick={() => dispatch(limparCarrinho())}>

@@ -64,7 +64,7 @@ const CartDialog = () => {
                   </DialogClose>
                   <Button onClick={handleComprarMedicamentos}>
                     {isPending && (
-                      <div className="flex justify-center items-center flex-row">
+                      <div className="flex gap-1 justify-center items-center flex-row">
                       <Loader className="animate-spin" />
                       <p>Efetuando compra</p>
                     </div>
