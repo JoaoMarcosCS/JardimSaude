@@ -6,6 +6,7 @@ import MedicamentosTable from "./components/tables/MedicamentosTable";
 import { useMedicamentosData } from "./hooks/useMedicamentosData";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import MedicamentosCard from "../(home)/components/cardsSecretaria/MedicamentosCard";
 
 const Estoque = () => {
   return (
@@ -30,7 +31,7 @@ const Estoque = () => {
         <Button className="bg-emerald-600">
           <Link href="/shopping">+Comprar</Link>
         </Button>
-
+      <MedicamentosCard/>
       </div>
       <MedicamentosTable hookFetchData={useMedicamentosData()}/>
     </section>

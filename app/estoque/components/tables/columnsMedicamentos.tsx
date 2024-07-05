@@ -5,6 +5,7 @@ import { ArrowUpDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import formatCurrency from "@/app/utils/formatCurrency"
 import { Medicamento } from "@/app/medicamentos/interfaces/medicamentoInterface"
+import FuncionarioCardDetails from "@/app/funcionarios/components/cards/FuncionarioCardDetails"
 
 export const columns: ColumnDef<Medicamento>[] = [
   {
@@ -29,7 +30,7 @@ export const columns: ColumnDef<Medicamento>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Nascimento
+          Valor unitário
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       )

@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import formatCurrency from "@/app/utils/formatCurrency"
 import { FuncionarioInterface } from "../../interfaces/funcionarioInterface"
 import { setProfissaoByNivel } from "../../utils/setProfissaoByNivel"
+import FuncionarioCardDetails from "../cards/FuncionarioCardDetails"
 
 export const columns: ColumnDef<FuncionarioInterface>[] = [
   {
@@ -22,25 +23,6 @@ export const columns: ColumnDef<FuncionarioInterface>[] = [
         </Button>
       )
     },
-  },
-  {
-    accessorKey: "nascimento",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Nascimento
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-    cell: ({ row }) => {
-      const dataNaoFormatada = new Date(row.getValue("nascimento"));
-      const dataFormatada = dataNaoFormatada.toLocaleDateString();
-      return <div>{dataFormatada}</div>;
-    }
   },
   {
     accessorKey: "cpf",
@@ -143,7 +125,7 @@ export const columns: ColumnDef<FuncionarioInterface>[] = [
     id: "actions",
     cell: ({ row }) => {
       return (
-        <>+</>
+        <FuncionarioCardDetails funcionario={row.original}/>
       )
     },
   }

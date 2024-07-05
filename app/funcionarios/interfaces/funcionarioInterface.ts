@@ -11,4 +11,5 @@ export interface FuncionarioInterface{
   nivel:number;
   empregado:boolean;
   especialidade?: EspecialidadeInterface;
+  pagamento?: Auditoria[]
 }
