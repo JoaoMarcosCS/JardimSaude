@@ -9,7 +9,7 @@ const LogoutDialog = () => {
 
   const router = useRouter();
 
-  const handleLogout = () => {
+  const HandleLogout = () => {
     useLogoutService(router);
   }
 
@@ -30,7 +30,7 @@ const LogoutDialog = () => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel className="bg-green-400 text-white">Voltar</AlertDialogCancel>
-          <AlertDialogAction className="bg-red-400 text-white" onClick={handleLogout}>Sair</AlertDialogAction>
+          <AlertDialogAction className="bg-red-400 text-white" onClick={HandleLogout}>Sair</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
