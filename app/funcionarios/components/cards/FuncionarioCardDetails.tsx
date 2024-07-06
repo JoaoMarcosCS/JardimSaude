@@ -13,6 +13,7 @@ import fetchFuncionarioDetails from "../../services/fetchFuncionarioDetails";
 import { FuncionarioInterface } from "../../interfaces/funcionarioInterface";
 import formatCurrency from "@/app/utils/formatCurrency";
 import PagamentoCard from "./PagamentosCard";
+import DemitirAlert from "./demitirAlert";
 
 interface FuncionarioCardDetailsProps {
   funcionario: FuncionarioInterface;
@@ -23,11 +24,11 @@ const FuncionarioCardDetails = ({ funcionario }: FuncionarioCardDetailsProps) =>
 
   const [isOpen, setIsOpen] = useState(false);
 
+
   const openDialog = () => {
     setIsOpen(true);
   };
-  const tets = JSON.stringify(funcionario);
-  console.log(`\n----------\n${tets}\n--------------------`)
+
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -39,7 +40,7 @@ const FuncionarioCardDetails = ({ funcionario }: FuncionarioCardDetailsProps) =>
           <DialogTitle className="text-emerald-400 flex-col flex">
             <h1 className="w-full text-center">{funcionario.name}</h1>
             <div className="w-full flex justify-center gap-3 mt-2 items-center">
-              <Button variant={"destructive"}>Demitir</Button>
+              <DemitirAlert nome={funcionario.name} id={funcionario.id}/>
             </div>
           </DialogTitle>
         </DialogHeader>

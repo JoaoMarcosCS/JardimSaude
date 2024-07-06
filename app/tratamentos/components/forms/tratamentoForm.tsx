@@ -30,7 +30,7 @@ const TratamentoForm = () => {
   return (
     <>
       {isLoading ? (
-        <div className="flex items-center justify-center flex-col mt-2">
+        <div className="flex items-center justify-center flex-col">
           <h1 className="text-green-500 text-2xl">Criando formulário</h1>
           <Loader2 className="animate-spin mr-2 h-4 w-4 text-green-500" />
         </div>

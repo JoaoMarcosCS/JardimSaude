@@ -10,11 +10,6 @@ const LogoutDialog = () => {
   const router = useRouter();
 
   const handleLogout = () => {
-    // Cookie.remove("auth_token");
-    // Cookie.remove("nivel");
-    // delete api.defaults.headers.Authorization;
-    // push("/login");
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useLogoutService(router);
   }
 

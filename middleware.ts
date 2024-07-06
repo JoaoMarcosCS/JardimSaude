@@ -13,22 +13,27 @@ export default function middleware(request: NextRequest) {
     return NextResponse.redirect(loginPath);
   }
 
-  if(request.nextUrl.pathname === "/tratamentos/novo" && nivel != "1"){
+  if (request.nextUrl.pathname === "/tratamentos/novo" && nivel != "1") {
     const tratamentosPath = new URL("/tratamentos", request.url);
     return NextResponse.redirect(tratamentosPath);
   }
 
-  if(request.nextUrl.pathname === "/funcionarios/*" && nivel != "1"){
+  if (request.nextUrl.pathname === "/funcionarios/novo" && nivel != "1") {
     const tratamentosPath = new URL("/", request.url);
     return NextResponse.redirect(tratamentosPath);
   }
 
-  if(request.nextUrl.pathname === "/shopping" && nivel != "1"){
+  if (request.nextUrl.pathname === "/funcionarios" && nivel != "1") {
+    const tratamentosPath = new URL("/", request.url);
+    return NextResponse.redirect(tratamentosPath);
+  }
+
+  if (request.nextUrl.pathname === "/shopping" && nivel != "1") {
     const homePath = new URL("/", request.url);
     return NextResponse.redirect(homePath);
   }
 
-  if(request.nextUrl.pathname === "/estoque" && nivel != "1"){
+  if (request.nextUrl.pathname === "/estoque" && nivel != "1") {
     const homePath = new URL("/", request.url);
     return NextResponse.redirect(homePath);
   }
@@ -38,5 +43,13 @@ export default function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/","/tratamentos", "/tratamentos/novo", "/shopping", "/contato"]
+  matcher: [
+    "/",
+    "/tratamentos",
+    "/tratamentos/novo",
+    "/shopping",
+    "/contato",
+    "/funcionarios",
+    "/funcionarios/novo"
+  ]
 }
