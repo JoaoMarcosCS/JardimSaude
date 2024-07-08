@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import AOS from "aos"
 import "aos/dist/aos.css"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ArrowBigLeft, ArrowBigRight, Fingerprint, Loader2, Lock, Send, SendHorizontal, UserCog } from "lucide-react";
 import { LabelStep } from "./labelStep";
 import { PatternFormat } from "react-number-format";
@@ -17,11 +17,11 @@ const FuncionarioForm = () => {
   const { next, previous, currentStep } = useMultiPartFormHandlers()
 
   const selectedCargo = watch('nivel');
+  const fields = watch();
 
   useEffect(() => {
     AOS.init({});
   }, [])
-
 
   return (
     <>
@@ -131,8 +131,8 @@ const FuncionarioForm = () => {
               <div data-aos="fade-left">
                 <InputField>
                   <Label htmlFor="nome">Senha</Label>
-                  <Input id="nome" type="text" placeholder="João Marcos" {...register("name")} />
-                  <Label htmlFor="nome" className="text-red-600">{errors.name?.message}</Label>
+                  <Input id="nome" type="text" placeholder="JMCS2024" {...register("senha")} />
+                  <Label htmlFor="nome" className="text-red-600">{errors.senha?.message}</Label>
                 </InputField>
               </div>
             )
@@ -144,8 +144,8 @@ const FuncionarioForm = () => {
               </p>
 
             </Button>
-            <Button type={currentStep === 4 ? "submit" : "button"} variant={"outline"} onClick={next}>
-              {currentStep === 4
+            <Button type={currentStep === 3 ? "submit" : "button"} variant={"outline"} onClick={next}>
+              {currentStep === 3
                 ? (<p className="flex flex-row items-center gap-1">Enviar<Send /></p>)
                 : (<p className="flex flex-row items-center gap-1">Próximo<ArrowBigRight /></p>)}
             </Button>
