@@ -122,7 +122,8 @@ const TratamentoForm = () => {
               <PatternFormat
                 format="###.###.###-##"
                 placeholder="123.456.789-09"
-                className="border shadow ps-2 rounded border-emerald-100" id="cpf" onChange={handleCPFChange}
+                className="border shadow ps-2 rounded border-emerald-100" id="cpf"
+                onChange={handleCPFChange}
               />
               <Label >Paciente escolhido: {paciente ? (<>{paciente.nome}</>) : (<>Nenhum paciente encontrado</>)}</Label>
             </div>

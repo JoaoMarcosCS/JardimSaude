@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export const useMultiPartFormHandlers = () => {
-  const STEPS_LIMIT = 3;
+  const STEPS_LIMIT = 4;
   const [currentStep, setCurrentStep] = useState(1);
 
   const next = () => {
