@@ -10,7 +10,7 @@ export const FuncionarioFormSchema = z.object({
   crm: z.string({}).min(10, "O CRM está incompleto").optional(),
   cpf: z.string().min(11, "O CPF está incompleto").optional(),
   nivel: z.number({required_error:"Escolha um cargo"}).min(1, "Escolha um cargo para o novo funcionário"),
-  senha: z.string().min(6, "A senha deve ter no mínimo 6 caracteres"),
+  senha: z.string().min(8, "A senha deve ter no mínimo 8 caracteres"),
   id_especialidade: z.number().min(1, "Selecione uma especialdidade").optional()
 });
 

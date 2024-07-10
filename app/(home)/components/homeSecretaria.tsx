@@ -5,6 +5,10 @@ import PacientesCard from "./cardsSecretaria/PacientesCard";
 import TratamentosCard from "./cardsSecretaria/TratamentosCard";
 import TratamentoTable from "../../tratamentos/components/TratamentoTable"
 import { useTratamentosData } from "@/app/tratamentos/hooks/useTratamentosData";
+import FuncionariosTable from "@/app/funcionarios/components/tables/FuncionariosTable";
+import MedicamentosTable from "@/app/estoque/components/tables/MedicamentosTable";
+import { useMedicamentosData } from "@/app/estoque/hooks/useMedicamentosData";
+import { useFuncionariosData } from "@/app/funcionarios/hooks/useFuncionariosData";
 
 const HomeSecretaria = () => {
 
@@ -26,6 +30,18 @@ const HomeSecretaria = () => {
         <h1 className="font-bold text-2xl text-green-500">Tratamentos</h1>
       </div>
       <TratamentoTable hookFetchData={useTratamentosData()}/>
+      </div>
+      <div className="container mt-4">
+      <div className="flex flex-row items-center gap-4">
+        <h1 className="font-bold text-2xl text-green-500">Funcionários</h1>
+      </div>
+      <FuncionariosTable hookFetchData={useFuncionariosData()}/>
+      </div>
+      <div className="container mt-4">
+      <div className="flex flex-row items-center gap-4">
+        <h1 className="font-bold text-2xl text-green-500">Estoque de medicamentos</h1>
+      </div>
+      <MedicamentosTable hookFetchData={useMedicamentosData()}/>
       </div>
     </section>
 

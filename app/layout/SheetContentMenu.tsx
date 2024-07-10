@@ -68,15 +68,6 @@ const SheetContentMenu = () => {
 
         </li>
         <li className="flex flex-row items-center ">
-          <ActiveLink directionTooltip="right" href="/financeiro" tooltipText="Financeiro">
-            <LineChart />
-          </ActiveLink>
-          <ActiveLink directionTooltip="right" href="/financeiro" tooltipText="Financeiro">
-            <p className="text-base tracking-wide font-medium">Financeiro</p>
-          </ActiveLink>
-
-        </li>
-        <li className="flex flex-row items-center ">
           <ActiveLink directionTooltip="right" href="/shopping" tooltipText="Shopping">
             <Store />
           </ActiveLink>
