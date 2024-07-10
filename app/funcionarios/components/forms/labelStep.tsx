@@ -9,7 +9,7 @@ export interface LabelStepProps {
 export const LabelStep = ({ children, currentStep, activeStep }: LabelStepProps) => {
   return (
     <div className={`flex w-1/3 items-start justify-center flex-col `}>
-      <p className={`flex gap-1 mb-2 flex-row ${currentStep >= activeStep
+      <p className={`flex gap-1 mb-2 flex-row max-sm:hidden ${currentStep >= activeStep
         ? 'text-black '
         : 'text-muted-foreground'
         } w-full items-center transition-all`}>

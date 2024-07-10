@@ -13,7 +13,16 @@ import { PatternFormat } from "react-number-format";
 import { useWatch } from "react-hook-form";
 
 const FuncionarioForm = () => {
-  const { register, errors, watch, data, isLoading, handleSubmit, handleNascimentoChange, handleCreateFuncionario } = useFuncionarioFormHandlers();
+  const { register, errors, watch,
+    handleCPFChange,
+    handleCRMChange,
+    data, isLoading,
+    handleSubmit,
+    handleNascimentoChange,
+    handleCreateFuncionario,
+    handleSalarioChange,
+    crm
+  } = useFuncionarioFormHandlers();
   const { next, previous, currentStep } = useMultiPartFormHandlers()
 
   const selectedCargo = watch('nivel');
@@ -57,7 +66,7 @@ const FuncionarioForm = () => {
                     format="###.###.###-##"
                     placeholder="123.456.789-09"
                     className="border shadow ps-2 rounded py-1.5 border-emerald-100" id="cpf"
-                    {...register("cpf")}
+                    onChange={handleCPFChange}
                   />
                   <Label htmlFor="cpf" className="text-red-600">{errors.cpf?.message}</Label>
                 </InputField>
@@ -70,8 +79,8 @@ const FuncionarioForm = () => {
                   <Label htmlFor="nascimento">Nascimento</Label>
                   <Input className="border shadow ps-2 rounded border-emerald-100"
                     id="nascimento" type="date" placeholder="18/04/2005"
-                    // onChange={handleNascimentoChange}
-                    {...register("nascimento", { valueAsDate: true })}
+                    onChange={handleNascimentoChange}
+                  // {...register("nascimento", { valueAsDate: true })}
                   />
                   <Label htmlFor="nascimento" className="text-red-600">{errors.nascimento?.message}</Label>
                 </InputField>
@@ -90,27 +99,39 @@ const FuncionarioForm = () => {
                   </select>
                   <Label htmlFor="cargo" className="text-red-600">{errors.nivel?.message}</Label>
                 </InputField>
+                <InputField>
+                  <Label htmlFor="salario">Salário</Label>
+                  <input
+                    type="number"
+                    className="border-b-2 ms-1 border-emerald-100 ps-1"
+                    {...register('salario', { valueAsNumber:true })}
 
+                  />
+                  <Label htmlFor="salario" className="text-red-600">{errors.salario?.message}</Label>
+                </InputField>
                 {selectedCargo == 2 && (
                   <div>
                     <InputField>
                       <Label htmlFor="crm">CRM</Label>
-                      <PatternFormat
-                        format="###.##.#####"
+                      <Input className="border shadow ps-2 rounded  border-emerald-100"
+                        id="nome" type="text"
                         placeholder="CRM-SP-12345"
-                        className="border shadow ps-2 rounded py-1.5 border-emerald-100" id="crm"
-                        {...register("crm")}
+                        onChange={handleCRMChange}
+                        value={crm}
                       />
                       <Label htmlFor="cargo" className="text-red-600">{errors.crm?.message}</Label>
                     </InputField>
                     <InputField>
                       <Label htmlFor="">Especialidade</Label>
-                      <select id="cargo" className="shadow p-2 border border-emerald-100 rounded">
+                      <select id="cargo"
+                        className="shadow p-2 border border-emerald-100 rounded"
+                        {...register("id_especialidade", {valueAsNumber:true})}
+                      >
                         <option value="">Selecione uma especialdiade</option>
                         {
                           data!?.length > 0 ? (
                             data?.map((especialidade) => (
-                              <option key={especialidade.id} value={especialidade.nome}>
+                              <option key={especialidade.id} value={especialidade.id}>
                                 {especialidade.nome}
                               </option>
                             ))
@@ -119,7 +140,7 @@ const FuncionarioForm = () => {
                           )
                         }
                       </select>
-                      <Label htmlFor="cargo" className="text-red-600">{errors.idEspecialdiade?.message}</Label>
+                      <Label htmlFor="cargo" className="text-red-600">{errors.id_especialidade?.message}</Label>
                     </InputField>
                   </div>
                 )}
@@ -144,11 +165,18 @@ const FuncionarioForm = () => {
               </p>
 
             </Button>
-            <Button type={currentStep === 3 ? "submit" : "button"} variant={"outline"} onClick={next}>
-              {currentStep === 3
-                ? (<p className="flex flex-row items-center gap-1">Enviar<Send /></p>)
-                : (<p className="flex flex-row items-center gap-1">Próximo<ArrowBigRight /></p>)}
-            </Button>
+            {
+              currentStep === 3 ? (
+                <Button type="submit" variant={"outline"} onClick={() => console.log(JSON.stringify(fields))}>
+                  Contratar
+                </Button>
+              ) : (
+                <Button type="button" variant={"outline"} onClick={next}>
+                  Próximo<ArrowBigRight />
+                </Button>
+              )
+            }
+
           </footer>
         </form >
       )
