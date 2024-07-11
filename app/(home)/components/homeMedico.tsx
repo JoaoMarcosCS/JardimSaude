@@ -8,6 +8,7 @@ import TratamentoTable from "@/app/tratamentos/components/TratamentoTable";
 import { useTratamentosEmAndamentoDataByMedicoId } from "@/app/tratamentos/hooks/useTratamentosEmAndamentoDataByMedicoId";
 import { useTratamentosFinalizadosDataByMedicoId } from "@/app/tratamentos/hooks/useTratamentosFinalizadosDataByMedicoId";
 import { useTratamentosCanceladosDataByMedicoId } from "@/app/tratamentos/hooks/useTratamentosCanceladosDataByMedicoId";
+import TotalPacientesCard from "@/app/pacientes/components/cards/TotalPacientesCard";
 
 const HomeMedico = () => {
 
@@ -23,6 +24,7 @@ const HomeMedico = () => {
           <CardTotalTratamentosEmAndamento />
           <CardTotalTratamentosFinalizados />
           <CardTotalTratamentosCancelados />
+          <TotalPacientesCard/>
         </div>
       </div>
       <br />

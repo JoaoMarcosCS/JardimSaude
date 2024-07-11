@@ -57,7 +57,8 @@ const FuncionarioForm = () => {
               <div data-aos="fade-left">
                 <InputField>
                   <Label htmlFor="nome">Nome</Label>
-                  <Input className="border shadow ps-2 rounded  border-emerald-100" id="nome" type="text" placeholder="João Marcos" {...register("name")} />
+                  <Input className="border shadow ps-2 rounded  border-emerald-100"
+                  id="nome" type="text" placeholder="João Marcos" {...register("name")} />
                   <Label htmlFor="nome" className="text-red-600">{errors.name?.message}</Label>
                 </InputField>
                 <InputField>
@@ -104,7 +105,7 @@ const FuncionarioForm = () => {
                   <input
                     type="number"
                     className="border-b-2 ms-1 border-emerald-100 ps-1"
-                    {...register('salario', { valueAsNumber:true })}
+                    {...register('salario', { valueAsNumber: true })}
 
                   />
                   <Label htmlFor="salario" className="text-red-600">{errors.salario?.message}</Label>
@@ -125,7 +126,7 @@ const FuncionarioForm = () => {
                       <Label htmlFor="">Especialidade</Label>
                       <select id="cargo"
                         className="shadow p-2 border border-emerald-100 rounded"
-                        {...register("id_especialidade", {valueAsNumber:true})}
+                        {...register("id_especialidade", { valueAsNumber: true })}
                       >
                         <option value="">Selecione uma especialdiade</option>
                         {
