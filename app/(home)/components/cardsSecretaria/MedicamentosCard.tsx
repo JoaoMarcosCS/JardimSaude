@@ -21,8 +21,7 @@ const MedicamentosCard = () => {
           dataToDisplay={data}
           icon={<><Pill size={35} /></>}
         >
-          <Link href={"#"}>Ver medicamentos</Link>
-          <Link href={"#"}>Histórico de compras</Link>
+          <Link href={"/estoque"}>Ver medicamentos</Link>
         </CardDashboard>
       )}
     </>

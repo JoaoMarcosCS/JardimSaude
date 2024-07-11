@@ -34,11 +34,14 @@ const Tratamentos = () => {
           </Breadcrumb>
         </div>
         {nivel === 1 &&
+        <>
           <Button className="bg-emerald-600 text-sm">
             <Link href="/tratamentos/novo">+Novo</Link>
           </Button>
+          <TratamentosCard/>
+        </>
         }
-        <TratamentosCard/>
+
       </div>
       {nivel === 1 ? (
         <TratamentoSecretaria />

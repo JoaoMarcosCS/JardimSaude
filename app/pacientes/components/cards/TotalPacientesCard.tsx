@@ -1,13 +1,12 @@
 import { SquareUser } from "lucide-react";
 import Link from "next/link";
-import { useTotalPacientes } from "@/app/(home)/hooks/useTotalPacientes";
-
-import CardDashboard from "./CardDashboard";
 import CardSkeleton from "@/app/skeletons/cardSkeleton";
+import { useTotalPacientesByMedicoId } from "../../hooks/useTotalPacientesByMedicoId";
+import CardDashboard from "@/app/(home)/components/cardsSecretaria/CardDashboard";
 
-const PacientesCard = () => {
+const TotalPacientesCard = () => {
 
-  const { data, isLoading } = useTotalPacientes();
+  const { data, isLoading } = useTotalPacientesByMedicoId();
 
   return (
     <>
@@ -16,7 +15,7 @@ const PacientesCard = () => {
       ) : (
         <CardDashboard
           title="Pacientes"
-          tooltipTextHelp={"Representa a quantidade de pacientes que já foram atendidos por nossa instaituição."}
+          tooltipTextHelp={"Representa a quantidade de pacientes que já você já atendeu."}
           color={"text-emerald-500"}
           description={"Pacientes que já foram atendidos"}
           dataToDisplay={data}
@@ -29,4 +28,4 @@ const PacientesCard = () => {
   )
 }
 
-export default PacientesCard
+export default TotalPacientesCard

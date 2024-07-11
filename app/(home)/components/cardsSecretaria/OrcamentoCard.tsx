@@ -21,9 +21,8 @@ const OrcamentoCard = () => {
           description={"Saldo disponível para operações"}
           dataToDisplay={orcamento}
         >
-          <Link href={"#"} >Transações financeiras</Link>
-          <Link href={"#"}>Funcionários</Link>
-          <Link href={"#"}>Estoque</Link>
+          <Link href={"/funcionarios"}>Funcionários</Link>
+          <Link href={"/estoque"}>Estoque</Link>
         </CardDashboard>
       )}
     </>

@@ -24,6 +24,7 @@ const FuncionarioCardDetails = ({ funcionario }: FuncionarioCardDetailsProps) =>
 
   const [isOpen, setIsOpen] = useState(false);
 
+  const nascimentoString = funcionario.nascimento.toString();
 
   const openDialog = () => {
     setIsOpen(true);
@@ -46,6 +47,8 @@ const FuncionarioCardDetails = ({ funcionario }: FuncionarioCardDetailsProps) =>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <CardItem label={"Nome"} value={funcionario.name} />
+          <hr />
+          <CardItem label="Nascimento" value={nascimentoString}/>
           <hr />
           <CardItem label="CPF" value={funcionario.cpf} />
           <hr />

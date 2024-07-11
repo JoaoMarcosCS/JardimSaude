@@ -33,6 +33,6 @@
       "@utils/*":["./app/utils/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/pacientes/hooks/usePacientesByMedicoIdDatats"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/pacientes/hooks/usePacientesByMedicoIdData.ts"],
   "exclude": ["node_modules"]
 }

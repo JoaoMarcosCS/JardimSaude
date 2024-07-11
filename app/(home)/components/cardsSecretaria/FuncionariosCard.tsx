@@ -21,7 +21,6 @@ const FuncionariosCard = () => {
           dataToDisplay={data}
           icon={<><Users size={35} /></>}
         >
-          <Link href={"#"} >Histórico de pagamentos</Link>
           <Link href={"/funcionarios"} >Ver funcionários</Link>
           <Link href={"/funcionarios/novo"} >Contratar</Link>
         </CardDashboard>
