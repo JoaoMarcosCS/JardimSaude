@@ -10,6 +10,9 @@ import PacientesTable from "./components/tables/PacientesTable";
 import { usePacientesByMedicoIdData } from "./hooks/usePacientesByMedicoIdData";
 import { usePacientesData } from "./hooks/usePacientesData";
 import TotalPacientesCard from "./components/cards/TotalPacientesCard";
+import PacienteSecretaria from "./screens/pacientesSecretaria";
+import PacienteMedico from "./screens/pacientesMedico";
+import PacientesMedico from "./screens/pacientesMedico";
 
 const Pacientes = () => {
 
@@ -50,9 +53,9 @@ const Pacientes = () => {
       </div>
       {
         nivel === 1 ? (
-          <PacientesTable hookFetchData={usePacientesData()} />
+          <PacienteSecretaria/>
         ) : (
-          <PacientesTable hookFetchData={usePacientesByMedicoIdData()} />
+          <PacientesMedico/>
         )
       }
     </section>
