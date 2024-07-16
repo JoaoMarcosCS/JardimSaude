@@ -23,7 +23,7 @@ const FuncionarioForm = () => {
     handleSalarioChange,
     crm
   } = useFuncionarioFormHandlers();
-  const { next, previous, currentStep } = useMultiPartFormHandlers()
+  const { next, previous, currentStep } = useMultiPartFormHandlers(3)
 
   const selectedCargo = watch('nivel');
   const fields = watch();
@@ -40,7 +40,7 @@ const FuncionarioForm = () => {
           <Loader2 className="animate-spin mr-2 h-4 w-4 text-green-500" />
         </div>
       ) : (
-        <form action="" className="rounded p-5 max-sm:w-full w-[600px]" onSubmit={handleSubmit(handleCreateFuncionario)}>
+        <form action="" className="rounded p-5 max-sm:w-full mt-2 w-[600px]" onSubmit={handleSubmit(handleCreateFuncionario)}>
           <div className="w-full flex justify-around gap-4">
             <LabelStep activeStep={1} currentStep={currentStep}>
               <Fingerprint /> Dados pessoais
@@ -168,7 +168,7 @@ const FuncionarioForm = () => {
             </Button>
             {
               currentStep === 3 ? (
-                <Button type="submit" variant={"outline"} onClick={() => console.log(JSON.stringify(fields))}>
+                <Button type="submit" variant={"outline"}>
                   Contratar
                 </Button>
               ) : (

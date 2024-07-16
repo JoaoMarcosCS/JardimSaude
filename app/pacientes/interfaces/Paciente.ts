@@ -6,7 +6,6 @@ export interface Paciente {
   altura: string,
   uf: string,
   cidade: string,
-  bairro: string,
   rua: string,
   sexo: string,
   telefone: string,
