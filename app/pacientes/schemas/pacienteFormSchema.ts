@@ -11,7 +11,10 @@ export const pacienteFormSchema = z.object({
     required_error: "CPF é obrigatório.",
     invalid_type_error: "CPF incorreto."
   })
-    .regex(/^\d+(\.\d+)?$/, "A altura só pode conter números")
+    .refine((cpf) => {
+      const formattedCpf = cpf.replace(/\D/g, '');
+      return !!Number(formattedCpf);
+    }, 'CPF deve conter apenas números.')
     .refine((cpf) => {
       const formattedCpf = cpf.replace(/\D/g, '');
       return formattedCpf.length >= 11;
@@ -20,6 +23,7 @@ export const pacienteFormSchema = z.object({
   altura: z.string({
     required_error: "Altura obrigatória",
   })
+    .max(4, "A altura deve conter no máximo 3 casas decimais")
     .regex(/^\d+(\.\d+)?$/, "A altura só pode conter números"
     ),
 
@@ -42,14 +46,15 @@ export const pacienteFormSchema = z.object({
 
   telefone: z.string({
     required_error: "Telefone obirgatório"
-  })
-    .regex(/^\d+(\.\d+)?$/, "O telefone só pode conter números."),
+  }),
 
   email: z.string({
     required_error: "Email obrigatório"
   }).email("Insira um email válido"),
 
-  nasicmento: z.string({
+  nascimento: z.date({
     required_error: "Data de nascimento obrigatória"
   })
 })
+
+export type PacienteFormProps = z.infer<typeof pacienteFormSchema>;

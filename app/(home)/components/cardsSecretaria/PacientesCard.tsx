@@ -23,6 +23,7 @@ const PacientesCard = () => {
           icon={<><SquareUser size={35} /></>}
         >
           <Link href={"/pacientes"} >Ver pacientes</Link>
+          <Link href={"/pacientes/novo"}>Cadastrar</Link>
         </CardDashboard>
       )}
     </>
