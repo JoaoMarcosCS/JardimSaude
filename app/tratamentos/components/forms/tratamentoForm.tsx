@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { PatternFormat } from "react-number-format"
 import useFormNovoTratamentioHandlers from "../../hooks/useFormNovoTratamentoHandlers";
+import { TratamentoPrice } from "./inputs/TratamentoPrice";
 
 const TratamentoForm = () => {
 
@@ -25,6 +26,8 @@ const TratamentoForm = () => {
     handleCPFChange,
     handleValorTratamentoChange,
     handleTratamentoSubmit,
+    isSearchingCPF,
+    control
   } = useFormNovoTratamentioHandlers();
 
   return (
@@ -101,20 +104,20 @@ const TratamentoForm = () => {
             }
             <br />
             <div className="flex flex-col mt-4 gap-2">
-              <Label htmlFor="valorTratamento">Valor do tratamento</Label>
+              <Label htmlFor="valorTratamento">Valor do tratamento (R$)</Label>
               <div>
-                <Label htmlFor="valorTratamento" className="">R$</Label>
-                <input
-                type="text"
-                className="border-b-2 ms-1 border-emerald-100 ps-1"
-                {...register('valor', { onChange:  handleValorTratamentoChange})}
-                id="valorTratamento"
-                pattern="[0-9]*"
-                inputMode="numeric"
-              />
+                {/* <input
+                  type="text"
+                  className="border-b-2 ms-1 border-emerald-100 ps-1"
+                  {...register('valor', { onChange: handleValorTratamentoChange })}
+                  id="valorTratamento"
+                  pattern="[0-9]*"
+                  inputMode="numeric"
+                /> */}
+                <TratamentoPrice name="valor" error={errors.valor} control={control}/>
               </div>
 
-              <Label htmlFor="valorTratamento" className="text-red-600">{errors.valor?.message}</Label>
+              {/* <Label htmlFor="valorTratamento" className="text-red-600">{errors.valor?.message}</Label> */}
             </div>
             <div className="flex flex-col mt-4 gap-2">
               <Label htmlFor="cpf">CPF do paciente</Label>
@@ -125,7 +128,20 @@ const TratamentoForm = () => {
                 className="border shadow ps-2 rounded border-emerald-100" id="cpf"
                 onChange={handleCPFChange}
               />
-              <Label >Paciente escolhido: {paciente ? (<>{paciente.nome}</>) : (<>Nenhum paciente encontrado</>)}</Label>
+              <Label className="flex flex-row items-center">Paciente escolhido:
+                {isSearchingCPF ? (
+                  <><Loader2 className="animate-spin" size={10} /></>
+                ) : (
+                  paciente ? (
+                    <>{paciente.nome}</>
+                  ) : (
+                    <>Nenhum paciente encontrado,
+                      <Link href="/pacientes/novo" className="text-emerald-400 ps-1">cadastre-o</Link>
+                    </>
+                  )
+                )
+                }
+              </Label>
             </div>
             <br />
             <div className="flex flex-col mt-4 gap-2">

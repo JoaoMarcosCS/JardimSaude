@@ -2,6 +2,9 @@ import { useForm } from "react-hook-form"
 import { PacienteFormProps, pacienteFormSchema } from "../schemas/pacienteFormSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { toast } from "sonner"
+import { useMutation } from "@tanstack/react-query"
+import { useCreatePacienteMutate } from "./useCreatePacienteMutate"
+import { useRouter } from "next/navigation"
 
 export const usePacienteFormHandlers = () => {
   const {
@@ -19,9 +22,15 @@ export const usePacienteFormHandlers = () => {
     reValidateMode:"onChange"
   })
 
+  const {mutate, isSuccess} = useCreatePacienteMutate();
+  const {push} = useRouter();
+
   const handleCreatePaciente = async (data: PacienteFormProps) => {
-    console.log(data);
-    toast.info(JSON.stringify(data));
+    mutate(data);
+    if(isSuccess){
+      toast.success("Paciente cadastrado!");
+      push('/pacientes');
+    }
   }
 
   return {

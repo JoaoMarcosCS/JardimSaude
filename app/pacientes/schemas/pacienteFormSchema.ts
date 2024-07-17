@@ -18,7 +18,8 @@ export const pacienteFormSchema = z.object({
     .refine((cpf) => {
       const formattedCpf = cpf.replace(/\D/g, '');
       return formattedCpf.length >= 11;
-    }, 'CPF deve conter 11 caracteres.'),
+    }, 'CPF deve conter 11 caracteres.')
+    .transform((cpf) => cpf.replace(/\D/g, '')),
 
   altura: z.string({
     required_error: "Altura obrigatória",
@@ -29,7 +30,10 @@ export const pacienteFormSchema = z.object({
 
   uf: z.string({
     required_error: "Unidade Federal é obrigatório"
-  }).regex(/^[a-zA-Z]+$/, "A Unidade Federal só pode conter letras"),
+  }).max(2, "A sigla da Unidade Federal só pode ter duas letras")
+  .min(2, "A sigla da Unidade Federal deve ter no minímo duas letras")
+  .regex(/^[a-zA-Z]+$/, "A Unidade Federal só pode conter letras")
+  .transform((uf) => uf.toUpperCase()),
 
   cidade: z.string({
     required_error: "Cidade é obrigatória"

@@ -13,7 +13,7 @@ import findPacienteByCPF from "../services/findPacienteByCPF";
 import medicosFiltredByEspecialidade from "../utils/MedicosFiltredByEspecialidade";
 
 const useFormNovoTratamentioHandlers = () => {
-  const { handleSubmit, register, formState: { errors }, setValue  } = useForm<TratamentoFormProps>({
+  const { handleSubmit, register, formState: { errors }, setValue, control  } = useForm<TratamentoFormProps>({
     mode: "all",
     reValidateMode: "onChange",
     resolver: zodResolver(schemaTratamentoForm)
@@ -25,6 +25,7 @@ const useFormNovoTratamentioHandlers = () => {
   const [selectedMedico, setSelectedMedico] = useState("");
   const [paciente, setPaciente] = useState<PacienteInterface | null>();
   const [cpf, setCPF] = useState("");
+  const [isSearchingCPF, setIsSearchingCPF] = useState(false);
   const { push } = useRouter();
 
   const handleSelectEspecialidade = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -57,8 +58,10 @@ const useFormNovoTratamentioHandlers = () => {
     }
 
     const getPacienteByCPF = async () => {
+      setIsSearchingCPF(true);
       const response = await findPacienteByCPF(cpf);
       setPaciente(response);
+      setIsSearchingCPF(false);
     }
 
     if (selectedEspecialidade) {
@@ -91,7 +94,9 @@ const useFormNovoTratamentioHandlers = () => {
     medicosFiltrados,
     selectedMedico,
     handleSelectMedico,
+    isSearchingCPF,
     paciente,
+    control,
     cpf,
     setValue,
     handleCPFChange,

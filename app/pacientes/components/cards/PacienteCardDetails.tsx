@@ -19,7 +19,8 @@ const PacienteCardDetails = ({ paciente }: PacienteCardDetailsProps) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log(JSON.stringify(paciente))
+  const unformattedBirthDay = new Date(paciente.nascimento);
+  const formattedBirthDay = unformattedBirthDay.toLocaleDateString();
 
   const openDialog = () => {
     setIsOpen(true);
@@ -49,7 +50,7 @@ const PacienteCardDetails = ({ paciente }: PacienteCardDetailsProps) => {
           <hr />
           <CardItem label="Telefone" value={paciente.telefone} />
           <hr />
-          <CardItem label="Nascimento" value={paciente.nascimento} />
+          <CardItem label="Nascimento" value={formattedBirthDay} />
           <hr />
           <CardItem label="Cidade" value={`${paciente.cidade}, ${paciente.uf}`} />
           <hr />
@@ -59,7 +60,7 @@ const PacienteCardDetails = ({ paciente }: PacienteCardDetailsProps) => {
             <h1 className="w-full">Histórico de tratamentos:</h1>
             {
               paciente.tratamentos ? (
-                <div >
+                <div>
                   {
                     paciente.tratamentos.map((tratamento) => (
                       <div key={tratamento.id}
