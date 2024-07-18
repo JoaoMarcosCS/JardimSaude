@@ -1,15 +1,9 @@
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Loader2, MoreHorizontal } from "lucide-react";
-
-
-
-import { useEffect, useState } from "react";
-import { RootState } from "@/app/store/root-reducer";
-import { useSelector } from "react-redux";
+import { MoreHorizontal } from "lucide-react";
+import { useState } from "react";
 import CardItem from "./CardItem";
 import { setProfissaoByNivel } from "../../utils/setProfissaoByNivel";
-import fetchFuncionarioDetails from "../../services/fetchFuncionarioDetails";
 import { FuncionarioInterface } from "../../interfaces/funcionarioInterface";
 import formatCurrency from "@/app/utils/formatCurrency";
 import PagamentoCard from "./PagamentosCard";

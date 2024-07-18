@@ -10,6 +10,6 @@ export interface Medicamento {
   tipo:string;
   codigo: number;
   aplicacoes: AplicacaoMedicamento[];
-  historico_compras:any;
+  historico_compras:Auditoria[];
   quantidadeAplicada?:number//essa prop só será usada na aplicacao de um medicamento
 }

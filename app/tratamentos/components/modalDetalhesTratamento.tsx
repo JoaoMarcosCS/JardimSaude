@@ -5,19 +5,6 @@ import { MoreHorizontal } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { ptBR } from "date-fns/locale";
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-
-
-import {
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -26,7 +13,6 @@ import {
 
 import { format } from "date-fns";
 import { useState } from "react";
-import { useActionTratamentoMutate } from "../hooks/useActionTratamentoMutate";
 import { RootState } from "@/app/store/root-reducer";
 import { useSelector } from "react-redux";
 import setStatusColor from "../utils/setStatusColor";

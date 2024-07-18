@@ -5,7 +5,7 @@ import { ArrowUpDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import formatCurrency from "@/app/utils/formatCurrency"
 import { Medicamento } from "@/app/medicamentos/interfaces/medicamentoInterface"
-import FuncionarioCardDetails from "@/app/funcionarios/components/cards/FuncionarioCardDetails"
+import { MedicamentoCardDetails } from "../cards/MedicamentoCardDetails"
 
 export const columns: ColumnDef<Medicamento>[] = [
   {
@@ -96,7 +96,7 @@ export const columns: ColumnDef<Medicamento>[] = [
     id: "actions",
     cell: ({ row }) => {
       return (
-        <>+</>
+        <MedicamentoCardDetails medicamento={row.original}/>
       )
     },
   }
