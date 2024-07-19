@@ -4,6 +4,7 @@ import { FuncionarioInterface } from "@/app/funcionarios/interfaces/funcionarioI
 import { setProfissaoByNivel } from "@/app/funcionarios/utils/setProfissaoByNivel";
 import formatCurrency from "@/app/utils/formatCurrency";
 import { Button } from "@/components/ui/button";
+import { format } from "date-fns";
 import { Pen } from "lucide-react";
 import Link from "next/link";
 
@@ -12,13 +13,10 @@ export interface UserInfoPros {
 }
 
 export const UserInfo = ({ user }: UserInfoPros) => {
-  let formattedBirthDay = "Nascimento não encontrado";
 
+  const formattedBirthDay = format(user.nascimento, 'dd/MM/yyyy');
 
-  if(user.nascimento){
-    const unformattedBirthDay = new Date(user.nascimento);
-    formattedBirthDay = unformattedBirthDay.toLocaleDateString();
-  }
+  console.log("UseInfo: " + JSON.stringify(user));
 
   return (
     <div className=" max-sm:w-full w-[600px] rounded max-sm:shadow-none shadow p-4 mt-4">

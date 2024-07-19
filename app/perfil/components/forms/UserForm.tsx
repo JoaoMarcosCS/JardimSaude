@@ -1,11 +1,4 @@
-import CardItem from "@/app/funcionarios/components/cards/CardItem";
-import PagamentoCard from "@/app/funcionarios/components/cards/PagamentosCard";
 import { FuncionarioInterface } from "@/app/funcionarios/interfaces/funcionarioInterface"
-import { setProfissaoByNivel } from "@/app/funcionarios/utils/setProfissaoByNivel";
-import formatCurrency from "@/app/utils/formatCurrency";
-import { Button } from "@/components/ui/button";
-import { Pen } from "lucide-react";
-import Link from "next/link";
 import { usePerfilFormHandlers } from "../../hooks/usePerfilFormHandlers";
 import { InputField } from "@/app/funcionarios/components/inputs/inputField";
 import { Label } from "@/components/ui/label";
@@ -16,10 +9,8 @@ export interface UserFormPros {
 }
 
 export const UserForm = ({ user }: UserFormPros) => {
-  if (user.nascimento) {
-    const unformattedBirthDay = new Date(user.nascimento);
-    const formattedBirthDay = unformattedBirthDay.toLocaleDateString();
-  }
+
+  console.log("UseForm: " + JSON.stringify(user));
 
   const { register, handleEditPersonalData, handleSubmit, errors } = usePerfilFormHandlers(user);
 
