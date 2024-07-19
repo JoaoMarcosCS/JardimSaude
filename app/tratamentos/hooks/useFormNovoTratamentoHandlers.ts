@@ -79,6 +79,7 @@ const useFormNovoTratamentioHandlers = () => {
     data.inicio = new Date();
     data.status = "Em andamento";
     data.queixas = data.queixas || "Nenhuma queixa registrada";
+    console.log(JSON.stringify(data));
     await createTratamento(data);
     push("/tratamentos");
   }

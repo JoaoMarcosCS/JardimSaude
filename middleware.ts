@@ -79,6 +79,7 @@ export const config = {
     "/funcionarios",
     "/funcionarios/novo",
     "/pacientes",
-    "/pacientes/novo"
+    "/pacientes/novo",
+    "/perfil"
   ]
 }

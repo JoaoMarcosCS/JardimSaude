@@ -106,15 +106,15 @@ const TratamentoForm = () => {
             <div className="flex flex-col mt-4 gap-2">
               <Label htmlFor="valorTratamento">Valor do tratamento (R$)</Label>
               <div>
-                {/* <input
+                <input
                   type="text"
                   className="border-b-2 ms-1 border-emerald-100 ps-1"
                   {...register('valor', { onChange: handleValorTratamentoChange })}
                   id="valorTratamento"
                   pattern="[0-9]*"
                   inputMode="numeric"
-                /> */}
-                <TratamentoPrice name="valor" error={errors.valor} control={control}/>
+                />
+                {/* <TratamentoPrice name="valor" error={errors.valor} control={control}/> */}
               </div>
 
               {/* <Label htmlFor="valorTratamento" className="text-red-600">{errors.valor?.message}</Label> */}

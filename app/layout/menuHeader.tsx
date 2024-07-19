@@ -46,9 +46,12 @@ const Header = () => {
               (<p className="text-xl tracking-wide text-green-500 font-semibold hidden max-sm:flex">Jardim Saúde</p>)}
           </div>
           <ul className="flex justify-between items-center md:mr-10 px-4 gap-5">
-            {(nivel === 1) && <ActiveLink directionTooltip="bottom" href="" tooltipText="Seu carrinho"><Cart/></ActiveLink>}
+            {(nivel === 1) &&
+              <ActiveLink directionTooltip="bottom" href="" tooltipText="Seu carrinho">
+                <Cart />
+              </ActiveLink>}
             <LogoutDialog />
-            <ActiveLink directionTooltip="bottom" href="" tooltipText="Seu perfil"><CircleUserRound /> Perfil</ActiveLink>
+            <ActiveLink directionTooltip="bottom" href="/perfil" tooltipText="Seu perfil"><CircleUserRound /> Perfil</ActiveLink>
           </ul>
 
         </nav>

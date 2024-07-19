@@ -1,24 +1,25 @@
+
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { MoreHorizontal } from "lucide-react";
+import { CircleUserRound } from "lucide-react";
 import { useState } from "react";
-import CardItem from "./CardItem";
-import { setProfissaoByNivel } from "../../utils/setProfissaoByNivel";
-import { FuncionarioInterface } from "../../interfaces/funcionarioInterface";
+import CardItem from "@/app/funcionarios/components/cards/CardItem";
+import PagamentoCard from "@/app/funcionarios/components/cards/PagamentosCard";
+import { FuncionarioInterface } from "@/app/funcionarios/interfaces/funcionarioInterface";
+import { setProfissaoByNivel } from "@/app/funcionarios/utils/setProfissaoByNivel";
 import formatCurrency from "@/app/utils/formatCurrency";
-import PagamentoCard from "./PagamentosCard";
-import DemitirAlert from "./demitirAlert";
+import ActiveLink from "@/app/layout/activeLink";
 
-interface FuncionarioCardDetailsProps {
-  funcionario: FuncionarioInterface;
+interface UserCardDetailsProps {
+  user: FuncionarioInterface;
 }
 
 
-const FuncionarioCardDetails = ({ funcionario }: FuncionarioCardDetailsProps) => {
+export const UserCardDetails = ({ user }: UserCardDetailsProps) => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const unformattedBirthDay = new Date(funcionario.nascimento);
+  const unformattedBirthDay = new Date(user.nascimento);
   const formattedBirthDay = unformattedBirthDay.toLocaleDateString();
 
   const openDialog = () => {
@@ -29,49 +30,51 @@ const FuncionarioCardDetails = ({ funcionario }: FuncionarioCardDetailsProps) =>
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger onClick={openDialog} asChild className="hover:cursor-pointer">
-        <MoreHorizontal />
+        <ActiveLink directionTooltip="bottom" href="" tooltipText="Seu perfil">
+          <CircleUserRound /> Perfil
+        </ActiveLink>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] border rounded max-h-[450px] border-emerald-300 shadow overflow-y-scroll">
         <DialogHeader className="rounded">
           <DialogTitle className="text-emerald-400 flex-col flex">
-            <h1 className="w-full text-center">{funcionario.name}</h1>
+            <h1 className="w-full text-center">{user.name}</h1>
             <div className="w-full flex justify-center gap-3 mt-2 items-center">
-              <DemitirAlert nome={funcionario.name} id={funcionario.id}/>
+
             </div>
           </DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-          <CardItem label={"Nome"} value={funcionario.name} />
+          <CardItem label={"Nome"} value={user.name} />
           <hr />
-          <CardItem label="Nascimento" value={formattedBirthDay}/>
+          <CardItem label="Nascimento" value={formattedBirthDay} />
           <hr />
-          <CardItem label="CPF" value={funcionario.cpf} />
+          <CardItem label="CPF" value={user.cpf} />
           <hr />
-          <CardItem label="Cargo" value={setProfissaoByNivel(funcionario.nivel)} />
+          <CardItem label="Cargo" value={setProfissaoByNivel(user.nivel)} />
           <hr />
-          {funcionario.crm && (
+          {user.crm && (
             <>
-              <CardItem label="CRM" value={funcionario.crm} />
+              <CardItem label="CRM" value={user.crm} />
               <hr />
             </>
           )}
-          {funcionario.especialidade?.nome && (
+          {user.especialidade?.nome && (
             <>
-              <CardItem label="Especialidade" value={funcionario.especialidade.nome} />
+              <CardItem label="Especialidade" value={user.especialidade.nome} />
               <hr />
             </>
           )}
-          <CardItem label="Email" value={funcionario.email} />
+          <CardItem label="Email" value={user.email} />
           <hr />
-          <CardItem label="Salario" value={formatCurrency(funcionario.salario)} />
+          <CardItem label="Salario" value={formatCurrency(user.salario)} />
           <hr />
-          <div className="flex justify-between items-center w-full">
+          <div className="flex justify-between items-center">
             <h1>Histórico de pagamentos:</h1>
             {
-              funcionario.pagamento ? (
-                <PagamentoCard pagamentos={funcionario.pagamento} />
+              user.pagamento ? (
+                <PagamentoCard pagamentos={user.pagamento} />
               ) : (
-                <p>Não houve pagamento {funcionario.pagamento}</p>
+                <p>Não houve pagamento {user.pagamento}</p>
               )
             }
           </div>
@@ -88,5 +91,3 @@ const FuncionarioCardDetails = ({ funcionario }: FuncionarioCardDetailsProps) =>
     </Dialog >
   );
 }
-
-export default FuncionarioCardDetails;
