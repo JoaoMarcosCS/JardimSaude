@@ -34,8 +34,10 @@ const EditPersonalData = () => {
       {
         isLoading ? (
           <Loading />
-        ) : (
+        ) :  id ? (
           <UserForm user={user} />
+        ) : (
+          <Loading/>
         )
       }
     </section>
