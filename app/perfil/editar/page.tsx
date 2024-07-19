@@ -11,7 +11,9 @@ import { UserForm } from "../components/forms/UserForm";
 const EditPersonalData = () => {
   const { id } = getCookies()
   const { data, isLoading } = useFuncionarioDetailsData(id);
-  
+
+  const user = data!;
+
   return (
     <section className="mt-2 items-center max-sm:w-full justify-center flex-col flex">
       <h1 className="text-2xl font-semibold text-green-500">Editar perfil</h1>
@@ -34,7 +36,7 @@ const EditPersonalData = () => {
         isLoading ? (
           <Loading />
         ) : (
-          <UserForm user={data!} />
+          <UserForm user={user} />
         )
       }
     </section>

@@ -12,6 +12,8 @@ const Perfil = () => {
 
   const { data, isLoading } = useFuncionarioDetailsData(id);
 
+  const user = data!
+  
   return (
     <section className="mt-2 items-center max-sm:w-full justify-center flex-col flex">
       <h1 className="text-2xl font-semibold text-green-500">Seu perfil</h1>
@@ -30,7 +32,7 @@ const Perfil = () => {
         isLoading ? (
           <Loading />
         ) :  (
-          <UserInfo user={data!} />
+          <UserInfo user={user} />
         )
       }
     </section>
