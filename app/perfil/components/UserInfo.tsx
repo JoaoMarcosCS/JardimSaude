@@ -14,8 +14,6 @@ export interface UserInfoPros {
 
 export const UserInfo = ({ user }: UserInfoPros) => {
 
-  const formattedBirthDay = format(user.nascimento, 'dd/MM/yyyy');
-
   console.log("UseInfo: " + JSON.stringify(user));
 
   return (
@@ -42,7 +40,7 @@ export const UserInfo = ({ user }: UserInfoPros) => {
         </div>
         <div className="w-full flex justify-between mt-2">
           <p>Nascimento:</p>
-          <p>{formattedBirthDay}</p>
+          <p>{}</p>
         </div>
         <div className="w-full flex justify-between mt-2">
           <p>Email:</p>
