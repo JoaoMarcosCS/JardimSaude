@@ -5,7 +5,6 @@ import Loading from "@/app/laoding";
 import getCookies from "@/app/utils/getCookies";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import Link from "next/link";
-import { UserInfo } from "../components/UserInfo";
 import { UserForm } from "../components/forms/UserForm";
 
 const EditPersonalData = () => {

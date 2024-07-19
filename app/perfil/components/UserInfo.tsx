@@ -12,8 +12,13 @@ export interface UserInfoPros {
 }
 
 export const UserInfo = ({ user }: UserInfoPros) => {
-  const unformattedBirthDay = new Date(user.nascimento);
-  const formattedBirthDay = unformattedBirthDay.toLocaleDateString();
+  let formattedBirthDay = "Nascimento não encontrado";
+
+
+  if(user.nascimento){
+    const unformattedBirthDay = new Date(user.nascimento);
+    formattedBirthDay = unformattedBirthDay.toLocaleDateString();
+  }
 
   return (
     <div className=" max-sm:w-full w-[600px] rounded max-sm:shadow-none shadow p-4 mt-4">
