@@ -16,10 +16,12 @@ export interface UserFormPros {
 }
 
 export const UserForm = ({ user }: UserFormPros) => {
-  const unformattedBirthDay = new Date(user.nascimento);
-  const formattedBirthDay = unformattedBirthDay.toLocaleDateString();
+  if (user.nascimento) {
+    const unformattedBirthDay = new Date(user.nascimento);
+    const formattedBirthDay = unformattedBirthDay.toLocaleDateString();
+  }
 
-  const {register, handleEditPersonalData, handleSubmit, errors} = usePerfilFormHandlers(user);
+  const { register, handleEditPersonalData, handleSubmit, errors } = usePerfilFormHandlers(user);
 
   return (
     <div className=" max-sm:w-full w-[600px] rounded max-sm:shadow-none shadow p-4 mt-4">
@@ -34,25 +36,25 @@ export const UserForm = ({ user }: UserFormPros) => {
         <div>
           <InputField>
             <Label htmlFor="nome">Nome:</Label>
-            <Input {...register("name")} type="text" id="nome"/>
+            <Input {...register("name")} type="text" id="nome" />
             <Label htmlFor="nome" className="text-red-600">{errors.name?.message}</Label>
           </InputField>
           <br />
           <InputField>
             <Label htmlFor="cpf">CPF:</Label>
-            <Input {...register("cpf")} type="text" id="cpf"/>
+            <Input {...register("cpf")} type="text" id="cpf" />
             <Label htmlFor="cpf" className="text-red-600">{errors.cpf?.message}</Label>
           </InputField>
           <br />
           <InputField>
             <Label htmlFor="email">Email:</Label>
-            <Input {...register("email")} type="text" id="email"/>
+            <Input {...register("email")} type="text" id="email" />
             <Label htmlFor="email" className="text-red-600">{errors.email?.message}</Label>
           </InputField>
           <br />
           <InputField>
             <Label htmlFor="nascimento">Nascimento:</Label>
-            <Input {...register("nascimento")} type="date" id="nascimento"/>
+            <Input {...register("nascimento")} type="date" id="nascimento" />
             <Label htmlFor="nasciemento" className="text-red-600">{errors.nascimento?.message}</Label>
           </InputField>
         </div>
