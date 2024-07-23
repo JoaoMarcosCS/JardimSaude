@@ -14,7 +14,11 @@ const LoginForm = () => {
   const { handleSubmit, register, formState:{errors} } = useForm<LoginFormProps>({
     mode: 'all',
     reValidateMode: "onChange",
-    resolver: zodResolver(schemaLoginForm)
+    resolver: zodResolver(schemaLoginForm),
+    defaultValues:{
+      email:"jmcsjoaomarcos@gmail.com",
+      senha:"JMCS2024"
+    }
   });
 
   return (
