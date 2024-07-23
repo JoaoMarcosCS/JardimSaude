@@ -42,7 +42,8 @@ const CardDashboard = ({ title, tooltipTextHelp, dataToDisplay, icon, color, chi
                 <TooltipTrigger asChild >
                   <Info size={15} />
                 </TooltipTrigger>
-                <TooltipContent side={"right"} className="text-xs text-neutral-700 text-left w-80 text-wrap">
+                <TooltipContent side={"left"}
+                className="text-xs text-neutral-700 text-left w-80 text-wrap">
                   {tooltipTextHelp}
                 </TooltipContent>
               </Tooltip>
