@@ -29,9 +29,7 @@ export const usePerfilFormHandlers = (user: PerfilFormProps) => {
   const handleEditPersonalData = async (data: PerfilFormProps) => {
 
     mutate(data);
-    console.log("estou aqui")
-    toast.success("Informações alteradas com sucesso");
-    push("/perfil");
+
   }
 
   return {
