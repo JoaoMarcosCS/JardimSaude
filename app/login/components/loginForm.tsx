@@ -9,7 +9,7 @@ import { useAuth } from "../hooks/useAuth";
 
 const LoginForm = () => {
 
-  const { handleLogin, isLoading } = useAuth();
+  const { handleLogin, isPending } = useAuth();
 
   const { handleSubmit, register, formState:{errors} } = useForm<LoginFormProps>({
     mode: 'all',
@@ -40,7 +40,7 @@ const LoginForm = () => {
                         text-base
                         hover:bg-green-700
                         shadow-inner">
-          {isLoading ? (
+          {isPending ? (
             <Loader2 className="animate-spin mr-2 h-4 w-4" />
           ) : ("Entrar")}
         </Button>
