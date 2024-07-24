@@ -5,7 +5,7 @@ export const perfilFormSchema = z.object({
     required_error: "Nome é obrigatório",
     invalid_type_error: "Nome precisa ser um texto"
   }).min(3, { message: "O nome precisa ter no mínimo 3 letras" })
-    .regex(/^[a-zA-Z\s]+$/, "O nome só pode conter letras e espaços"),
+    .regex(/^[A-Za-zÀ-ÖØ-öø-ÿ ~´]*$/, "O nome só pode conter letras e espaços"),
 
   cpf: z.string({
     required_error: "CPF é obrigatório.",
@@ -26,7 +26,8 @@ export const perfilFormSchema = z.object({
   }).email("Insira um email válido"),
 
   nascimento: z.date({
-    required_error: "Data de nascimento obrigatória"
+    required_error: "Data de nascimento obrigatória",
+    invalid_type_error: "É necessário um dado no formato de data"
   })
 })
 

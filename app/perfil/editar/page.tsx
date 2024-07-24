@@ -35,7 +35,7 @@ const EditPersonalData = () => {
         isLoading ? (
           <Loading />
         ) :  id ? (
-          <UserForm user={user} />
+          <UserForm  defaultData={user}/>
         ) : (
           <Loading/>
         )

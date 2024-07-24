@@ -1,15 +1,15 @@
 import { useForm } from "react-hook-form";
-import { PerfilFormProps, perfilFormSchema } from "../perfilFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useUpdatePersonalDataMutate } from "./useUpdatePersonalDataMutate";
+import { PerfilFormProps, perfilFormSchema } from "../schemas/perfilFormSchema";
 
 
-export const usePerfilFormHandlers = (user:PerfilFormProps) => {
+export const usePerfilFormHandlers = (user: PerfilFormProps) => {
   const {
     register,
-    formState:{
+    formState: {
       errors,
       isSubmitting
     },
@@ -18,20 +18,20 @@ export const usePerfilFormHandlers = (user:PerfilFormProps) => {
     watch,
   } = useForm<PerfilFormProps>({
     resolver: zodResolver(perfilFormSchema),
-    mode:"all",
-    reValidateMode:"onChange",
-    defaultValues:user
+    mode: "all",
+    reValidateMode: "onChange",
+    defaultValues: user
   })
 
-  const {mutate, isSuccess} = useUpdatePersonalDataMutate();
-  const {push} = useRouter();
+  const { mutate, isPending } = useUpdatePersonalDataMutate();
+  const { push } = useRouter();
 
   const handleEditPersonalData = async (data: PerfilFormProps) => {
+
     mutate(data);
-    if(isSuccess){
-      toast.success("Informações alteradas com sucesso");
-      push('/');
-    }
+    console.log("estou aqui")
+    toast.success("Informações alteradas com sucesso");
+    push("/perfil");
   }
 
   return {
@@ -39,6 +39,7 @@ export const usePerfilFormHandlers = (user:PerfilFormProps) => {
     handleSubmit,
     handleEditPersonalData,
     errors,
+    isPending,
     control,
     watch,
     isSubmitting
