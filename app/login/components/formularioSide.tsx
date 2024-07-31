@@ -24,7 +24,15 @@ const FomularioSide = () => {
       <div className="mt-10 w4/5 max-w-72 ">
         <p className="text-muted-foreground text-sm px-2 text-center">
           Plataforma FullStack desenvolvido por João Marcos |
-          <span><a className="text-blue-400" href="https://linkedin.com/in/joão-marcos-cândido-da-silva-58b29227a" target="_blank"> Linkedin</a></span>
+          <span>
+            <a className="text-blue-400"
+             href="https://linkedin.com/in/joão-marcos-cândido-da-silva-58b29227a" target="_blank"> Linkedin </a>
+          </span>
+          |
+          <span>
+            <a className="text-blue-400"
+             href="https://jardim-saude-doc.vercel.app/" target="_blank"> Documentação </a>
+          </span>
         </p>
       </div>
     </div>
