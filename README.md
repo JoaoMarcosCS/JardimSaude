@@ -36,10 +36,10 @@ com diferentes níveis de acesso(
     ). Clique e veja a documentação das features do <a href="https://jardim-saude-doc.vercel.app/">Jardim Saúde</a>. Eu desenvolvi esse MVP com o objetivo de consolidar meus conhecimentos nos ambientes de frontend e backend.
 
 <h2 id="frontend">🖌️ Sobre o frontend do Jardim Saúde</h2>
-O frontend foi construido usando arquitetura package by feature e tecnologias como NextJS, Redux para gerenciamento de estado, React Hook Form
+O frontend foi construído usando arquitetura package by feature e tecnologias como NextJS, Redux para gerenciamento de estado, React Hook Form
 para criação de formulários e React Query para gerenciar os requests para a API. Embora o NextJS
 já possua cacheamento, server functions e streaming, eu optei por usar o React Query para poder conhecer
-essa biblioteca tão famosa e entender como ela funciona, logo, todas as funcionalidades ligadas aos requests da aplicação são feitas pelo React Query. Outro ponto importante são os formulários, nem todos estão em seu potencial máximo, apenas o formulário de cadastro de pacientes, pois quando esta feature foi implementada eu já tinha melhor entendimento em como trabalhar com o Hook Form e como utiliza-lo de forma mais complexa com validações personalizadas com refine e transform. Além disso, nem todos os inputs possuem máscaras de formatação. Para mais informações, acesse a <a  href="https://jardim-saude-doc.vercel.app/">documentação</a> do Jardim Saúde. A seguir, veja algumas telas do sistema.
+essa biblioteca tão famosa e entender como ela funciona, logo, todas as funcionalidades ligadas aos requests da aplicação são feitas pelo React Query. Outro ponto importante são os formulários, nem todos estão em seu potencial máximo, apenas o formulário de cadastro de pacientes, pois quando esta feature foi implementada eu já tinha melhor entendimento em como trabalhar com o Hook Form e como utilizá-lo de forma mais complexa com validações personalizadas com refine e transform. Além disso, nem todos os inputs possuem máscaras de formatação. Para mais informações, acesse a <a  href="https://jardim-saude-doc.vercel.app/">documentação</a> do Jardim Saúde. A seguir, veja algumas telas do sistema.
 
 <h1 id="screens">🖥️ Telas</h1>
 
@@ -65,7 +65,7 @@ essa biblioteca tão famosa e entender como ela funciona, logo, todas as funcion
 
 <h2>Tela do Carrinho</h2>
 <p>
-  <b>Uma melhoria sobre a feature de carrinho seria implementar uma tabela no backend que representa o carrihno do usuário, pois, até o momento, o estado do carrinho do usuário é mantido no LocalStorage, com isso, o usuário não consegue acessar seu carrinho caso esteja em outra máquina.</b>
+  <b>Uma melhoria sobre a feature de carrinho seria implementar uma tabela no backend que representaria o carrinho do usuário, pois, até o momento, o estado do carrinho do usuário é mantido no LocalStorage, com isso, o usuário não consegue acessar seu carrinho caso esteja em outra máquina.</b>
 </p>
 
 <img src="./public/tela_carrrinho.png"/>
@@ -76,7 +76,7 @@ essa biblioteca tão famosa e entender como ela funciona, logo, todas as funcion
 <img src="./public/tela_perfil.png"/>
 
 <h2>✔️ O que aprendi</h2>
-Durante todo o processo de desenvolvimento do Jardim Saúde eu aprendi muito sobre os ambientes de front e backend, mas além disso, aprendi sobre como deve ser o desenvolvimento de software, sobre a importância de deixar os arquivos padronizados, os commits claros e diretos, pois muitas vezes eu me perdia nas funções e no que ainda tinha que ser alterado, o que também ratificou a necessidade de usar uma métodologia agil(Scrum) para organização, através de uma plataforma de gerenciamento como ClickUp, Trello ou Jira. Após esse projeto, embora pequeno com apenas 9 entidades, me sinto muito mais confiante e consigo compreender claramente como funciona a comunicação entre o front e o backend. Como está na documentação do projeto, na seção "próximas melhorias", ainda são necessários vários outros conhecimentos para me tornar um bom desenvolvedor, como docker e swagger, que são tecnologias e ferramentas indispensáveis no dia a dia de times de desenvolvedores.
+Durante todo o processo de desenvolvimento do Jardim Saúde, eu aprendi muito sobre os ambientes de front e backend, mas além disso, aprendi sobre como deve ser o desenvolvimento de software, sobre a importância de deixar os arquivos padronizados, os commits claros e diretos, pois muitas vezes eu me perdia nas funções e no que ainda tinha que ser alterado, o que também ratificou a necessidade de usar uma metodologia ágil (Scrum) para organização, através de uma plataforma de gerenciamento como ClickUp, Trello ou Jira. Após esse projeto, embora pequeno, com apenas 9 entidades, me sinto muito mais confiante e consigo compreender claramente como funciona a comunicação entre o front e o backend. Como está na documentação do projeto, na seção "próximas melhorias", ainda são necessários vários outros conhecimentos para me tornar um bom desenvolvedor, como docker e swagger, que são tecnologias e ferramentas indispensáveis no dia a dia de times de desenvolvedores.
 
 
 <h2 id="colab">🤝 Colaboradores</h2>
