@@ -6,15 +6,6 @@ export default function middleware(request: NextRequest) {
   const token = request.cookies.get("auth_token")?.value;
   const nivel = request.cookies.get("nivel")?.value;
 
-  // const authorizedRoutes = [
-  //   "/tratamentos/novo",
-  //   "/funcionarios",
-  //   "/funcionarios/novo",
-  //   "/pacientes/novo",
-  //   "/shopping",
-  //   "/estoque"
-  // ]
-
   const loginPath = new URL("/login", request.url);
   const homePath = new URL("/", request.url);
 
@@ -22,17 +13,6 @@ export default function middleware(request: NextRequest) {
 
     return NextResponse.redirect(loginPath);
   }
-
-
-  // authorizedRoutes.forEach((route) => {
-  //   console.log('Rota:' + route + "\nnivel: " + nivel);
-  //   if(request.nextUrl.pathname === route && nivel != "1"){
-  //     console.log('redirecionou')
-  //     return NextResponse.redirect(homePath)
-  //   }else{
-
-  //   }
-  // })
 
   if (request.nextUrl.pathname === "/tratamentos/novo" && nivel != "1") {
     const homePath = new URL("/", request.url);
