@@ -1,14 +1,22 @@
 const setStatusColor = (status: string) => {
-  let colorBg = "text-yellow-400";
+  let bgColor = "bg-yellow-100";
+  let textColor = "text-yellow-500";
+
   if (status === "Em andamento") {
-    colorBg = "text-yellow-400";
+    bgColor = "bg-yellow-100";
+    textColor = "text-yellow-500";
+
   } else if (status === "Finalizado") {
-    colorBg = "text-green-400"
+    bgColor = "bg-green-100"
+    textColor = "text-green-500";
+
   } else if (status === "Cancelado") {
-    colorBg = "text-red-400";
+    bgColor = "bg-red-100";
+    textColor = "text-red-500";
+
   }
 
-  return colorBg;
+  return {bgColor, textColor};
 }
 
 export default setStatusColor;

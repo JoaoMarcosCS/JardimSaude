@@ -107,9 +107,9 @@ export const columns: ColumnDef<Tratamento>[] = [
     cell: ({ row }) => {
       const status:any = row.getValue("status");
 
-      const colorBg = setStatusColor(status);
+      const {bgColor, textColor} = setStatusColor(status);
 
-      return <Badge  className={`${colorBg} bg-slate-100 font-bold`}>{status}</Badge>
+      return <Badge  className={`${textColor} ${bgColor} font-bold`}>{status}</Badge>
     },
 
   },

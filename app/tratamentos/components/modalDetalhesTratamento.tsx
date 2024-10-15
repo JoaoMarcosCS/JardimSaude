@@ -36,7 +36,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
     setIsOpen(true);
   };
 
-  const colorBg = setStatusColor(tratamento.status);
+  const {bgColor, textColor} = setStatusColor(tratamento.status);
 
 
   return (
@@ -103,7 +103,7 @@ const ModalDetalhesTratamento = ({ tratamento }: ModalDetalhesTratamentoProps) =
 
           <div className="flex w-full justify-between px-2 items-center">
             <h2>Stauts: </h2>
-            <Badge className={`${colorBg} bg-slate-100 font-bold`}>{tratamento.status}</Badge>
+            <Badge className={`${textColor} ${bgColor} font-bold`}>{tratamento.status}</Badge>
           </div>
           <hr />
           <div className="flex w-full justify-between px-2 items-center">
